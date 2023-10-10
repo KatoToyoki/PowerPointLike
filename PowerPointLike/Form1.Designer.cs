@@ -54,7 +54,7 @@ namespace PowerPointLike
             this._menuInfo});
             this._menu.Location = new System.Drawing.Point(0, 0);
             this._menu.Name = "_menu";
-            this._menu.Size = new System.Drawing.Size(1441, 27);
+            this._menu.Size = new System.Drawing.Size(1441, 30);
             this._menu.TabIndex = 0;
             this._menu.Text = "menuStrip1";
             // 
@@ -63,13 +63,13 @@ namespace PowerPointLike
             this._menuInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._menuInfoAbout});
             this._menuInfo.Name = "_menuInfo";
-            this._menuInfo.Size = new System.Drawing.Size(53, 23);
+            this._menuInfo.Size = new System.Drawing.Size(53, 26);
             this._menuInfo.Text = "說明";
             // 
             // _menuInfoAbout
             // 
             this._menuInfoAbout.Name = "_menuInfoAbout";
-            this._menuInfoAbout.Size = new System.Drawing.Size(224, 26);
+            this._menuInfoAbout.Size = new System.Drawing.Size(122, 26);
             this._menuInfoAbout.Text = "關於";
             // 
             // _canvas
@@ -168,6 +168,7 @@ namespace PowerPointLike
             this._newElementButton.TabIndex = 0;
             this._newElementButton.Text = "新增";
             this._newElementButton.UseVisualStyleBackColor = true;
+            this._newElementButton.Click += new System.EventHandler(this.AddNewElement);
             // 
             // PowerPointLike
             // 

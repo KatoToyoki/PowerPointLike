@@ -13,6 +13,6 @@ namespace PowerPointLike.Shapes
         const string RECTANGLE = "矩形";
         const string LINE = "線";
         private List<ShapeAlias.Shape> _shapeContainer = new List<ShapeAlias.Shape>();
-        private FactoryAlias.Factory _factory;
+        private FactoryAlias.Factory _factory = new FactoryAlias.Factory();
     }
 }

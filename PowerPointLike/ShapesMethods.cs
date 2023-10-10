@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 using ShapeAlias = PowerPointLike.Shape;
 using RectangleAlias = PowerPointLike.Rectangle;
 using LineAlias = PowerPointLike.Line;
+using PowerPointLike.Shape;
 
 namespace PowerPointLike.Shapes
 {
     public partial class Shapes
     {
         /// <summary>
-        /// 
+        /// Method <c>AddShape</c>
+        /// to create new element depends on the chosen element
         /// </summary>
-        /// <param name="shapeName"></param>
+        /// <param name="shapeName">to decide which element will be create</param>
         public void AddShape(string shapeName)
         {
             if (shapeName == RECTANGLE)
@@ -24,6 +26,30 @@ namespace PowerPointLike.Shapes
             else if (shapeName == LINE)
             {
                 _shapeContainer.Add(_factory.CreateLine());
+            }
+        }
+
+        /// <summary>
+        /// Method <c>GetContainerLength</c>
+        /// to get the length of the container's length
+        /// </summary>
+        /// <returns>the length of the container's length</returns>
+        public int GetContainerLength()
+        {
+            return _shapeContainer.Count;
+        }
+
+        /// <summary>
+        /// Method <c>PrintContainer</c>
+        /// print each element in the container
+        /// </summary>
+        public void PrintContainer()
+        {
+            for (int i = 0; i < _shapeContainer.Count; i++)
+            {
+                Coordinate[] temp = new Coordinate[ShapeAlias.Shape.COORDINATE_LENGTH];
+                temp = _shapeContainer[i].GetCooderinate();
+                Console.WriteLine(_shapeContainer[i]._shapeName + "" + "(" + temp[0]._x + "," + temp[0]._y + ")" + "(" + temp[1]._x + "," + temp[1]._y + ")");
             }
         }
     }

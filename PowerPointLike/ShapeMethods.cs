@@ -29,7 +29,16 @@ namespace PowerPointLike.Shape
                 _shapeCoordinate[i]._x = random.Next(MAX_RANGE);
                 _shapeCoordinate[i]._y = random.Next(MAX_RANGE);
             }
+        }
 
+        /// <summary>
+        /// Method <c>GetCoordinate</c>
+        /// the getter of the coordinate of the shape
+        /// </summary>
+        /// <returns>the current coordinate of the shape</returns>
+        public Coordinate[] GetCooderinate()
+        {
+            return _shapeCoordinate;
         }
     }
 

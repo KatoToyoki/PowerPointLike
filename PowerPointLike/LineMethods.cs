@@ -10,7 +10,7 @@ namespace PowerPointLike.Line
     public partial class Line : ShapeAlias.Shape
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="Line"/> class.
         /// </summary>
         public Line()
         {

@@ -19,8 +19,8 @@ namespace PowerPointLike.Shape
     }
     public partial class Shape
     {
-        const int MAX_RANGE = 100;
-        const int COORDINATE_LENGTH = 2;
+        public const int MAX_RANGE = 100;
+        public const int COORDINATE_LENGTH = 2;
 
         public string _shapeName
         {
