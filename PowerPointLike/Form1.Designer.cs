@@ -41,9 +41,9 @@ namespace PowerPointLike
             this.button3 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this._delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._shape = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._info = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._deleteButton = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._shapeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._shapeInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -145,9 +145,9 @@ namespace PowerPointLike
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this._delete,
-            this._shape,
-            this._info});
+            this._deleteButton,
+            this._shapeName,
+            this._shapeInfo});
             this.dataGridView1.Location = new System.Drawing.Point(13, 94);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
@@ -155,28 +155,28 @@ namespace PowerPointLike
             this.dataGridView1.Size = new System.Drawing.Size(350, 219);
             this.dataGridView1.TabIndex = 2;
             // 
-            // _delete
+            // _deleteButton
             // 
-            this._delete.HeaderText = "刪除";
-            this._delete.MinimumWidth = 6;
-            this._delete.Name = "_delete";
-            this._delete.ReadOnly = true;
-            this._delete.Width = 55;
+            this._deleteButton.HeaderText = "刪除";
+            this._deleteButton.MinimumWidth = 6;
+            this._deleteButton.Name = "_deleteButton";
+            this._deleteButton.ReadOnly = true;
+            this._deleteButton.Width = 55;
             // 
-            // _shape
+            // _shapeName
             // 
-            this._shape.HeaderText = "形狀";
-            this._shape.MinimumWidth = 6;
-            this._shape.Name = "_shape";
-            this._shape.ReadOnly = true;
-            this._shape.Width = 55;
+            this._shapeName.HeaderText = "形狀";
+            this._shapeName.MinimumWidth = 6;
+            this._shapeName.Name = "_shapeName";
+            this._shapeName.ReadOnly = true;
+            this._shapeName.Width = 55;
             // 
-            // _info
+            // _shapeInfo
             // 
-            this._info.HeaderText = "資訊";
-            this._info.MinimumWidth = 6;
-            this._info.Name = "_info";
-            this._info.ReadOnly = true;
+            this._shapeInfo.HeaderText = "資訊";
+            this._shapeInfo.MinimumWidth = 6;
+            this._shapeInfo.Name = "_shapeInfo";
+            this._shapeInfo.ReadOnly = true;
             // 
             // Form1
             // 
@@ -215,9 +215,9 @@ namespace PowerPointLike
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _delete;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _shape;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _info;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _deleteButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _shapeName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _shapeInfo;
     }
 }
 
