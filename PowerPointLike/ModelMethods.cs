@@ -31,27 +31,46 @@ namespace PowerPointLike.Model
             }
             _shapes.AddShape(shape);
 
-            // string information = string.Format("{0}, ({1},{2}),({3},{4})", _shapeContainer[i]._shapeName, temp[0]._x, temp[0]._y, temp[1]._x, temp[1]._y);
-            // Console.WriteLine(information);
-
+            // print test
             PrintTest();
         }
 
+        /// <summary>
+        /// Method <c>GetOneElement</c>
+        /// get the delete button, name, and its coordinate in one time
+        /// the informatiob is constructed by a string array
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>one element info separated in string array</returns>
         public string[] GetOneElement(int index)
         {
-            string[] element = new string[3];
-            element[0] = DELETE;
-            element[1] = _shapes.GetElementName(index);
+            string[] element = new string[DATA_ELEMENT_LENGTH];
+            element[DATA_DELETE_INDEX] = DELETE;
+            element[DATA_NAME_INDEX] = _shapes.GetElementName(index);
             Coordinate[] temp = _shapes.GetElementCoordinate(index);
-            string coordinate = string.Format("({0},{1}),({2},{3})", temp[0]._x, temp[0]._y, temp[1]._x, temp[1]._y);
-            element[2] = coordinate;
-
+            string coordinate = _shapes.GetElementCoordinateString(index);
+            element[DATA_COORDINATE_INDEX] = coordinate;
             return element;
         }
 
+        /// <summary>
+        /// Method <c>GetContainerLength</c>
+        /// to get the shapes container's length
+        /// </summary>
+        /// <returns>the length of shapes container</returns>
         public int GetContainerLength()
         {
             return _shapes.GetContainerLength();
+        }
+
+        /// <summary>
+        /// Method <c>GetCurrentElement</c>
+        /// to get the current(last) element
+        /// </summary>
+        /// <returns>the current element, which is a string array contains delete, name, coordinate</returns>
+        public string[] GetCurrentElement()
+        {
+            return GetOneElement(_shapes.GetContainerLength() - 1);
         }
     }
 }

@@ -14,8 +14,8 @@ namespace PowerPointLike.Rectangle
         /// </summary>
         public Rectangle()
         {
-            this._shapeName = RECTANGLE;
-            this.SetInitialCoordinate();
+            _shapeName = RECTANGLE;
+            SetInitialCoordinate();
         }
     }
 }

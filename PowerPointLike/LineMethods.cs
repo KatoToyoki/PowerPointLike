@@ -14,8 +14,8 @@ namespace PowerPointLike.Line
         /// </summary>
         public Line()
         {
-            this._shapeName = LINE;
-            this.SetInitialCoordinate();
+            _shapeName = LINE;
+            SetInitialCoordinate();
         }
     }
 }
