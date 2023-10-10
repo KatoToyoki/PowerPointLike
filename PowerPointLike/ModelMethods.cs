@@ -72,5 +72,14 @@ namespace PowerPointLike.Model
         {
             return GetOneElement(_shapes.GetContainerLength() - 1);
         }
+
+        /// <summary>
+        /// Method <c>DeleteCertainElement</c>
+        /// </summary>
+        /// <param name="index">the wanted index</param>
+        public void DeleteCertainElement(int index)
+        {
+            _shapes.DeleteCertainElement(index);
+        }
     }
 }

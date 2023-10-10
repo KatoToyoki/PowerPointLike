@@ -90,5 +90,14 @@ namespace PowerPointLike.Shapes
         {
             return _shapeContainer[index].GetOneElementCoordinate();
         }
+
+        /// <summary>
+        /// Method <c>DeleteCertainElement</c>
+        /// </summary>
+        /// <param name="index">the wanted index</param>
+        public void DeleteCertainElement(int index)
+        {
+            _shapeContainer.RemoveAt(index);
+        }
     }
 }

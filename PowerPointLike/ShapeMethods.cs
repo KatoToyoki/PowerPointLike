@@ -48,7 +48,7 @@ namespace PowerPointLike.Shape
         /// <returns>formatted string element data</returns>
         public string GetOneElementData()
         {
-            string element = _shapeName + COMMA + LEFT_BRACKET + _shapeCoordinate[TOP_LEFT_POSITION]._x + LEFT_BRACKET + _shapeCoordinate[TOP_LEFT_POSITION]._y + RIGHT_BRACKET + COMMA + LEFT_BRACKET + _shapeCoordinate[BOTTOM_RIGHT_POSITION]._x + COMMA + _shapeCoordinate[BOTTOM_RIGHT_POSITION]._y + RIGHT_BRACKET;
+            string element = _shapeName + COMMA + LEFT_BRACKET + _shapeCoordinate[TOP_LEFT_POSITION]._x + COMMA + _shapeCoordinate[TOP_LEFT_POSITION]._y + RIGHT_BRACKET + COMMA + LEFT_BRACKET + _shapeCoordinate[BOTTOM_RIGHT_POSITION]._x + COMMA + _shapeCoordinate[BOTTOM_RIGHT_POSITION]._y + RIGHT_BRACKET;
             return element;
         }
 
@@ -59,7 +59,7 @@ namespace PowerPointLike.Shape
         /// <returns>formatted string of coordinate data</returns>
         public string GetOneElementCoordinate()
         {
-            string coordinate = LEFT_BRACKET + _shapeCoordinate[TOP_LEFT_POSITION]._x + LEFT_BRACKET + _shapeCoordinate[TOP_LEFT_POSITION]._y + RIGHT_BRACKET + COMMA + LEFT_BRACKET + _shapeCoordinate[BOTTOM_RIGHT_POSITION]._x + COMMA + _shapeCoordinate[BOTTOM_RIGHT_POSITION]._y + RIGHT_BRACKET;
+            string coordinate = LEFT_BRACKET + _shapeCoordinate[TOP_LEFT_POSITION]._x + COMMA + _shapeCoordinate[TOP_LEFT_POSITION]._y + RIGHT_BRACKET + COMMA + LEFT_BRACKET + _shapeCoordinate[BOTTOM_RIGHT_POSITION]._x + COMMA + _shapeCoordinate[BOTTOM_RIGHT_POSITION]._y + RIGHT_BRACKET;
             return coordinate;
         }
     }

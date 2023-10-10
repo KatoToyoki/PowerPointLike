@@ -41,5 +41,20 @@ namespace PowerPointLike
             string[] element = _model.GetCurrentElement();
             _elementDataGrid.Rows.Add(element[DATA_DELETE_INDEX], element[DATA_NAME_INDEX], element[DATA_COORDINATE_INDEX]);
         }
+
+        /// <summary>
+        /// Method <c>DeleteElement</c>
+        /// if the button is clicked, delete the element
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteElement(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == DATA_DELETE_INDEX)
+            {
+                _model.DeleteCertainElement(e.RowIndex);
+                _elementDataGrid.Rows.RemoveAt(e.RowIndex);
+            }
+        }
     }
 }
