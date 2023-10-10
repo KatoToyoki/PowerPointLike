@@ -122,7 +122,7 @@ namespace PowerPointLike
             this._elementDataGrid.Name = "_elementDataGrid";
             this._elementDataGrid.RowHeadersWidth = 51;
             this._elementDataGrid.RowTemplate.Height = 27;
-            this._elementDataGrid.Size = new System.Drawing.Size(350, 219);
+            this._elementDataGrid.Size = new System.Drawing.Size(350, 643);
             this._elementDataGrid.TabIndex = 2;
             // 
             // _deleteButton

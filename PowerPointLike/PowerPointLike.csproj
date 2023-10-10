@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FactoryMethods.cs" />
+    <Compile Include="FactoryProps.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +67,8 @@
     <Compile Include="RectangleProps.cs" />
     <Compile Include="ShapeMethods.cs" />
     <Compile Include="ShapeProps.cs" />
+    <Compile Include="ShapesMethods.cs" />
+    <Compile Include="ShapesProps.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
