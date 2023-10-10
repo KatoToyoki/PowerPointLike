@@ -2,9 +2,9 @@ E:\window_p\PowerPointLike\PowerPointLike\bin\Debug\PowerPointLike.exe.config
 E:\window_p\PowerPointLike\PowerPointLike\bin\Debug\PowerPointLike.exe
 E:\window_p\PowerPointLike\PowerPointLike\bin\Debug\PowerPointLike.pdb
 E:\window_p\PowerPointLike\PowerPointLike\obj\Debug\PowerPointLike.csproj.AssemblyReference.cache
-E:\window_p\PowerPointLike\PowerPointLike\obj\Debug\PowerPointLike.Form1.resources
 E:\window_p\PowerPointLike\PowerPointLike\obj\Debug\PowerPointLike.Properties.Resources.resources
 E:\window_p\PowerPointLike\PowerPointLike\obj\Debug\PowerPointLike.csproj.GenerateResource.cache
 E:\window_p\PowerPointLike\PowerPointLike\obj\Debug\PowerPointLike.csproj.CoreCompileInputs.cache
 E:\window_p\PowerPointLike\PowerPointLike\obj\Debug\PowerPointLike.exe
 E:\window_p\PowerPointLike\PowerPointLike\obj\Debug\PowerPointLike.pdb
+E:\window_p\PowerPointLike\PowerPointLike\obj\Debug\PowerPointLike.PowerPointLike.resources

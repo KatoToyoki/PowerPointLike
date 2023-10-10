@@ -9,18 +9,25 @@ namespace PowerPointLike.Shape
 
     public partial class Shape
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Shape"/> class.
+        /// </summary>
         public Shape()
         {
-            SetInitCoordinate();
+            SetInitialCoordinate();
         }
 
-        public void SetInitCoordinate()
+        /// <summary>
+        /// Method <c>SetInitCoordinate</c> 
+        /// randomly get position to the given shape and store the top-left and bottom-right.
+        /// </summary>
+        public void SetInitialCoordinate()
         {
-            var rand = new Random();
-            for (int i = 0; i < 2; i++)
+            var random = new Random();
+            for (int i = 0; i < _shapeCoordinate.Length; i++)
             {
-                _shapeCoordinate[i]._x = rand.Next(100);
-                _shapeCoordinate[i]._y = rand.Next(100);
+                _shapeCoordinate[i]._x = random.Next(MAX_RANGE);
+                _shapeCoordinate[i]._y = random.Next(MAX_RANGE);
             }
 
         }

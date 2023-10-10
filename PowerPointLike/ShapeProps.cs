@@ -19,14 +19,14 @@ namespace PowerPointLike.Shape
     }
     public partial class Shape
     {
+        const int MAX_RANGE = 100;
+        const int COORDINATE_LENGTH = 2;
+
         public string _shapeName
         {
             get; set;
         }
 
-        private Coordinate[] _shapeCoordinate = new Coordinate[2];
-
-
+        private Coordinate[] _shapeCoordinate = new Coordinate[COORDINATE_LENGTH];
     }
-
 }

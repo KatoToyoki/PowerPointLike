@@ -7,34 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ModelAlias = PowerPointLike.Model;
 
 namespace PowerPointLike
 {
-    public partial class Form1 : Form
+    public partial class PowerPointLike : Form
     {
-        public Form1()
+        private ModelAlias.Model _model;
+
+        public PowerPointLike(ModelAlias.Model model)
         {
             InitializeComponent();
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            _model = model;
         }
     }
 }
