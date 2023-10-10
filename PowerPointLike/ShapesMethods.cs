@@ -49,8 +49,29 @@ namespace PowerPointLike.Shapes
             {
                 Coordinate[] temp = new Coordinate[ShapeAlias.Shape.COORDINATE_LENGTH];
                 temp = _shapeContainer[i].GetCooderinate();
-                Console.WriteLine(_shapeContainer[i]._shapeName + "" + "(" + temp[0]._x + "," + temp[0]._y + ")" + "(" + temp[1]._x + "," + temp[1]._y + ")");
+                string information = string.Format("{0}, ({1},{2}),({3},{4})", _shapeContainer[i]._shapeName, temp[0]._x, temp[0]._y, temp[1]._x, temp[1]._y);
+                Console.WriteLine(information);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public string GetElementName(int index)
+        {
+            return _shapeContainer[index]._shapeName;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public Coordinate[] GetElementCoordinate(int index)
+        {
+            return _shapeContainer[index].GetCooderinate();
         }
     }
 }

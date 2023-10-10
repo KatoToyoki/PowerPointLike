@@ -10,6 +10,9 @@ namespace PowerPointLike.Model
 {
     public partial class Model
     {
+        public const string EMPTY_STRING = "";
+        public const string DELETE = "刪除";
+
         private ShapesAlias.Shapes _shapes = new ShapesAlias.Shapes();
     }
 }

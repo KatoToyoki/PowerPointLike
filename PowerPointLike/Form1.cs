@@ -24,18 +24,9 @@ namespace PowerPointLike
 
         private void AddNewElement(object sender, EventArgs e)
         {
-            string chosenText = _elementsChoicesBox.Text;
-
-            if (chosenText == EMPTY_STRING)
-            {
-                return;
-            }
-
-            Console.WriteLine(chosenText);
-
-            _model.AddItem(chosenText);
-
-            _model.PrintTest();
+            _model.AddItem(_elementsChoicesBox.Text);
+            string[] element = _model.GetOneElement(_model.GetContainerLength() - 1);
+            _elementDataGrid.Rows.Add(element[0], element[1], element[2]);
         }
     }
 }
