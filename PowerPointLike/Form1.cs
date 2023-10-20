@@ -58,20 +58,52 @@ namespace PowerPointLike
             _elementDataGrid.Rows.RemoveAt(_presentationModel.GetDeleteIndex(e.ColumnIndex, e.RowIndex));
         }
 
+        /// <summary>
+        /// Method <c>ClickLineButton</c>
+        /// change the status of all buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClickLineButton(object sender, EventArgs e)
         {
-            _lineButton.Checked = true;
-            _canvas.Cursor = System.Windows.Forms.Cursors.Cross;
+            _presentationModel.ClickLineButton();
+            RefreshToolButtonClick();
+            // _canvas.Cursor = System.Windows.Forms.Cursors.Cross;
         }
 
+        /// <summary>
+        /// Method <c>ClickRectangleButton</c>
+        /// change the status of all buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClickRectangleButton(object sender, EventArgs e)
         {
-
+            _presentationModel.ClickRectangleButton();
+            RefreshToolButtonClick();
         }
 
+        /// <summary>
+        /// Method <c>ClickCircleButton</c>
+        /// change the status of all buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClickCircleButton(object sender, EventArgs e)
         {
+            _presentationModel.ClickCircleButton();
+            RefreshToolButtonClick();
+        }
 
+        /// <summary>
+        /// /// Method <c>RefreshToolButtonClick</c>
+        /// updates three toolbar buttons to be consisted with presentation model
+        /// </summary>
+        public void RefreshToolButtonClick()
+        {
+            _lineButton.Checked = _presentationModel._isLineButtonCheck;
+            _rectangleButton.Checked = _presentationModel._isRectangleButtonCheck;
+            _circleButton.Checked = _presentationModel._isCircleButtonCheck;
         }
     }
 }

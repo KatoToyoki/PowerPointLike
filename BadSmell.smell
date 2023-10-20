@@ -185,104 +185,7 @@
     <div class="data">
       <Data id="ReviewPalData">
         <CodeReview xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-          <Reviews>
-            <Smell>
-              <Id>1</Id>
-              <SmellType>Unresolved warnings(忽視警告)-The method "ClickLineButton" lack of comments</SmellType>
-              <HashCode>PowerPointLike\PowerPointLike.Form1.cs.Unresolved warnings(忽視警告)-The method "ClickLineButton" lack of comments.60</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>PowerPointLike\PowerPointLike</Project>
-              <File>Form1.cs</File>
-              <Line>60</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment />
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>2</Id>
-              <SmellType>Unresolved warnings(忽視警告)-The method "ClickRectangleButton" lack of comments</SmellType>
-              <HashCode>PowerPointLike\PowerPointLike.Form1.cs.Unresolved warnings(忽視警告)-The method "ClickRectangleButton" lack of comments.66</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>PowerPointLike\PowerPointLike</Project>
-              <File>Form1.cs</File>
-              <Line>66</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment />
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>3</Id>
-              <SmellType>Unresolved warnings(忽視警告)-The method "ClickCircleButton" lack of comments</SmellType>
-              <HashCode>PowerPointLike\PowerPointLike.Form1.cs.Unresolved warnings(忽視警告)-The method "ClickCircleButton" lack of comments.71</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>PowerPointLike\PowerPointLike</Project>
-              <File>Form1.cs</File>
-              <Line>71</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment />
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>4</Id>
-              <SmellType>Lack of comments(缺乏註解)</SmellType>
-              <HashCode>60 PowerPointLike.PowerPointLike.ClickLineButton(object, System.EventArgs)</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>PowerPointLike</Project>
-              <File>Form1.cs</File>
-              <Line>60</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>PowerPointLike.PowerPointLike.ClickLineButton(object, System.EventArgs)</Comment>
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>5</Id>
-              <SmellType>Lack of comments(缺乏註解)</SmellType>
-              <HashCode>66 PowerPointLike.PowerPointLike.ClickRectangleButton(object, System.EventArgs)</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>PowerPointLike</Project>
-              <File>Form1.cs</File>
-              <Line>66</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>PowerPointLike.PowerPointLike.ClickRectangleButton(object, System.EventArgs)</Comment>
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>6</Id>
-              <SmellType>Lack of comments(缺乏註解)</SmellType>
-              <HashCode>71 PowerPointLike.PowerPointLike.ClickCircleButton(object, System.EventArgs)</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>PowerPointLike</Project>
-              <File>Form1.cs</File>
-              <Line>71</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>PowerPointLike.PowerPointLike.ClickCircleButton(object, System.EventArgs)</Comment>
-              <Auto>false</Auto>
-            </Smell>
-          </Reviews>
+          <Reviews />
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList />
           <AnalysisFileManager>
@@ -399,7 +302,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>943</ProductionLoc>
+          <ProductionLoc>1092</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>
