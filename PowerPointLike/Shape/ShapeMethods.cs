@@ -18,8 +18,8 @@ namespace PowerPointLike.Shape
         public Coordinate CreateRandomCoordinate(Random random)
         {
             Coordinate coordinate = new Coordinate();
-            coordinate._x = random.Next(MAX_RANGE);
-            coordinate._y = random.Next(MAX_RANGE);
+            coordinate._x = random.Next(MAX_WIDTH);
+            coordinate._y = random.Next(MAX_HEIGHT);
 
             return coordinate;
         }

@@ -60,7 +60,7 @@ namespace PowerPointLike
             this._menuInfo});
             this._menu.Location = new System.Drawing.Point(0, 0);
             this._menu.Name = "_menu";
-            this._menu.Size = new System.Drawing.Size(1441, 30);
+            this._menu.Size = new System.Drawing.Size(1441, 27);
             this._menu.TabIndex = 0;
             this._menu.Text = "menuStrip1";
             // 
@@ -81,9 +81,9 @@ namespace PowerPointLike
             // _canvas
             // 
             this._canvas.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this._canvas.Location = new System.Drawing.Point(141, 64);
+            this._canvas.Location = new System.Drawing.Point(140, 67);
             this._canvas.Name = "_canvas";
-            this._canvas.Size = new System.Drawing.Size(887, 638);
+            this._canvas.Size = new System.Drawing.Size(890, 640);
             this._canvas.TabIndex = 2;
             // 
             // _canvas1
@@ -185,9 +185,9 @@ namespace PowerPointLike
             this._lineButton,
             this._rectangleButton,
             this._circleButton});
-            this._toolBar.Location = new System.Drawing.Point(0, 30);
+            this._toolBar.Location = new System.Drawing.Point(0, 27);
             this._toolBar.Name = "_toolBar";
-            this._toolBar.Size = new System.Drawing.Size(1441, 31);
+            this._toolBar.Size = new System.Drawing.Size(1441, 27);
             this._toolBar.TabIndex = 6;
             this._toolBar.Text = "toolStrip1";
             // 
@@ -197,7 +197,7 @@ namespace PowerPointLike
             this._lineButton.Image = ((System.Drawing.Image)(resources.GetObject("_lineButton.Image")));
             this._lineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._lineButton.Name = "_lineButton";
-            this._lineButton.Size = new System.Drawing.Size(29, 28);
+            this._lineButton.Size = new System.Drawing.Size(29, 24);
             this._lineButton.Text = "Line";
             this._lineButton.Click += new System.EventHandler(this.ClickLineButton);
             // 

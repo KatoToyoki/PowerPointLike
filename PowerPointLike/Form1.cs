@@ -68,7 +68,7 @@ namespace PowerPointLike
         {
             _presentationModel.ClickLineButton();
             RefreshToolButtonClick();
-            // _canvas.Cursor = System.Windows.Forms.Cursors.Cross;
+            _canvas.Cursor = System.Windows.Forms.Cursors.Cross;
         }
 
         /// <summary>
@@ -81,6 +81,7 @@ namespace PowerPointLike
         {
             _presentationModel.ClickRectangleButton();
             RefreshToolButtonClick();
+            _canvas.Cursor = System.Windows.Forms.Cursors.Cross;
         }
 
         /// <summary>
@@ -93,6 +94,7 @@ namespace PowerPointLike
         {
             _presentationModel.ClickCircleButton();
             RefreshToolButtonClick();
+            _canvas.Cursor = System.Windows.Forms.Cursors.Cross;
         }
 
         /// <summary>

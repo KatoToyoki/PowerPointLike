@@ -19,7 +19,8 @@ namespace PowerPointLike.Shape
     }
     public partial class Shape
     {
-        public const int MAX_RANGE = 100;
+        public const int MAX_WIDTH = 890;
+        public const int MAX_HEIGHT = 640;
         public const int COORDINATE_LENGTH = 2;
         public const int TOP_LEFT_POSITION = 0;
         public const int BOTTOM_RIGHT_POSITION = 1;
