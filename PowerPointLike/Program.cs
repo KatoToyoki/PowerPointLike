@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ModelAlias = PowerPointLike.Model;
+using PresentationModelAlias = PowerPointLike.PresentationModel;
 
 namespace PowerPointLike
 {
@@ -19,8 +20,9 @@ namespace PowerPointLike
             Application.SetCompatibleTextRenderingDefault(false);
 
             ModelAlias.Model model = new ModelAlias.Model();
+            PresentationModelAlias.PresentationModel presentationModel = new PresentationModelAlias.PresentationModel(model);
 
-            Application.Run(new PowerPointLike(model));
+            Application.Run(new PowerPointLike(presentationModel));
         }
 
     }

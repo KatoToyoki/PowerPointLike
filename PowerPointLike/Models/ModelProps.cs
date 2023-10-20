@@ -21,7 +21,6 @@ namespace PowerPointLike.Model
         public const string LEFT_BRACKET = "(";
         public const string RIGHT_BRACKET = ")";
         public const string COMMA = ",";
-
         private ShapesAlias.Shapes _shapes = new ShapesAlias.Shapes();
     }
 }
