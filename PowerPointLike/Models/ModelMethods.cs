@@ -47,7 +47,6 @@ namespace PowerPointLike.Model
             string[] element = new string[DATA_ELEMENT_LENGTH];
             element[DATA_DELETE_INDEX] = DELETE;
             element[DATA_NAME_INDEX] = _shapes.GetElementName(index);
-            Coordinate[] temp = _shapes.GetElementCoordinate(index);
             string coordinate = _shapes.GetElementCoordinateString(index);
             element[DATA_COORDINATE_INDEX] = coordinate;
             return element;

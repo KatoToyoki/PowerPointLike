@@ -57,6 +57,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\PresentationMethods.cs" />
+    <Compile Include="Models\PresentationModelProps.cs" />
+    <Compile Include="Shape\CircleMethods.cs" />
+    <Compile Include="Shape\CircleProps.cs" />
     <Compile Include="Shape\LineMethods.cs" />
     <Compile Include="Shape\LineProps.cs" />
     <Compile Include="Models\ModelMethods.cs" />

@@ -10,35 +10,33 @@ namespace PowerPointLike.Shape
     public partial class Shape
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Shape"/> class.
+        /// Method <c>RandomCoordinate</c>
+        /// to create a random coordinate
         /// </summary>
-        public Shape()
+        /// <param name="random"></param>
+        /// <returns></returns>
+        public Coordinate CreateRandomCoordinate(Random random)
         {
-            SetInitialCoordinate();
+            Coordinate coordinate = new Coordinate();
+            coordinate._x = random.Next(MAX_RANGE);
+            coordinate._y = random.Next(MAX_RANGE);
+
+            return coordinate;
         }
 
         /// <summary>
-        /// Method <c>SetInitCoordinate</c> 
-        /// randomly get position to the given shape and store the top-left and bottom-right.
+        /// Method <c>InitContainer</c>
+        /// to put elements in container depends on each Shape and the length
         /// </summary>
-        public void SetInitialCoordinate()
+        /// <param name="length">the container length</param>
+        protected void InitializeContainer(int length)
         {
             var random = new Random();
-            for (int i = 0; i < _shapeCoordinate.Length; i++)
+            for (int i = 0; i < length; i++)
             {
-                _shapeCoordinate[i]._x = random.Next(MAX_RANGE);
-                _shapeCoordinate[i]._y = random.Next(MAX_RANGE);
+                Coordinate element = CreateRandomCoordinate(random);
+                _coordinateContainer.Add(element);
             }
-        }
-
-        /// <summary>
-        /// Method <c>GetCoordinate</c>
-        /// the getter of the coordinate of the shape
-        /// </summary>
-        /// <returns>the current coordinate of the shape</returns>
-        public Coordinate[] GetCoordinate()
-        {
-            return _shapeCoordinate;
         }
 
         /// <summary>
@@ -48,7 +46,8 @@ namespace PowerPointLike.Shape
         /// <returns>formatted string element data</returns>
         public string GetOneElementData()
         {
-            string element = _shapeName + COMMA + LEFT_BRACKET + _shapeCoordinate[TOP_LEFT_POSITION]._x + COMMA + _shapeCoordinate[TOP_LEFT_POSITION]._y + RIGHT_BRACKET + COMMA + LEFT_BRACKET + _shapeCoordinate[BOTTOM_RIGHT_POSITION]._x + COMMA + _shapeCoordinate[BOTTOM_RIGHT_POSITION]._y + RIGHT_BRACKET;
+            string element = _shapeName + COMMA;
+            element += GetOneElementCoordinate();
             return element;
         }
 
@@ -59,9 +58,16 @@ namespace PowerPointLike.Shape
         /// <returns>formatted string of coordinate data</returns>
         public string GetOneElementCoordinate()
         {
-            string coordinate = LEFT_BRACKET + _shapeCoordinate[TOP_LEFT_POSITION]._x + COMMA + _shapeCoordinate[TOP_LEFT_POSITION]._y + RIGHT_BRACKET + COMMA + LEFT_BRACKET + _shapeCoordinate[BOTTOM_RIGHT_POSITION]._x + COMMA + _shapeCoordinate[BOTTOM_RIGHT_POSITION]._y + RIGHT_BRACKET;
+            string coordinate = null;
+            for (int i = 0; i < _coordinateContainer.Count; i++)
+            {
+                coordinate += LEFT_BRACKET + _coordinateContainer[i]._x + COMMA + _coordinateContainer[i]._y + RIGHT_BRACKET;
+                if (i != _coordinateContainer.Count - 1)
+                {
+                    coordinate += COMMA;
+                }
+            }
             return coordinate;
         }
     }
-
 }

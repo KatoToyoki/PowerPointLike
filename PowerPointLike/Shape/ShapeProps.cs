@@ -32,6 +32,11 @@ namespace PowerPointLike.Shape
             get; set;
         }
 
-        private Coordinate[] _shapeCoordinate = new Coordinate[COORDINATE_LENGTH];
+        public int _coordinateLength
+        {
+            get; set;
+        }
+
+        protected List<Coordinate> _coordinateContainer = new List<Coordinate>();
     }
 }

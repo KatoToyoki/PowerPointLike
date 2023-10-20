@@ -10,5 +10,6 @@ namespace PowerPointLike.Line
     public partial class Line : ShapeAlias.Shape
     {
         public const string LINE = "線";
+        public const int LINE_COORDINATE_LENGTH = 2;
     }
 }

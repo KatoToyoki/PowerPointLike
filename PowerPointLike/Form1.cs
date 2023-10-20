@@ -56,5 +56,21 @@ namespace PowerPointLike
                 _elementDataGrid.Rows.RemoveAt(e.RowIndex);
             }
         }
+
+        private void ClickLineButton(object sender, EventArgs e)
+        {
+            _lineButton.Checked = true;
+            _canvas.Cursor = System.Windows.Forms.Cursors.Cross;
+        }
+
+        private void ClickRectangleButton(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ClickCircleButton(object sender, EventArgs e)
+        {
+
+        }
     }
 }

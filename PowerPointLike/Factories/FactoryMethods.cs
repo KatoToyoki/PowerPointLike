@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ShapeAlias = PowerPointLike.Shape;
 using RectangleAlias = PowerPointLike.Rectangle;
 using LineAlias = PowerPointLike.Line;
+using CircleAlias = PowerPointLike.Circle;
 
 namespace PowerPointLike.Factory
 {
@@ -31,6 +32,17 @@ namespace PowerPointLike.Factory
         {
             ShapeAlias.Shape line = new LineAlias.Line();
             return line;
+        }
+
+        /// <summary>
+        /// Method <c>CreateCircle</c>
+        /// to create a new circle element
+        /// </summary>
+        /// <returns>circle element</returns>
+        public ShapeAlias.Shape CreateCircle()
+        {
+            ShapeAlias.Shape circle = new CircleAlias.Circle();
+            return circle;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace PowerPointLike.Shapes
     {
         const string RECTANGLE = "矩形";
         const string LINE = "線";
+        const string CIRCLE = "圓";
         const string INFORMATION_TEMPLATE = "{NAME}, ({TOP_LEFT_X},{TOP_LEFT_Y}),({BOTTOM_RIGHT_X},{BOTTOM_RIGHT_Y})";
         private List<ShapeAlias.Shape> _shapeContainer = new List<ShapeAlias.Shape>();
         private FactoryAlias.Factory _factory = new FactoryAlias.Factory();

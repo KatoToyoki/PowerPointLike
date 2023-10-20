@@ -27,6 +27,14 @@ namespace PowerPointLike.Shapes
             {
                 _shapeContainer.Add(_factory.CreateLine());
             }
+            else if (shapeName == CIRCLE)
+            {
+                _shapeContainer.Add(_factory.CreateCircle());
+            }
+            else
+            {
+                return;
+            }
         }
 
         /// <summary>
@@ -47,13 +55,6 @@ namespace PowerPointLike.Shapes
         {
             for (int i = 0; i < _shapeContainer.Count; i++)
             {
-                Coordinate[] temp = new Coordinate[ShapeAlias.Shape.COORDINATE_LENGTH];
-                // temp = _shapeContainer[i].GetCoordinate();
-                // const string informationTemplate = "{NAME}, ({TOP_LEFT_X},{TOP_LEFT_Y}),({BOTTOM_RIGHT_X},{BOTTOM_RIGHT_Y})";
-                // string information = string.Format("{NAME}, ({TOP_LEFT_X},{TOP_LEFT_Y}),({BOTTOM_RIGHT_X},{BOTTOM_RIGHT_Y})", _shapeContainer[i]._shapeName, temp[0]._x, temp[0]._y, temp[1]._x, temp[1]._y);
-                // string information = string.Format(INFORMATION_TEMPLATE, _shapeContainer[i]._shapeName, temp[0]._x, temp[0]._y, temp[1]._x, temp[1]._y);
-                // string printResult = _shapeContainer[i]._shapeName + COMMA + LEFT_BRACKET + temp[0]._x + LEFT_BRACKET + temp[0]._y + RIGHT_BRACKET + COMMA + LEFT_BRACKET + temp[1]._x + COMMA + temp[1]._y + RIGHT_BRACKET;
-
                 Console.WriteLine(_shapeContainer[i].GetOneElementData());
             }
         }
@@ -70,17 +71,6 @@ namespace PowerPointLike.Shapes
         }
 
         /// <summary>
-        /// Method <c>GetElementCoordinate</c>
-        /// the getter of the two position: top-left and bottom-right positions
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns>top-left and bottom-right coordinate</returns>
-        public Coordinate[] GetElementCoordinate(int index)
-        {
-            return _shapeContainer[index].GetCoordinate();
-        }
-
-        /// <summary>
         /// Method <c>GetElementCoordinateString</c>
         /// get the formatted string of coordinate depends in index 
         /// </summary>
@@ -93,6 +83,7 @@ namespace PowerPointLike.Shapes
 
         /// <summary>
         /// Method <c>DeleteCertainElement</c>
+        /// delete the certain element by index
         /// </summary>
         /// <param name="index">the wanted index</param>
         public void DeleteCertainElement(int index)

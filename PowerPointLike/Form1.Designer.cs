@@ -29,6 +29,7 @@ namespace PowerPointLike
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PowerPointLike));
             this._menu = new System.Windows.Forms.MenuStrip();
             this._menuInfo = new System.Windows.Forms.ToolStripMenuItem();
             this._menuInfoAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,9 +43,14 @@ namespace PowerPointLike
             this._shapeInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._elementsChoicesBox = new System.Windows.Forms.ComboBox();
             this._newElementButton = new System.Windows.Forms.Button();
+            this._toolBar = new System.Windows.Forms.ToolStrip();
+            this._lineButton = new System.Windows.Forms.ToolStripButton();
+            this._rectangleButton = new System.Windows.Forms.ToolStripButton();
+            this._circleButton = new System.Windows.Forms.ToolStripButton();
             this._menu.SuspendLayout();
             this._canvasElementsData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._elementDataGrid)).BeginInit();
+            this._toolBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // _menu
@@ -75,26 +81,26 @@ namespace PowerPointLike
             // _canvas
             // 
             this._canvas.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this._canvas.Location = new System.Drawing.Point(141, 12);
+            this._canvas.Location = new System.Drawing.Point(141, 64);
             this._canvas.Name = "_canvas";
-            this._canvas.Size = new System.Drawing.Size(887, 717);
+            this._canvas.Size = new System.Drawing.Size(887, 638);
             this._canvas.TabIndex = 2;
             // 
             // _canvas1
             // 
             this._canvas1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this._canvas1.Location = new System.Drawing.Point(14, 44);
+            this._canvas1.Location = new System.Drawing.Point(14, 67);
             this._canvas1.Name = "_canvas1";
-            this._canvas1.Size = new System.Drawing.Size(112, 82);
+            this._canvas1.Size = new System.Drawing.Size(112, 91);
             this._canvas1.TabIndex = 3;
             this._canvas1.UseVisualStyleBackColor = false;
             // 
             // _canvas2
             // 
             this._canvas2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this._canvas2.Location = new System.Drawing.Point(14, 140);
+            this._canvas2.Location = new System.Drawing.Point(14, 163);
             this._canvas2.Name = "_canvas2";
-            this._canvas2.Size = new System.Drawing.Size(112, 82);
+            this._canvas2.Size = new System.Drawing.Size(112, 91);
             this._canvas2.TabIndex = 4;
             this._canvas2.UseVisualStyleBackColor = false;
             // 
@@ -103,9 +109,9 @@ namespace PowerPointLike
             this._canvasElementsData.Controls.Add(this._elementDataGrid);
             this._canvasElementsData.Controls.Add(this._elementsChoicesBox);
             this._canvasElementsData.Controls.Add(this._newElementButton);
-            this._canvasElementsData.Location = new System.Drawing.Point(1045, 37);
+            this._canvasElementsData.Location = new System.Drawing.Point(1045, 67);
             this._canvasElementsData.Name = "_canvasElementsData";
-            this._canvasElementsData.Size = new System.Drawing.Size(374, 692);
+            this._canvasElementsData.Size = new System.Drawing.Size(374, 662);
             this._canvasElementsData.TabIndex = 5;
             this._canvasElementsData.TabStop = false;
             this._canvasElementsData.Text = "資料顯示";
@@ -118,11 +124,11 @@ namespace PowerPointLike
             this._deleteButton,
             this._shapeName,
             this._shapeInfo});
-            this._elementDataGrid.Location = new System.Drawing.Point(13, 94);
+            this._elementDataGrid.Location = new System.Drawing.Point(13, 86);
             this._elementDataGrid.Name = "_elementDataGrid";
             this._elementDataGrid.RowHeadersWidth = 51;
             this._elementDataGrid.RowTemplate.Height = 27;
-            this._elementDataGrid.Size = new System.Drawing.Size(350, 643);
+            this._elementDataGrid.Size = new System.Drawing.Size(350, 546);
             this._elementDataGrid.TabIndex = 2;
             this._elementDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DeleteElement);
             // 
@@ -155,7 +161,8 @@ namespace PowerPointLike
             this._elementsChoicesBox.FormattingEnabled = true;
             this._elementsChoicesBox.Items.AddRange(new object[] {
             "矩形",
-            "線"});
+            "線",
+            "圓"});
             this._elementsChoicesBox.Location = new System.Drawing.Point(135, 44);
             this._elementsChoicesBox.Name = "_elementsChoicesBox";
             this._elementsChoicesBox.Size = new System.Drawing.Size(228, 23);
@@ -163,7 +170,7 @@ namespace PowerPointLike
             // 
             // _newElementButton
             // 
-            this._newElementButton.Location = new System.Drawing.Point(15, 29);
+            this._newElementButton.Location = new System.Drawing.Point(13, 29);
             this._newElementButton.Name = "_newElementButton";
             this._newElementButton.Size = new System.Drawing.Size(114, 51);
             this._newElementButton.TabIndex = 0;
@@ -171,12 +178,56 @@ namespace PowerPointLike
             this._newElementButton.UseVisualStyleBackColor = true;
             this._newElementButton.Click += new System.EventHandler(this.AddNewElement);
             // 
+            // _toolBar
+            // 
+            this._toolBar.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this._toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this._lineButton,
+            this._rectangleButton,
+            this._circleButton});
+            this._toolBar.Location = new System.Drawing.Point(0, 27);
+            this._toolBar.Name = "_toolBar";
+            this._toolBar.Size = new System.Drawing.Size(1441, 27);
+            this._toolBar.TabIndex = 6;
+            this._toolBar.Text = "toolStrip1";
+            // 
+            // _lineButton
+            // 
+            this._lineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._lineButton.Image = ((System.Drawing.Image)(resources.GetObject("_lineButton.Image")));
+            this._lineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._lineButton.Name = "_lineButton";
+            this._lineButton.Size = new System.Drawing.Size(29, 24);
+            this._lineButton.Text = "toolStripButton1";
+            this._lineButton.Click += new System.EventHandler(this.ClickLineButton);
+            // 
+            // _rectangleButton
+            // 
+            this._rectangleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._rectangleButton.Image = ((System.Drawing.Image)(resources.GetObject("_rectangleButton.Image")));
+            this._rectangleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._rectangleButton.Name = "_rectangleButton";
+            this._rectangleButton.Size = new System.Drawing.Size(29, 24);
+            this._rectangleButton.Text = "toolStripButton2";
+            this._rectangleButton.Click += new System.EventHandler(this.ClickRectangleButton);
+            // 
+            // _circleButton
+            // 
+            this._circleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._circleButton.Image = ((System.Drawing.Image)(resources.GetObject("_circleButton.Image")));
+            this._circleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._circleButton.Name = "_circleButton";
+            this._circleButton.Size = new System.Drawing.Size(29, 24);
+            this._circleButton.Text = "toolStripButton3";
+            this._circleButton.Click += new System.EventHandler(this.ClickCircleButton);
+            // 
             // PowerPointLike
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(1441, 711);
+            this.Controls.Add(this._toolBar);
             this.Controls.Add(this._canvasElementsData);
             this.Controls.Add(this._canvas2);
             this.Controls.Add(this._canvas1);
@@ -189,6 +240,8 @@ namespace PowerPointLike
             this._menu.PerformLayout();
             this._canvasElementsData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._elementDataGrid)).EndInit();
+            this._toolBar.ResumeLayout(false);
+            this._toolBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,6 +262,10 @@ namespace PowerPointLike
         private System.Windows.Forms.DataGridViewTextBoxColumn _deleteButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn _shapeName;
         private System.Windows.Forms.DataGridViewTextBoxColumn _shapeInfo;
+        private System.Windows.Forms.ToolStrip _toolBar;
+        private System.Windows.Forms.ToolStripButton _lineButton;
+        private System.Windows.Forms.ToolStripButton _rectangleButton;
+        private System.Windows.Forms.ToolStripButton _circleButton;
     }
 }
 
