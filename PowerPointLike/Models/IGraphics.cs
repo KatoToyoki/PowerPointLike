@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace PowerPointLike
 {
-    public partial class Circle : Shape
+    interface IGraphics
     {
-        public const string CIRCLE = "圓";
-        public const int CIRCLE_COORDINATE_LENGTH = 1;
+        void DrawLine(Coordinate point1, Coordinate point2);
     }
 }

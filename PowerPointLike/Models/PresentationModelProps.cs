@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ModelAlias = PowerPointLike.Model;
 
-namespace PowerPointLike.PresentationModel
+namespace PowerPointLike
 {
     public partial class PresentationModel
     {
         public const int DATA_DELETE_INDEX = 0;
-        public const int BUTTON_QUANTITY = 3;
         public const int INVALID = -1;
-        private ModelAlias.Model _model;
+        private Model _model;
 
         public bool _isLineButtonCheck
         {

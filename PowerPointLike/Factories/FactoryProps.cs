@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ShapeAlias = PowerPointLike.Shape;
 
-namespace PowerPointLike.Factory
+namespace PowerPointLike
 {
     public partial class Factory
     {

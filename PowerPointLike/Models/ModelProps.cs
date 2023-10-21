@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ShapeAlias = PowerPointLike.Shape;
-using ShapesAlias = PowerPointLike.Shapes;
 
-namespace PowerPointLike.Model
+namespace PowerPointLike
 {
     public partial class Model
     {
@@ -21,6 +19,6 @@ namespace PowerPointLike.Model
         public const string LEFT_BRACKET = "(";
         public const string RIGHT_BRACKET = ")";
         public const string COMMA = ",";
-        private ShapesAlias.Shapes _shapes = new ShapesAlias.Shapes();
+        private Shapes _shapes = new Shapes();
     }
 }

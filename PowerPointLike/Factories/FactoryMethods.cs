@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ShapeAlias = PowerPointLike.Shape;
-using RectangleAlias = PowerPointLike.Rectangle;
-using LineAlias = PowerPointLike.Line;
-using CircleAlias = PowerPointLike.Circle;
 
-namespace PowerPointLike.Factory
+namespace PowerPointLike
 {
     public partial class Factory
     {
@@ -17,9 +13,9 @@ namespace PowerPointLike.Factory
         /// to create a new rectangle element
         /// </summary>
         /// <returns>rectangle element</returns>
-        public ShapeAlias.Shape CreateRectangle()
+        public Shape CreateRectangle()
         {
-            ShapeAlias.Shape rectangle = new RectangleAlias.Rectangle();
+            Shape rectangle = new Rectangle();
             return rectangle;
         }
 
@@ -28,9 +24,9 @@ namespace PowerPointLike.Factory
         /// to create a new line element
         /// </summary>
         /// <returns>line element</returns>
-        public ShapeAlias.Shape CreateLine()
+        public Shape CreateLine()
         {
-            ShapeAlias.Shape line = new LineAlias.Line();
+            Shape line = new Line();
             return line;
         }
 
@@ -39,9 +35,9 @@ namespace PowerPointLike.Factory
         /// to create a new circle element
         /// </summary>
         /// <returns>circle element</returns>
-        public ShapeAlias.Shape CreateCircle()
+        public Shape CreateCircle()
         {
-            ShapeAlias.Shape circle = new CircleAlias.Circle();
+            Shape circle = new Circle();
             return circle;
         }
     }

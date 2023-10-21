@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ShapeAlias = PowerPointLike.Shape;
-using RectangleAlias = PowerPointLike.Rectangle;
-using LineAlias = PowerPointLike.Line;
-using PowerPointLike.Shape;
 
-namespace PowerPointLike.Shapes
+namespace PowerPointLike
 {
     public partial class Shapes
     {

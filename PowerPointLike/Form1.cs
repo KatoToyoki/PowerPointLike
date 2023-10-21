@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PresentationModelAlias = PowerPointLike.PresentationModel;
 
 namespace PowerPointLike
 {
@@ -17,13 +16,13 @@ namespace PowerPointLike
         public const int DATA_DELETE_INDEX = 0;
         public const int DATA_NAME_INDEX = 1;
         public const int DATA_COORDINATE_INDEX = 2;
-        private PresentationModelAlias.PresentationModel _presentationModel;
+        private PresentationModel _presentationModel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Form"/> class.
         /// </summary>
         /// <param name="model"></param>
-        public PowerPointLike(PresentationModelAlias.PresentationModel presentationModel)
+        public PowerPointLike(PresentationModel presentationModel)
         {
             InitializeComponent();
             _presentationModel = presentationModel;
@@ -42,7 +41,6 @@ namespace PowerPointLike
                 _presentationModel.AddItem(_elementsChoicesBox.Text);
                 string[] element = _presentationModel.GetCurrentElement();
                 _elementDataGrid.Rows.Add(element[DATA_DELETE_INDEX], element[DATA_NAME_INDEX], element[DATA_COORDINATE_INDEX]);
-
             }
         }
 

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ShapeAlias = PowerPointLike.Shape;
 
-namespace PowerPointLike.Rectangle
+namespace PowerPointLike
 {
-    public partial class Rectangle : ShapeAlias.Shape
+    public partial class Rectangle : Shape
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Rectangle"/> class.

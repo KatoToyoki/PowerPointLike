@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerPointLike.Shape
+namespace PowerPointLike
 {
     public struct Coordinate
     {
-        public int _x
+        public double _x
         {
             get; set;
         }
-        public int _y
+        public double _y
         {
             get; set;
         }

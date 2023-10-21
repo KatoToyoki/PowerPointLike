@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ModelAlias = PowerPointLike.Model;
 
-namespace PowerPointLike.PresentationModel
+namespace PowerPointLike
 {
     public partial class PresentationModel
     {
@@ -13,7 +12,7 @@ namespace PowerPointLike.PresentationModel
         /// Initializes a new instance of the <see cref="PresentationModel"/> class.
         /// </summary>
         /// <param name="model">the member model</param>
-        public PresentationModel(ModelAlias.Model model)
+        public PresentationModel(Model model)
         {
             _model = model;
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerPointLike.Shape
+namespace PowerPointLike
 {
 
     public partial class Shape

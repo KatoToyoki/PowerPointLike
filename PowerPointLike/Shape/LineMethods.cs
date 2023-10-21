@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ShapeAlias = PowerPointLike.Shape;
+// using ShapeAlias = PowerPointLike.Shape;
 
-namespace PowerPointLike.Line
+namespace PowerPointLike
 {
-    public partial class Line : ShapeAlias.Shape
+    public partial class Line : Shape
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Line"/> class.

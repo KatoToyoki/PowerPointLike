@@ -29,7 +29,6 @@ namespace PowerPointLike
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PowerPointLike));
             this._menu = new System.Windows.Forms.MenuStrip();
             this._menuInfo = new System.Windows.Forms.ToolStripMenuItem();
             this._menuInfoAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,7 +59,7 @@ namespace PowerPointLike
             this._menuInfo});
             this._menu.Location = new System.Drawing.Point(0, 0);
             this._menu.Name = "_menu";
-            this._menu.Size = new System.Drawing.Size(1441, 27);
+            this._menu.Size = new System.Drawing.Size(1441, 30);
             this._menu.TabIndex = 0;
             this._menu.Text = "menuStrip1";
             // 
@@ -185,26 +184,26 @@ namespace PowerPointLike
             this._lineButton,
             this._rectangleButton,
             this._circleButton});
-            this._toolBar.Location = new System.Drawing.Point(0, 27);
+            this._toolBar.Location = new System.Drawing.Point(0, 30);
             this._toolBar.Name = "_toolBar";
-            this._toolBar.Size = new System.Drawing.Size(1441, 27);
+            this._toolBar.Size = new System.Drawing.Size(1441, 31);
             this._toolBar.TabIndex = 6;
             this._toolBar.Text = "toolStrip1";
             // 
             // _lineButton
             // 
             this._lineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._lineButton.Image = ((System.Drawing.Image)(resources.GetObject("_lineButton.Image")));
+            this._lineButton.Image = global::PowerPointLike.Properties.Resources.line;
             this._lineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._lineButton.Name = "_lineButton";
-            this._lineButton.Size = new System.Drawing.Size(29, 24);
+            this._lineButton.Size = new System.Drawing.Size(29, 28);
             this._lineButton.Text = "Line";
             this._lineButton.Click += new System.EventHandler(this.ClickLineButton);
             // 
             // _rectangleButton
             // 
             this._rectangleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._rectangleButton.Image = ((System.Drawing.Image)(resources.GetObject("_rectangleButton.Image")));
+            this._rectangleButton.Image = global::PowerPointLike.Properties.Resources.rectangle;
             this._rectangleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._rectangleButton.Name = "_rectangleButton";
             this._rectangleButton.Size = new System.Drawing.Size(29, 28);
@@ -214,7 +213,7 @@ namespace PowerPointLike
             // _circleButton
             // 
             this._circleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._circleButton.Image = ((System.Drawing.Image)(resources.GetObject("_circleButton.Image")));
+            this._circleButton.Image = global::PowerPointLike.Properties.Resources.circle;
             this._circleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._circleButton.Name = "_circleButton";
             this._circleButton.Size = new System.Drawing.Size(29, 28);
