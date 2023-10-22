@@ -9,18 +9,19 @@ namespace PowerPointLike
     public class Rectangle : Shape
     {
         public const string RECTANGLE = "矩形";
-        public const int RECTANGLE_COORDINATE_LENGTH = 2;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Rectangle"/> class.
         /// </summary>
-        public Rectangle()
+        public Rectangle(CoordinateSet coordinateSet)
         {
             _shapeName = RECTANGLE;
-            InitializeContainer();
+            _coordinateSet = coordinateSet;
         }
 
-        // public override void Draw()
-        // {
-        // }
+        public override void Draw(IGraphics graphics)
+        {
+            graphics.DrawRectangle(_coordinateSet);
+        }
     }
 }

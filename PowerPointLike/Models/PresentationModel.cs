@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PowerPointLike.Models;
 
 namespace PowerPointLike
 {
     public class PresentationModel
     {
+        public enum ShapeIndex
+        {
+            Line,
+            Rectangle,
+            Circle
+        }
         public const int DATA_DELETE_INDEX = 0;
         public const int INVALID = -1;
         private Model _model;
+        private int _currentButtonIndex;
 
-        public bool _isLineButtonCheck
+        public bool[] _isbuttonChecked
         {
             get; set;
-        }
-        public bool _isRectangleButtonCheck
-        {
-            get; set;
-        }
-        public bool _isCircleButtonCheck
-        {
-            get; set;
-        }
+        } = new bool[3];
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PresentationModel"/> class.
@@ -32,6 +32,7 @@ namespace PowerPointLike
         public PresentationModel(Model model)
         {
             _model = model;
+            ResetAllButtonCheck();
         }
 
         /// <summary>
@@ -80,7 +81,6 @@ namespace PowerPointLike
             if (dataIndex == DATA_DELETE_INDEX)
             {
                 return deleteIndex;
-
             }
             return INVALID;
         }
@@ -91,9 +91,10 @@ namespace PowerPointLike
         /// </summary>
         public void ResetAllButtonCheck()
         {
-            _isLineButtonCheck = false;
-            _isRectangleButtonCheck = false;
-            _isCircleButtonCheck = false;
+            for (int i = 0; i < _isbuttonChecked.Length; i++)
+            {
+                _isbuttonChecked[i] = false;
+            }
         }
 
         /// <summary>
@@ -103,7 +104,8 @@ namespace PowerPointLike
         public void ClickLineButton()
         {
             ResetAllButtonCheck();
-            _isLineButtonCheck = true;
+            _isbuttonChecked[(int)ShapeIndex.Line] = true;
+            _currentButtonIndex = (int)ShapeIndex.Line;
         }
 
         /// <summary>
@@ -113,7 +115,8 @@ namespace PowerPointLike
         public void ClickRectangleButton()
         {
             ResetAllButtonCheck();
-            _isRectangleButtonCheck = true;
+            _isbuttonChecked[(int)ShapeIndex.Rectangle] = true;
+            _currentButtonIndex = (int)ShapeIndex.Rectangle;
         }
 
         /// <summary>
@@ -123,7 +126,31 @@ namespace PowerPointLike
         public void ClickCircleButton()
         {
             ResetAllButtonCheck();
-            _isCircleButtonCheck = true;
+            _isbuttonChecked[(int)ShapeIndex.Circle] = true;
+            _currentButtonIndex = (int)ShapeIndex.Circle;
+        }
+
+        public void Draw(System.Drawing.Graphics graphics)
+        {
+            Console.WriteLine("in presentation, before model");
+            _model.Draw(new GraphicsAdaptor(graphics));
+        }
+
+        public void PointerPressed(double x, double y)
+        {
+
+            Console.WriteLine("click canvas, in presentation");
+            _model.PointerPressed(x, y, _currentButtonIndex);
+        }
+
+        public void PointerMoved(double x, double y)
+        {
+            _model.PoinerMoved(x, y);
+        }
+
+        public void PointerReleased(double x, double y)
+        {
+            _model.PointerReleased(x, y, _currentButtonIndex);
         }
     }
 }

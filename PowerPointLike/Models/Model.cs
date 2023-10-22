@@ -18,6 +18,12 @@ namespace PowerPointLike
 
         public const string EMPTY_STRING = "";
         public const string DELETE = "刪除";
+        public delegate void ModelChangedEventHandler();
+        public event ModelChangedEventHandler _modelChanged;
+        Coordinate _firstPoint;
+        private CoordinateSet _newShapeCoordinateSet = new CoordinateSet();
+        private Shape _newShape;
+        private bool _isPressed = false;
 
         private Shapes _shapes = new Shapes();
 
@@ -91,6 +97,83 @@ namespace PowerPointLike
         public void DeleteCertainElement(int index)
         {
             _shapes.DeleteCertainElement(index);
+        }
+
+        public void Draw(IGraphics graphics)
+        {
+            Console.WriteLine("in model, before each");
+            _shapes.Draw(graphics);
+        }
+
+        public bool CheckInputValid(double x, double y)
+        {
+            if (x > 0 && y > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void PointerPressed(double x, double y, int shapeIndex)
+        {
+
+            Console.WriteLine("click canvas, in model");
+            if (!CheckInputValid(x, y))
+            {
+                return;
+            }
+            _firstPoint._x = (int)x;
+            _firstPoint._y = (int)y;
+
+            _newShapeCoordinateSet._point1 = _firstPoint;
+
+            switch (shapeIndex)
+            {
+                case (int)PresentationModel.ShapeIndex.Line:
+                    _newShape = new Line(_newShapeCoordinateSet);
+                    break;
+                case (int)PresentationModel.ShapeIndex.Rectangle:
+                    _newShape = new Rectangle(_newShapeCoordinateSet);
+                    break;
+                case (int)PresentationModel.ShapeIndex.Circle:
+                    _newShape = new Circle(_newShapeCoordinateSet);
+                    break;
+            }
+
+            _isPressed = true;
+        }
+
+        public void PoinerMoved(double x, double y)
+        {
+            if (_isPressed)
+            {
+                Coordinate temp = new Coordinate();
+                temp._x = (int)x;
+                temp._y = (int)y;
+                _newShapeCoordinateSet._point2 = temp;
+                NotifyModelChanged();
+            }
+        }
+
+        public void PointerReleased(double x, double y, int shapeIndex)
+        {
+            if (_isPressed)
+            {
+                _isPressed = false;
+                CoordinateSet confirmOne = new CoordinateSet();
+                confirmOne._point1 = _firstPoint;
+                confirmOne._point2 = (new Coordinate((int)x, (int)y));
+                _shapes.DrawShape(shapeIndex, confirmOne);
+                NotifyModelChanged();
+            }
+        }
+
+        void NotifyModelChanged()
+        {
+            if (_modelChanged != null)
+            {
+                _modelChanged();
+            }
         }
     }
 }

@@ -92,5 +92,32 @@ namespace PowerPointLike
         {
             _shapeContainer.RemoveAt(index);
         }
+
+        public void Draw(IGraphics graphics)
+        {
+            Console.WriteLine("in container");
+
+            foreach (Shape shape in _shapeContainer)
+            {
+                Console.WriteLine("iii");
+                shape.Draw(graphics);
+            }
+        }
+
+        public void DrawShape(int shapeIndex, CoordinateSet coordinateSet)
+        {
+            switch (shapeIndex)
+            {
+                case (int)PresentationModel.ShapeIndex.Line:
+                    _shapeContainer.Add(_factory.DrawLine(coordinateSet));
+                    break;
+                case (int)PresentationModel.ShapeIndex.Rectangle:
+                    _shapeContainer.Add(_factory.DrawRectangle(coordinateSet));
+                    break;
+                case (int)PresentationModel.ShapeIndex.Circle:
+                    _shapeContainer.Add(_factory.DrawCircle(coordinateSet));
+                    break;
+            }
+        }
     }
 }

@@ -12,10 +12,14 @@ namespace PowerPointLike
 {
     public partial class PowerPointLike : Form
     {
+        enum Data
+        {
+            DataDeleteIndex,
+            DataNameIndex,
+            DataCoordinateIndex,
+        }
+
         public const string EMPTY_STRING = "";
-        public const int DATA_DELETE_INDEX = 0;
-        public const int DATA_NAME_INDEX = 1;
-        public const int DATA_COORDINATE_INDEX = 2;
         private PresentationModel _presentationModel;
 
         /// <summary>
@@ -26,6 +30,11 @@ namespace PowerPointLike
         {
             InitializeComponent();
             _presentationModel = presentationModel;
+            _canvas.MouseDown += HandleCanvasPressed;
+            _canvas.MouseUp += HandleCanvasReleased;
+            _canvas.MouseMove += HandleCanvasMoved;
+            _canvas.Paint += HandleCanvasPaint;
+            Controls.Add(_canvas);
         }
 
         /// <summary>
@@ -39,8 +48,7 @@ namespace PowerPointLike
             if (_elementsChoicesBox.Text != EMPTY_STRING)
             {
                 _presentationModel.AddItem(_elementsChoicesBox.Text);
-                string[] element = _presentationModel.GetCurrentElement();
-                _elementDataGrid.Rows.Add(element[DATA_DELETE_INDEX], element[DATA_NAME_INDEX], element[DATA_COORDINATE_INDEX]);
+                AddElementToDataRridView();
             }
         }
 
@@ -101,9 +109,47 @@ namespace PowerPointLike
         /// </summary>
         public void RefreshToolButtonClick()
         {
-            _lineButton.Checked = _presentationModel._isLineButtonCheck;
-            _rectangleButton.Checked = _presentationModel._isRectangleButtonCheck;
-            _circleButton.Checked = _presentationModel._isCircleButtonCheck;
+            _lineButton.Checked = _presentationModel._isbuttonChecked[(int)PresentationModel.ShapeIndex.Line];
+            _rectangleButton.Checked = _presentationModel._isbuttonChecked[(int)PresentationModel.ShapeIndex.Rectangle];
+            _circleButton.Checked = _presentationModel._isbuttonChecked[(int)PresentationModel.ShapeIndex.Circle];
+        }
+
+        private void _canvas_Paint(object sender, PaintEventArgs e)
+        {
+            _presentationModel.Draw(e.Graphics);
+        }
+
+        public void HandleCanvasPressed(object sender,
+System.Windows.Forms.MouseEventArgs e)
+        {
+            Console.WriteLine("click canvas, before presentation");
+            _presentationModel.PointerPressed(e.X, e.Y);
+        }
+
+        public void HandleCanvasReleased(object sender,
+System.Windows.Forms.MouseEventArgs e)
+        {
+            _presentationModel.PointerReleased(e.X, e.Y);
+            AddElementToDataRridView();
+        }
+
+        public void HandleCanvasMoved(object sender,
+System.Windows.Forms.MouseEventArgs e)
+        {
+            _presentationModel.PointerMoved(e.X, e.Y);
+        }
+
+        public void HandleCanvasPaint(object sender,
+       System.Windows.Forms.PaintEventArgs e)
+        {
+            Console.WriteLine("before presentation");
+            _presentationModel.Draw(e.Graphics);
+        }
+
+        public void AddElementToDataRridView()
+        {
+            string[] element = _presentationModel.GetCurrentElement();
+            _elementDataGrid.Rows.Add(element[(int)Data.DataDeleteIndex], element[(int)Data.DataNameIndex], element[(int)Data.DataCoordinateIndex]);
         }
     }
 }

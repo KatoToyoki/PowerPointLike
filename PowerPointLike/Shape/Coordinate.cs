@@ -10,6 +10,11 @@ namespace PowerPointLike
     public struct Coordinate
     {
         public const int QUANTITY = 2;
+        public Coordinate(int x, int y)
+        {
+            _x = x;
+            _y = y;
+        }
         public int _x
         {
             get; set;
@@ -44,7 +49,6 @@ namespace PowerPointLike
 
     public struct CoordinateSet
     {
-        public const int QUANTITY = 2;
         public Coordinate _point1
         {
             get; set;

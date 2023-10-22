@@ -59,7 +59,7 @@ namespace PowerPointLike
             this._menuInfo});
             this._menu.Location = new System.Drawing.Point(0, 0);
             this._menu.Name = "_menu";
-            this._menu.Size = new System.Drawing.Size(1441, 30);
+            this._menu.Size = new System.Drawing.Size(1441, 27);
             this._menu.TabIndex = 0;
             this._menu.Text = "menuStrip1";
             // 
@@ -68,7 +68,7 @@ namespace PowerPointLike
             this._menuInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._menuInfoAbout});
             this._menuInfo.Name = "_menuInfo";
-            this._menuInfo.Size = new System.Drawing.Size(53, 26);
+            this._menuInfo.Size = new System.Drawing.Size(53, 23);
             this._menuInfo.Text = "說明";
             // 
             // _menuInfoAbout
@@ -84,6 +84,7 @@ namespace PowerPointLike
             this._canvas.Name = "_canvas";
             this._canvas.Size = new System.Drawing.Size(890, 640);
             this._canvas.TabIndex = 2;
+            this._canvas.Paint += new System.Windows.Forms.PaintEventHandler(this._canvas_Paint);
             // 
             // _canvas1
             // 
@@ -184,9 +185,9 @@ namespace PowerPointLike
             this._lineButton,
             this._rectangleButton,
             this._circleButton});
-            this._toolBar.Location = new System.Drawing.Point(0, 30);
+            this._toolBar.Location = new System.Drawing.Point(0, 27);
             this._toolBar.Name = "_toolBar";
-            this._toolBar.Size = new System.Drawing.Size(1441, 31);
+            this._toolBar.Size = new System.Drawing.Size(1441, 27);
             this._toolBar.TabIndex = 6;
             this._toolBar.Text = "toolStrip1";
             // 
@@ -196,7 +197,7 @@ namespace PowerPointLike
             this._lineButton.Image = global::PowerPointLike.Properties.Resources.line;
             this._lineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._lineButton.Name = "_lineButton";
-            this._lineButton.Size = new System.Drawing.Size(29, 28);
+            this._lineButton.Size = new System.Drawing.Size(29, 24);
             this._lineButton.Text = "Line";
             this._lineButton.Click += new System.EventHandler(this.ClickLineButton);
             // 
@@ -206,7 +207,7 @@ namespace PowerPointLike
             this._rectangleButton.Image = global::PowerPointLike.Properties.Resources.rectangle;
             this._rectangleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._rectangleButton.Name = "_rectangleButton";
-            this._rectangleButton.Size = new System.Drawing.Size(29, 28);
+            this._rectangleButton.Size = new System.Drawing.Size(29, 24);
             this._rectangleButton.Text = "Rectangle";
             this._rectangleButton.Click += new System.EventHandler(this.ClickRectangleButton);
             // 
@@ -216,7 +217,7 @@ namespace PowerPointLike
             this._circleButton.Image = global::PowerPointLike.Properties.Resources.circle;
             this._circleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._circleButton.Name = "_circleButton";
-            this._circleButton.Size = new System.Drawing.Size(29, 28);
+            this._circleButton.Size = new System.Drawing.Size(29, 24);
             this._circleButton.Text = "Circle";
             this._circleButton.Click += new System.EventHandler(this.ClickCircleButton);
             // 

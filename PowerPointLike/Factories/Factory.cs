@@ -8,6 +8,37 @@ namespace PowerPointLike
 {
     public partial class Factory
     {
+        public const int MAX_WIDTH = 890;
+        public const int MAX_HEIGHT = 640;
+
+        /// <summary>
+        /// Method <c>RandomCoordinate</c>
+        /// to create a random coordinate
+        /// </summary>
+        /// <param name="random"></param>
+        /// <returns></returns>
+        public Coordinate CreateRandomCoordinate(Random random)
+        {
+            Coordinate coordinate = new Coordinate();
+            coordinate._x = random.Next(MAX_WIDTH);
+            coordinate._y = random.Next(MAX_HEIGHT);
+            return coordinate;
+        }
+
+        /// <summary>
+        /// Method <c>InitializeSet</c>
+        /// to set coordinate to the set
+        /// </summary>
+        /// <param name="length">the container length</param>
+        protected CoordinateSet InitializeSet()
+        {
+            CoordinateSet coordinateSet = new CoordinateSet();
+            var random = new Random();
+            coordinateSet._point1 = CreateRandomCoordinate(random);
+            coordinateSet._point2 = CreateRandomCoordinate(random);
+            return coordinateSet;
+        }
+
         /// <summary>
         /// Method <c>CreateRectangle</c>
         /// to create a new rectangle element
@@ -15,7 +46,7 @@ namespace PowerPointLike
         /// <returns>rectangle element</returns>
         public Shape CreateRectangle()
         {
-            Shape rectangle = new Rectangle();
+            Shape rectangle = new Rectangle(InitializeSet());
             return rectangle;
         }
 
@@ -26,7 +57,7 @@ namespace PowerPointLike
         /// <returns>line element</returns>
         public Shape CreateLine()
         {
-            Shape line = new Line();
+            Shape line = new Line(InitializeSet());
             return line;
         }
 
@@ -37,7 +68,25 @@ namespace PowerPointLike
         /// <returns>circle element</returns>
         public Shape CreateCircle()
         {
-            Shape circle = new Circle();
+            Shape circle = new Circle(InitializeSet());
+            return circle;
+        }
+
+        public Shape DrawLine(CoordinateSet coordinateSet)
+        {
+            Shape line = new Line(coordinateSet);
+            return line;
+        }
+
+        public Shape DrawRectangle(CoordinateSet coordinateSet)
+        {
+            Shape rectangle = new Rectangle(coordinateSet);
+            return rectangle;
+        }
+
+        public Shape DrawCircle(CoordinateSet coordinateSet)
+        {
+            Shape circle = new Circle(coordinateSet);
             return circle;
         }
     }
