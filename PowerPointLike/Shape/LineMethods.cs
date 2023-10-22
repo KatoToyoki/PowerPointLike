@@ -7,15 +7,21 @@ using System.Threading.Tasks;
 
 namespace PowerPointLike
 {
-    public partial class Line : Shape
+    public class Line : Shape
     {
+        public const string LINE = "線";
+        public const int LINE_COORDINATE_LENGTH = 2;
         /// <summary>
         /// Initializes a new instance of the <see cref="Line"/> class.
         /// </summary>
         public Line()
         {
             _shapeName = LINE;
-            InitializeContainer(LINE_COORDINATE_LENGTH);
+            InitializeContainer();
         }
+
+        // public override void Draw()
+        // {
+        // }
     }
 }

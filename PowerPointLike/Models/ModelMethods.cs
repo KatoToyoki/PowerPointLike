@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace PowerPointLike
 {
-    public partial class Model
+    public class Model
     {
+        enum Data
+        {
+            dataDeleteIndex, dataNameIndex, dataCoordinateIndex, dataElementLength
+        }
+
+        public const string EMPTY_STRING = "";
+        public const string DELETE = "刪除";
+
+        private Shapes _shapes = new Shapes();
+
         /// <summary>
         /// Method <c>PrintTest</c>
         /// to print the attributes of each element in the container
@@ -43,11 +53,11 @@ namespace PowerPointLike
         /// <returns>one element info separated in string array</returns>
         public string[] GetOneElement(int index)
         {
-            string[] element = new string[DATA_ELEMENT_LENGTH];
-            element[DATA_DELETE_INDEX] = DELETE;
-            element[DATA_NAME_INDEX] = _shapes.GetElementName(index);
+            string[] element = new string[(int)Data.dataElementLength];
+            element[(int)Data.dataDeleteIndex] = DELETE;
+            element[(int)Data.dataNameIndex] = _shapes.GetElementName(index);
             string coordinate = _shapes.GetElementCoordinateString(index);
-            element[DATA_COORDINATE_INDEX] = coordinate;
+            element[(int)Data.dataCoordinateIndex] = coordinate;
             return element;
         }
 

@@ -6,9 +6,20 @@ using System.Threading.Tasks;
 
 namespace PowerPointLike
 {
-
-    public partial class Shape
+    public abstract class Shape
     {
+        public const int MAX_WIDTH = 890;
+        public const int MAX_HEIGHT = 640;
+        public const string COMMA = ",";
+
+        public string _shapeName
+        {
+            get; set;
+        }
+
+        protected CoordinateSet _coordinateSet = new CoordinateSet();
+
+
         /// <summary>
         /// Method <c>RandomCoordinate</c>
         /// to create a random coordinate
@@ -20,7 +31,6 @@ namespace PowerPointLike
             Coordinate coordinate = new Coordinate();
             coordinate._x = random.Next(MAX_WIDTH);
             coordinate._y = random.Next(MAX_HEIGHT);
-
             return coordinate;
         }
 
@@ -29,14 +39,11 @@ namespace PowerPointLike
         /// to put elements in container depends on each Shape and the length
         /// </summary>
         /// <param name="length">the container length</param>
-        protected void InitializeContainer(int length)
+        protected void InitializeContainer()
         {
             var random = new Random();
-            for (int i = 0; i < length; i++)
-            {
-                Coordinate element = CreateRandomCoordinate(random);
-                _coordinateContainer.Add(element);
-            }
+            _coordinateSet._point1 = CreateRandomCoordinate(random);
+            _coordinateSet._point2 = CreateRandomCoordinate(random);
         }
 
         /// <summary>
@@ -44,11 +51,9 @@ namespace PowerPointLike
         /// get one whole element, including the name and the coordinate
         /// </summary>
         /// <returns>formatted string element data</returns>
-        public string GetOneElementData()
+        public virtual string GetOneElementData()
         {
-            string element = _shapeName + COMMA;
-            element += GetOneElementCoordinate();
-            return element;
+            return _shapeName + _coordinateSet.GetCoordinateSetString();
         }
 
         /// <summary>
@@ -56,18 +61,9 @@ namespace PowerPointLike
         /// get one whole element, only coordinate
         /// </summary>
         /// <returns>formatted string of coordinate data</returns>
-        public string GetOneElementCoordinate()
+        public virtual string GetOneElementCoordinate()
         {
-            string coordinate = null;
-            for (int i = 0; i < _coordinateContainer.Count; i++)
-            {
-                coordinate += LEFT_BRACKET + _coordinateContainer[i]._x + COMMA + _coordinateContainer[i]._y + RIGHT_BRACKET;
-                if (i != _coordinateContainer.Count - 1)
-                {
-                    coordinate += COMMA;
-                }
-            }
-            return coordinate;
+            return _coordinateSet.GetCoordinateSetString();
         }
     }
 }

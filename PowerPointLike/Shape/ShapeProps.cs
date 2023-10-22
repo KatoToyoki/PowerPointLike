@@ -8,31 +8,45 @@ namespace PowerPointLike
 {
     public struct Coordinate
     {
-        public double _x
+        public int _x
         {
             get; set;
         }
-        public double _y
+        public int _y
         {
             get; set;
+        }
+
+        public string GetCoordinateString()
+        {
+            const string COORDINATE = "({0},{1})";
+            return string.Format(COORDINATE, _x, _y);
         }
     }
-    public partial class Shape
-    {
-        public const int MAX_WIDTH = 890;
-        public const int MAX_HEIGHT = 640;
-        public const int COORDINATE_LENGTH = 2;
-        public const int TOP_LEFT_POSITION = 0;
-        public const int BOTTOM_RIGHT_POSITION = 1;
-        public const string LEFT_BRACKET = "(";
-        public const string RIGHT_BRACKET = ")";
-        public const string COMMA = ",";
 
-        public string _shapeName
+    public struct CoordinateSet
+    {
+        public Coordinate _point1
+        {
+            get; set;
+        }
+        public Coordinate _point2
         {
             get; set;
         }
 
-        protected List<Coordinate> _coordinateContainer = new List<Coordinate>();
+        public string GetMiddlePoint()
+        {
+            Coordinate result = new Coordinate();
+            result._x = (_point1._x + _point2._x) / 2;
+            result._y = (_point1._y + _point2._y) / 2;
+            return result.GetCoordinateString();
+        }
+
+        public string GetCoordinateSetString()
+        {
+            const string COORDINATE = "{0},{1}";
+            return string.Format(COORDINATE, _point1.GetCoordinateString(), _point2.GetCoordinateString());
+        }
     }
 }

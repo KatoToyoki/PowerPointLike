@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace PowerPointLike
 {
-    public partial class Shapes
+    public class Shapes
     {
+        const string RECTANGLE = "矩形";
+        const string LINE = "線";
+        const string CIRCLE = "圓";
+        private List<Shape> _shapeContainer = new List<Shape>();
+        private Factory _factory = new Factory();
         /// <summary>
         /// Method <c>AddShape</c>
         /// to create new element depends on the chosen element
@@ -74,6 +79,7 @@ namespace PowerPointLike
         /// <returns>formatted string of coordinate data</returns>
         public string GetElementCoordinateString(int index)
         {
+            // return _shapeContainer[index].GetOneElementCoordinate();
             return _shapeContainer[index].GetOneElementCoordinate();
         }
 
