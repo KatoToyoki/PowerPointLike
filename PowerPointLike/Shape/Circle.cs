@@ -19,6 +19,11 @@ namespace PowerPointLike
             _coordinateSet = coordinateSet;
         }
 
+        /// <summary>
+        ///  Method <c>Draw</c>
+        ///  to draw circle
+        /// </summary>
+        /// <param name="graphics"></param>
         public override void Draw(IGraphics graphics)
         {
             graphics.DrawCircle(_coordinateSet);

@@ -36,6 +36,11 @@ namespace PowerPointLike
             return _coordinateSet.GetCoordinateSetString();
         }
 
+        /// <summary>
+        ///  Method <c>Draw</c>
+        ///  implemented by the derived class
+        /// </summary>
+        /// <param name="graphics"></param>
         public abstract void Draw(IGraphics graphics);
     }
 }

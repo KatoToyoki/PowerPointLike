@@ -84,7 +84,6 @@ namespace PowerPointLike
             this._canvas.Name = "_canvas";
             this._canvas.Size = new System.Drawing.Size(890, 640);
             this._canvas.TabIndex = 2;
-            this._canvas.Paint += new System.Windows.Forms.PaintEventHandler(this._canvas_Paint);
             // 
             // _canvas1
             // 

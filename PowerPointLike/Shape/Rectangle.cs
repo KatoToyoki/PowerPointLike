@@ -19,6 +19,10 @@ namespace PowerPointLike
             _coordinateSet = coordinateSet;
         }
 
+        /// <summary>
+        ///  Method <c>Draw</c>
+        ///  to draw rectangle
+        /// </summary>
         public override void Draw(IGraphics graphics)
         {
             graphics.DrawRectangle(_coordinateSet);

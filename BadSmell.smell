@@ -206,6 +206,16 @@
                 <AnalysisFileType>Designer</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>Models\GraphicsAdaptor.cs</RelativePath>
+                <ProjectName>PowerPointLike</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Models\IGraphics.cs</RelativePath>
+                <ProjectName>PowerPointLike</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>Models\Model.cs</RelativePath>
                 <ProjectName>PowerPointLike</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
@@ -267,7 +277,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>1067</ProductionLoc>
+          <ProductionLoc>1530</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>

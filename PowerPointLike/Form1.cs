@@ -16,7 +16,7 @@ namespace PowerPointLike
         {
             DataDeleteIndex,
             DataNameIndex,
-            DataCoordinateIndex,
+            DataCoordinateIndex
         }
 
         public const string EMPTY_STRING = "";
@@ -35,6 +35,8 @@ namespace PowerPointLike
             _canvas.MouseMove += HandleCanvasMoved;
             _canvas.Paint += HandleCanvasPaint;
             Controls.Add(_canvas);
+
+            _presentationModel.GetModelEvent()._modelChanged += HandleModelChanged;
         }
 
         /// <summary>
@@ -48,7 +50,7 @@ namespace PowerPointLike
             if (_elementsChoicesBox.Text != EMPTY_STRING)
             {
                 _presentationModel.AddItem(_elementsChoicesBox.Text);
-                AddElementToDataRridView();
+                AddDataToTable();
             }
         }
 
@@ -109,47 +111,75 @@ namespace PowerPointLike
         /// </summary>
         public void RefreshToolButtonClick()
         {
-            _lineButton.Checked = _presentationModel._isbuttonChecked[(int)PresentationModel.ShapeIndex.Line];
-            _rectangleButton.Checked = _presentationModel._isbuttonChecked[(int)PresentationModel.ShapeIndex.Rectangle];
-            _circleButton.Checked = _presentationModel._isbuttonChecked[(int)PresentationModel.ShapeIndex.Circle];
+            _lineButton.Checked = _presentationModel.GetButtonChecked((int)PresentationModel.ShapeIndex.Line);
+            _rectangleButton.Checked = _presentationModel.GetButtonChecked((int)PresentationModel.ShapeIndex.Rectangle);
+            _circleButton.Checked = _presentationModel.GetButtonChecked((int)PresentationModel.ShapeIndex.Circle);
         }
 
-        private void _canvas_Paint(object sender, PaintEventArgs e)
+        /// <summary>
+        /// Method <c>HandleCanvasPressed</c>
+        /// this function is to deal with the situation of the starting of the drawing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void HandleCanvasPressed(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            _presentationModel.PressPointer(e.X, e.Y);
+        }
+
+        /// <summary>
+        /// Method <c>HandleCanvasMoved</c>
+        /// this function is to deal with the situation of the the process of the drawing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void HandleCanvasMoved(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            _presentationModel.MovePointer(e.X, e.Y);
+        }
+
+        /// <summary>
+        /// Method <c>HandleCanvasReleased</c>
+        /// this function is to deal with the situation of the end of the drawing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void HandleCanvasReleased(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            _presentationModel.ReleasePointer(e.X, e.Y);
+            AddDataToTable();
+            _presentationModel.ResetAllButtonCheck();
+            RefreshToolButtonClick();
+            _canvas.Cursor = System.Windows.Forms.Cursors.Default;
+        }
+
+        /// <summary>
+        /// Method <c>HandleCanvasPaint</c>
+        /// to display all the instances on the screen
+        /// </summary>
+        /// <param name="sender"></param>
+        public void HandleCanvasPaint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             _presentationModel.Draw(e.Graphics);
         }
 
-        public void HandleCanvasPressed(object sender,
-System.Windows.Forms.MouseEventArgs e)
-        {
-            Console.WriteLine("click canvas, before presentation");
-            _presentationModel.PointerPressed(e.X, e.Y);
-        }
-
-        public void HandleCanvasReleased(object sender,
-System.Windows.Forms.MouseEventArgs e)
-        {
-            _presentationModel.PointerReleased(e.X, e.Y);
-            AddElementToDataRridView();
-        }
-
-        public void HandleCanvasMoved(object sender,
-System.Windows.Forms.MouseEventArgs e)
-        {
-            _presentationModel.PointerMoved(e.X, e.Y);
-        }
-
-        public void HandleCanvasPaint(object sender,
-       System.Windows.Forms.PaintEventArgs e)
-        {
-            Console.WriteLine("before presentation");
-            _presentationModel.Draw(e.Graphics);
-        }
-
-        public void AddElementToDataRridView()
+        /// <summary>
+        /// Method <c>AddElementToDataRridView</c>
+        /// add data whenever it's generated or painted
+        /// </summary>
+        public void AddDataToTable()
         {
             string[] element = _presentationModel.GetCurrentElement();
             _elementDataGrid.Rows.Add(element[(int)Data.DataDeleteIndex], element[(int)Data.DataNameIndex], element[(int)Data.DataCoordinateIndex]);
+        }
+
+        /// <summary>
+        /// Method <c>HandleModelChanged</c>
+        /// refresh when model is changed
+        /// </summary>
+        public void HandleModelChanged()
+        {
+            Invalidate(true);
         }
     }
 }

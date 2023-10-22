@@ -20,6 +20,10 @@ namespace PowerPointLike
             _coordinateSet = coordinateSet;
         }
 
+        /// <summary>
+        ///  Method <c>Draw</c>
+        ///  to draw line
+        /// </summary>
         public override void Draw(IGraphics graphics)
         {
             graphics.DrawLine(_coordinateSet);

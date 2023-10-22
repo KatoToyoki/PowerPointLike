@@ -8,8 +8,8 @@ namespace PowerPointLike
 {
     public partial class Factory
     {
-        public const int MAX_WIDTH = 890;
-        public const int MAX_HEIGHT = 640;
+        public const int MAX_WIDTH = 445;
+        public const int MAX_HEIGHT = 320;
 
         /// <summary>
         /// Method <c>RandomCoordinate</c>
@@ -72,18 +72,33 @@ namespace PowerPointLike
             return circle;
         }
 
+        /// <summary>
+        /// Method <c>DrawLine</c>
+        /// to create a drawn line element
+        /// </summary>
+        /// <returns>line element</returns>
         public Shape DrawLine(CoordinateSet coordinateSet)
         {
             Shape line = new Line(coordinateSet);
             return line;
         }
 
+        /// <summary>
+        /// Method <c>DrawRectangle</c>
+        /// to create a drawn rectangle element
+        /// </summary>
+        /// <returns>rectangle element</returns>
         public Shape DrawRectangle(CoordinateSet coordinateSet)
         {
             Shape rectangle = new Rectangle(coordinateSet);
             return rectangle;
         }
 
+        /// <summary>
+        /// Method <c>DrawCircle</c>
+        /// to create a drawn circle element
+        /// </summary>
+        /// <returns>circle element</returns>
         public Shape DrawCircle(CoordinateSet coordinateSet)
         {
             Shape circle = new Circle(coordinateSet);

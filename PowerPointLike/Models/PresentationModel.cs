@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using PowerPointLike.Models;
 
 namespace PowerPointLike
@@ -17,13 +18,11 @@ namespace PowerPointLike
         }
         public const int DATA_DELETE_INDEX = 0;
         public const int INVALID = -1;
+        public const int LENGTH = 3;
+
         private Model _model;
         private int _currentButtonIndex;
-
-        public bool[] _isbuttonChecked
-        {
-            get; set;
-        } = new bool[3];
+        private bool[] _buttonChecked = new bool[LENGTH];
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PresentationModel"/> class.
@@ -33,6 +32,21 @@ namespace PowerPointLike
         {
             _model = model;
             ResetAllButtonCheck();
+        }
+
+        /// <summary>
+        /// Method <c>GetbuttonChecked</c>
+        /// thank you, dr.smell, for not letting me use the new syntax
+        /// I originally didn't have to do this, thanks A LOT :))))
+        /// public bool[] _buttonChecked{
+        /// get; set;
+        /// }= new bool[3];
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public bool GetButtonChecked(int index)
+        {
+            return _buttonChecked[index];
         }
 
         /// <summary>
@@ -91,9 +105,9 @@ namespace PowerPointLike
         /// </summary>
         public void ResetAllButtonCheck()
         {
-            for (int i = 0; i < _isbuttonChecked.Length; i++)
+            for (int i = 0; i < _buttonChecked.Length; i++)
             {
-                _isbuttonChecked[i] = false;
+                _buttonChecked[i] = false;
             }
         }
 
@@ -104,7 +118,7 @@ namespace PowerPointLike
         public void ClickLineButton()
         {
             ResetAllButtonCheck();
-            _isbuttonChecked[(int)ShapeIndex.Line] = true;
+            _buttonChecked[(int)ShapeIndex.Line] = true;
             _currentButtonIndex = (int)ShapeIndex.Line;
         }
 
@@ -115,7 +129,7 @@ namespace PowerPointLike
         public void ClickRectangleButton()
         {
             ResetAllButtonCheck();
-            _isbuttonChecked[(int)ShapeIndex.Rectangle] = true;
+            _buttonChecked[(int)ShapeIndex.Rectangle] = true;
             _currentButtonIndex = (int)ShapeIndex.Rectangle;
         }
 
@@ -126,31 +140,61 @@ namespace PowerPointLike
         public void ClickCircleButton()
         {
             ResetAllButtonCheck();
-            _isbuttonChecked[(int)ShapeIndex.Circle] = true;
+            _buttonChecked[(int)ShapeIndex.Circle] = true;
             _currentButtonIndex = (int)ShapeIndex.Circle;
         }
 
+        /// <summary>
+        /// Method <c>Draw</c>
+        /// let model draw
+        /// </summary>
+        /// <param name="graphics"></param>
         public void Draw(System.Drawing.Graphics graphics)
         {
-            Console.WriteLine("in presentation, before model");
             _model.Draw(new GraphicsAdaptor(graphics));
         }
 
-        public void PointerPressed(double x, double y)
+        /// <summary>
+        /// Method <c>PressPointer</c>
+        /// let model handle with PressPointer
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void PressPointer(double coordinateX, double coordinateY)
         {
-
-            Console.WriteLine("click canvas, in presentation");
-            _model.PointerPressed(x, y, _currentButtonIndex);
+            _model.PressPointer(coordinateX, coordinateY, _currentButtonIndex);
         }
 
-        public void PointerMoved(double x, double y)
+        /// <summary>
+        /// Method <c>MovePointer</c>
+        /// let model handle with MovePointer
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void MovePointer(double coordinateX, double coordinateY)
         {
-            _model.PoinerMoved(x, y);
+            _model.MovePointer(coordinateX, coordinateY);
         }
 
-        public void PointerReleased(double x, double y)
+        /// <summary>
+        /// Method <c>ReleasePointer</c>
+        /// let model handle with ReleasePointer
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void ReleasePointer(double coordinateX, double coordinateY)
         {
-            _model.PointerReleased(x, y, _currentButtonIndex);
+            _model.ReleasePointer(coordinateX, coordinateY, _currentButtonIndex);
+        }
+
+        /// <summary>
+        ///  Method <c>GetModelEvent</c>
+        /// in order to get _modelChanged
+        /// </summary>
+        /// <returns></returns>
+        public Model GetModelEvent()
+        {
+            return _model;
         }
     }
 }

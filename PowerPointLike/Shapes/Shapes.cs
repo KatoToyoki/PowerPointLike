@@ -13,6 +13,7 @@ namespace PowerPointLike
         const string CIRCLE = "圓";
         private List<Shape> _shapeContainer = new List<Shape>();
         private Factory _factory = new Factory();
+
         /// <summary>
         /// Method <c>AddShape</c>
         /// to create new element depends on the chosen element
@@ -79,7 +80,6 @@ namespace PowerPointLike
         /// <returns>formatted string of coordinate data</returns>
         public string GetElementCoordinateString(int index)
         {
-            // return _shapeContainer[index].GetOneElementCoordinate();
             return _shapeContainer[index].GetOneElementCoordinate();
         }
 
@@ -93,17 +93,25 @@ namespace PowerPointLike
             _shapeContainer.RemoveAt(index);
         }
 
+        /// <summary>
+        /// Method <c>Draw</c>
+        /// to draw all instances in the container
+        /// </summary>
+        /// <param name="graphics"></param>
         public void Draw(IGraphics graphics)
         {
-            Console.WriteLine("in container");
-
             foreach (Shape shape in _shapeContainer)
             {
-                Console.WriteLine("iii");
                 shape.Draw(graphics);
             }
         }
 
+        /// <summary>
+        ///  Method <c>DrawShape</c>
+        ///  to create a drawn shpae
+        /// </summary>
+        /// <param name="shapeIndex">to know which shape to draw</param>
+        /// <param name="coordinateSet">to set the coordinate</param>
         public void DrawShape(int shapeIndex, CoordinateSet coordinateSet)
         {
             switch (shapeIndex)
@@ -118,6 +126,27 @@ namespace PowerPointLike
                     _shapeContainer.Add(_factory.DrawCircle(coordinateSet));
                     break;
             }
+        }
+
+        /// <summary>
+        ///  Method <c>CreateTempShape</c>
+        ///  create a shape but not added in the container
+        /// </summary>
+        /// <param name="shapeIndex"></param>
+        /// <param name="coordinateSet"></param>
+        /// <returns></returns>
+        public Shape CreateTempShape(int shapeIndex, CoordinateSet coordinateSet)
+        {
+            switch (shapeIndex)
+            {
+                case (int)PresentationModel.ShapeIndex.Line:
+                    return _factory.DrawLine(coordinateSet);
+                case (int)PresentationModel.ShapeIndex.Rectangle:
+                    return _factory.DrawRectangle(coordinateSet);
+                case (int)PresentationModel.ShapeIndex.Circle:
+                    return _factory.DrawCircle(coordinateSet);
+            }
+            return null;
         }
     }
 }
