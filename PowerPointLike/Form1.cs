@@ -96,7 +96,7 @@ namespace PowerPointLike
         }
 
         /// <summary>
-        /// /// Method <c>RefreshToolButtonClick</c>
+        /// Method <c>RefreshToolButtonClick</c>
         /// updates three toolbar buttons to be consisted with presentation model
         /// </summary>
         public void RefreshToolButtonClick()

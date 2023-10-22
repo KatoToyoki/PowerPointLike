@@ -10,7 +10,10 @@ namespace PowerPointLike
     {
         enum Data
         {
-            dataDeleteIndex, dataNameIndex, dataCoordinateIndex, dataElementLength
+            DataDeleteIndex,
+            DataNameIndex,
+            DataCoordinateIndex,
+            DataElementLength
         }
 
         public const string EMPTY_STRING = "";
@@ -53,11 +56,11 @@ namespace PowerPointLike
         /// <returns>one element info separated in string array</returns>
         public string[] GetOneElement(int index)
         {
-            string[] element = new string[(int)Data.dataElementLength];
-            element[(int)Data.dataDeleteIndex] = DELETE;
-            element[(int)Data.dataNameIndex] = _shapes.GetElementName(index);
+            string[] element = new string[(int)Data.DataElementLength];
+            element[(int)Data.DataDeleteIndex] = DELETE;
+            element[(int)Data.DataNameIndex] = _shapes.GetElementName(index);
             string coordinate = _shapes.GetElementCoordinateString(index);
-            element[(int)Data.dataCoordinateIndex] = coordinate;
+            element[(int)Data.DataCoordinateIndex] = coordinate;
             return element;
         }
 

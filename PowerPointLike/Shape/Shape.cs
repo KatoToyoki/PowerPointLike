@@ -19,7 +19,6 @@ namespace PowerPointLike
 
         protected CoordinateSet _coordinateSet = new CoordinateSet();
 
-
         /// <summary>
         /// Method <c>RandomCoordinate</c>
         /// to create a random coordinate

@@ -191,12 +191,7 @@
           <AnalysisFileManager>
             <AnalysisFiles>
               <AnalysisFile>
-                <RelativePath>Factories\FactoryMethods.cs</RelativePath>
-                <ProjectName>PowerPointLike</ProjectName>
-                <AnalysisFileType>Model</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
-                <RelativePath>Factories\FactoryProps.cs</RelativePath>
+                <RelativePath>Factories\Factory.cs</RelativePath>
                 <ProjectName>PowerPointLike</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
@@ -211,22 +206,12 @@
                 <AnalysisFileType>Designer</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Models\ModelMethods.cs</RelativePath>
+                <RelativePath>Models\Model.cs</RelativePath>
                 <ProjectName>PowerPointLike</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Models\ModelProps.cs</RelativePath>
-                <ProjectName>PowerPointLike</ProjectName>
-                <AnalysisFileType>Model</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
-                <RelativePath>Models\PresentationMethods.cs</RelativePath>
-                <ProjectName>PowerPointLike</ProjectName>
-                <AnalysisFileType>Model</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
-                <RelativePath>Models\PresentationModelProps.cs</RelativePath>
+                <RelativePath>Models\PresentationModel.cs</RelativePath>
                 <ProjectName>PowerPointLike</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
@@ -251,58 +236,38 @@
                 <AnalysisFileType>Designer</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Shape\CircleMethods.cs</RelativePath>
+                <RelativePath>Shape\Circle.cs</RelativePath>
                 <ProjectName>PowerPointLike</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Shape\CircleProps.cs</RelativePath>
+                <RelativePath>Shape\Coordinate.cs</RelativePath>
                 <ProjectName>PowerPointLike</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Shape\LineMethods.cs</RelativePath>
+                <RelativePath>Shape\Line.cs</RelativePath>
                 <ProjectName>PowerPointLike</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Shape\LineProps.cs</RelativePath>
+                <RelativePath>Shape\Rectangle.cs</RelativePath>
                 <ProjectName>PowerPointLike</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Shape\RectangleMethods.cs</RelativePath>
+                <RelativePath>Shape\Shape.cs</RelativePath>
                 <ProjectName>PowerPointLike</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Shape\RectangleProps.cs</RelativePath>
-                <ProjectName>PowerPointLike</ProjectName>
-                <AnalysisFileType>Model</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
-                <RelativePath>Shape\ShapeMethods.cs</RelativePath>
-                <ProjectName>PowerPointLike</ProjectName>
-                <AnalysisFileType>Model</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
-                <RelativePath>Shape\ShapeProps.cs</RelativePath>
-                <ProjectName>PowerPointLike</ProjectName>
-                <AnalysisFileType>Model</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
-                <RelativePath>Shapes\ShapesMethods.cs</RelativePath>
-                <ProjectName>PowerPointLike</ProjectName>
-                <AnalysisFileType>Model</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
-                <RelativePath>Shapes\ShapesProps.cs</RelativePath>
+                <RelativePath>Shapes\Shapes.cs</RelativePath>
                 <ProjectName>PowerPointLike</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>1092</ProductionLoc>
+          <ProductionLoc>1067</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>
