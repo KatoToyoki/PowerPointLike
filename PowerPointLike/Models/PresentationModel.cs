@@ -14,14 +14,20 @@ namespace PowerPointLike
         {
             Line,
             Rectangle,
-            Circle
+            Circle,
+            Mouse
         }
         public const int DATA_DELETE_INDEX = 0;
         public const int INVALID = -1;
-        public const int LENGTH = 3;
+        public const int LENGTH = 4;
 
         private Model _model;
-        private int _currentButtonIndex;
+
+        public int _currentButtonIndex
+        {
+            get; set;
+        }
+
         private bool[] _buttonChecked = new bool[LENGTH];
 
         /// <summary>
@@ -32,6 +38,7 @@ namespace PowerPointLike
         {
             _model = model;
             ResetAllButtonCheck();
+            _currentButtonIndex = INVALID;
         }
 
         /// <summary>
@@ -145,6 +152,17 @@ namespace PowerPointLike
         }
 
         /// <summary>
+        /// Method <c>ClickMouseButton</c>
+        /// when mouse buttin is clicked, except for current button, all become false;
+        /// </summary>
+        public void ClickMouseButton()
+        {
+            ResetAllButtonCheck();
+            _buttonChecked[(int)ShapeIndex.Mouse] = true;
+            _currentButtonIndex = INVALID;
+        }
+
+        /// <summary>
         /// Method <c>Draw</c>
         /// let model draw
         /// </summary>
@@ -185,6 +203,7 @@ namespace PowerPointLike
         public void ReleasePointer(double coordinateX, double coordinateY)
         {
             _model.ReleasePointer(coordinateX, coordinateY, _currentButtonIndex);
+            _currentButtonIndex = INVALID;
         }
 
         /// <summary>
@@ -195,6 +214,20 @@ namespace PowerPointLike
         public Model GetModelEvent()
         {
             return _model;
+        }
+
+        /// <summary>
+        ///  Method <c>DrawIsReady</c>
+        /// if the button index is not line, rectangle or circle(namely, the mouse), can't draw
+        /// </summary>
+        /// <returns>if the current state is for drawing</returns>
+        public bool DrawIsReady()
+        {
+            if (_currentButtonIndex == INVALID)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

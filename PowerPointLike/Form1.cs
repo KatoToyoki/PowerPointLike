@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -106,6 +107,19 @@ namespace PowerPointLike
         }
 
         /// <summary>
+        /// Method <c>ClickMouseButton</c>
+        /// change the status of all buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickMouseButton(object sender, EventArgs e)
+        {
+            _presentationModel.ClickMouseButton();
+            RefreshToolButtonClick();
+            _canvas.Cursor = System.Windows.Forms.Cursors.Default;
+        }
+
+        /// <summary>
         /// Method <c>RefreshToolButtonClick</c>
         /// updates three toolbar buttons to be consisted with presentation model
         /// </summary>
@@ -114,6 +128,7 @@ namespace PowerPointLike
             _lineButton.Checked = _presentationModel.GetButtonChecked((int)PresentationModel.ShapeIndex.Line);
             _rectangleButton.Checked = _presentationModel.GetButtonChecked((int)PresentationModel.ShapeIndex.Rectangle);
             _circleButton.Checked = _presentationModel.GetButtonChecked((int)PresentationModel.ShapeIndex.Circle);
+            _mouseButton.Checked = _presentationModel.GetButtonChecked((int)PresentationModel.ShapeIndex.Mouse);
         }
 
         /// <summary>
@@ -124,6 +139,10 @@ namespace PowerPointLike
         /// <param name="e"></param>
         public void HandleCanvasPressed(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            if (!_presentationModel.DrawIsReady())
+            {
+                return;
+            }
             _presentationModel.PressPointer(e.X, e.Y);
         }
 
@@ -135,6 +154,10 @@ namespace PowerPointLike
         /// <param name="e"></param>
         public void HandleCanvasMoved(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            if (!_presentationModel.DrawIsReady())
+            {
+                return;
+            }
             _presentationModel.MovePointer(e.X, e.Y);
         }
 
@@ -146,11 +169,15 @@ namespace PowerPointLike
         /// <param name="e"></param>
         public void HandleCanvasReleased(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            if (!_presentationModel.DrawIsReady())
+            {
+                return;
+            }
             _presentationModel.ReleasePointer(e.X, e.Y);
             AddDataToTable();
             _presentationModel.ResetAllButtonCheck();
             RefreshToolButtonClick();
-            _canvas.Cursor = System.Windows.Forms.Cursors.Default;
+            ClickMouseButton(sender, e);
         }
 
         /// <summary>
@@ -161,6 +188,7 @@ namespace PowerPointLike
         public void HandleCanvasPaint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             _presentationModel.Draw(e.Graphics);
+            _canvas1.Image = GetScaleImage();
         }
 
         /// <summary>
@@ -171,6 +199,73 @@ namespace PowerPointLike
         {
             string[] element = _presentationModel.GetCurrentElement();
             _elementDataGrid.Rows.Add(element[(int)Data.DataDeleteIndex], element[(int)Data.DataNameIndex], element[(int)Data.DataCoordinateIndex]);
+        }
+
+        /// <summary>
+        /// Method <c>GetscaleImage</c>
+        /// to get change the button's image to the panel's thumbnail
+        /// why Dr.Smell doesn't recognize the word "thunbmail" ???
+        /// </summary>
+        /// <returns></returns>
+        public Bitmap GetScaleImage()
+        {
+            System.Drawing.Rectangle captureRegion = new System.Drawing.Rectangle(_canvas.Location.X, _canvas.Location.Y, _canvas.Width, _canvas.Height);
+            Bitmap scaleImage = new Bitmap(_canvas1.Width, _canvas1.Height);
+
+            using (Graphics g = Graphics.FromImage(scaleImage))
+            {
+                Bitmap capturedImage = CaptureRegion(_canvas, captureRegion);
+                capturedImage = ResizeImage(capturedImage, _canvas1.Size);
+                g.DrawImage(capturedImage, Point.Empty);
+            }
+
+            return scaleImage;
+        }
+
+        /// <summary>
+        /// Method <c>CaptureRegion</c>
+        /// get the origin capture region of panel
+        /// </summary>
+        /// <param name="control">the panel</param>
+        /// <param name="region">the rectangle that represent panel</param>
+        /// <returns></returns>
+        private Bitmap CaptureRegion(Control control, System.Drawing.Rectangle region)
+        {
+            Bitmap capturedImage = new Bitmap(region.Width, region.Height);
+            using (Graphics g = Graphics.FromImage(capturedImage))
+            {
+                g.CopyFromScreen(
+                    control.PointToScreen(new System.Drawing.Point(region.Left, region.Top)),
+                    Point.Empty,
+                    region.Size,
+                    CopyPixelOperation.SourceCopy);
+            }
+            return capturedImage;
+        }
+
+        /// <summary>
+        /// Method <c>ResizeImage</c>
+        /// to fit the width and height of panel and button, the captured img need to scale to the proper size
+        /// </summary>
+        /// <param name="originalImage">the origin capture img</param>
+        /// <param name="newSize">the size of button</param>
+        /// <returns></returns>
+        private Bitmap ResizeImage(Bitmap originalImage, Size newSize)
+        {
+            float percentWidth = ((float)newSize.Width / (float)originalImage.Width);
+            float percentHeight = ((float)newSize.Height / (float)originalImage.Height);
+            float percent = Math.Min(percentWidth, percentHeight);
+            int finalWidth = (int)(originalImage.Width * percent);
+            int finalHeight = (int)(originalImage.Height * percent);
+
+            Bitmap resizedImage = new Bitmap(finalWidth, finalHeight);
+            using (Graphics g = Graphics.FromImage(resizedImage))
+            {
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.DrawImage(originalImage, 0, 0, finalWidth, finalHeight);
+            }
+
+            return resizedImage;
         }
 
         /// <summary>
