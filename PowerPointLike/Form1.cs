@@ -20,6 +20,12 @@ namespace PowerPointLike
             DataCoordinateIndex
         }
 
+        public enum Command
+        {
+            Draw,
+            Generate
+        }
+
         public const string EMPTY_STRING = "";
         private PresentationModel _presentationModel;
 
@@ -51,7 +57,7 @@ namespace PowerPointLike
             if (_elementsChoicesBox.Text != EMPTY_STRING)
             {
                 _presentationModel.AddItem(_elementsChoicesBox.Text);
-                AddDataToTable();
+                AddDataToTable((int)Command.Generate);
             }
         }
 
@@ -75,7 +81,7 @@ namespace PowerPointLike
         /// <param name="e"></param>
         private void ClickLineButton(object sender, EventArgs e)
         {
-            _presentationModel.ClickLineButton();
+            _presentationModel.ClickLineButton(_lineButton.MergeIndex);
             RefreshToolButtonClick();
             _canvas.Cursor = System.Windows.Forms.Cursors.Cross;
         }
@@ -88,7 +94,7 @@ namespace PowerPointLike
         /// <param name="e"></param>
         private void ClickRectangleButton(object sender, EventArgs e)
         {
-            _presentationModel.ClickRectangleButton();
+            _presentationModel.ClickRectangleButton(_rectangleButton.MergeIndex);
             RefreshToolButtonClick();
             _canvas.Cursor = System.Windows.Forms.Cursors.Cross;
         }
@@ -101,7 +107,7 @@ namespace PowerPointLike
         /// <param name="e"></param>
         private void ClickCircleButton(object sender, EventArgs e)
         {
-            _presentationModel.ClickCircleButton();
+            _presentationModel.ClickCircleButton(_circleButton.MergeIndex);
             RefreshToolButtonClick();
             _canvas.Cursor = System.Windows.Forms.Cursors.Cross;
         }
@@ -114,7 +120,7 @@ namespace PowerPointLike
         /// <param name="e"></param>
         private void ClickMouseButton(object sender, EventArgs e)
         {
-            _presentationModel.ClickMouseButton();
+            _presentationModel.ClickMouseButton(_mouseButton.MergeIndex);
             RefreshToolButtonClick();
             _canvas.Cursor = System.Windows.Forms.Cursors.Default;
         }
@@ -139,10 +145,6 @@ namespace PowerPointLike
         /// <param name="e"></param>
         public void HandleCanvasPressed(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (!_presentationModel.DrawIsReady())
-            {
-                return;
-            }
             _presentationModel.PressPointer(e.X, e.Y);
         }
 
@@ -154,10 +156,6 @@ namespace PowerPointLike
         /// <param name="e"></param>
         public void HandleCanvasMoved(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (!_presentationModel.DrawIsReady())
-            {
-                return;
-            }
             _presentationModel.MovePointer(e.X, e.Y);
         }
 
@@ -169,15 +167,13 @@ namespace PowerPointLike
         /// <param name="e"></param>
         public void HandleCanvasReleased(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (!_presentationModel.DrawIsReady())
-            {
-                return;
-            }
             _presentationModel.ReleasePointer(e.X, e.Y);
-            AddDataToTable();
+            AddDataToTable((int)Command.Draw);
+
             _presentationModel.ResetAllButtonCheck();
             RefreshToolButtonClick();
             ClickMouseButton(sender, e);
+            _presentationModel.SetStateSelect();
         }
 
         /// <summary>
@@ -195,9 +191,13 @@ namespace PowerPointLike
         /// Method <c>AddElementToDataRridView</c>
         /// add data whenever it's generated or painted
         /// </summary>
-        public void AddDataToTable()
+        public void AddDataToTable(int command)
         {
-            string[] element = _presentationModel.GetCurrentElement();
+            string[] element = _presentationModel.GetCurrentElement(command);
+            if (element == null)
+            {
+                return;
+            }
             _elementDataGrid.Rows.Add(element[(int)Data.DataDeleteIndex], element[(int)Data.DataNameIndex], element[(int)Data.DataCoordinateIndex]);
         }
 

@@ -187,8 +187,9 @@ namespace PowerPointLike
             this._lineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this._lineButton.Image = global::PowerPointLike.Properties.Resources.line;
             this._lineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._lineButton.MergeIndex = 0;
             this._lineButton.Name = "_lineButton";
-            this._lineButton.Size = new System.Drawing.Size(29, 28);
+            this._lineButton.Size = new System.Drawing.Size(29, 24);
             this._lineButton.Text = "Line";
             this._lineButton.Click += new System.EventHandler(this.ClickLineButton);
             // 
@@ -197,8 +198,9 @@ namespace PowerPointLike
             this._rectangleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this._rectangleButton.Image = global::PowerPointLike.Properties.Resources.rectangle;
             this._rectangleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._rectangleButton.MergeIndex = 1;
             this._rectangleButton.Name = "_rectangleButton";
-            this._rectangleButton.Size = new System.Drawing.Size(29, 28);
+            this._rectangleButton.Size = new System.Drawing.Size(29, 24);
             this._rectangleButton.Text = "Rectangle";
             this._rectangleButton.Click += new System.EventHandler(this.ClickRectangleButton);
             // 
@@ -207,8 +209,9 @@ namespace PowerPointLike
             this._circleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this._circleButton.Image = global::PowerPointLike.Properties.Resources.circle;
             this._circleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._circleButton.MergeIndex = 2;
             this._circleButton.Name = "_circleButton";
-            this._circleButton.Size = new System.Drawing.Size(29, 28);
+            this._circleButton.Size = new System.Drawing.Size(29, 24);
             this._circleButton.Text = "Circle";
             this._circleButton.Click += new System.EventHandler(this.ClickCircleButton);
             // 

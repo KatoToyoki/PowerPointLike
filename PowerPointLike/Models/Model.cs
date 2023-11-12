@@ -20,12 +20,8 @@ namespace PowerPointLike
         public const string EMPTY_STRING = "";
         public const string DELETE = "刪除";
 
-        // for drawing new shape
-        Coordinate _firstPoint;
-        private CoordinateSet _newShapeCoordinateSet = new CoordinateSet();
-        private Shape _newShape;
-        private bool _isPressed = false;
-        private Shapes _shapes = new Shapes();
+        protected Shapes _shapes = new Shapes();
+        private State _state = new PointState();
 
         /// <summary>
         /// Method <c>PrintTest</c>
@@ -140,11 +136,7 @@ namespace PowerPointLike
             {
                 return;
             }
-            _firstPoint._x = (int)coordinateX;
-            _firstPoint._y = (int)coordinateY;
-            _newShapeCoordinateSet._point1 = _firstPoint;
-            _newShape = _shapes.CreateTempShape(shapeIndex, _newShapeCoordinateSet);
-            _isPressed = true;
+            _state.HandleCanvasPressed(coordinateX, coordinateY, shapeIndex);
         }
 
         /// <summary>
@@ -155,12 +147,10 @@ namespace PowerPointLike
         /// <param name="y"></param>
         public void MovePointer(double coordinateX, double coordinateY)
         {
-            if (_isPressed)
+            _state.HandleCanvasMoved(coordinateX, coordinateY);
+
+            if (_state._isPressed)
             {
-                Coordinate temp = new Coordinate();
-                temp._x = (int)coordinateX;
-                temp._y = (int)coordinateY;
-                _newShapeCoordinateSet._point2 = temp;
                 NotifyModelChanged();
             }
         }
@@ -174,15 +164,12 @@ namespace PowerPointLike
         /// <param name="shapeIndex">to know which shape to draw</param>
         public void ReleasePointer(double coordinateX, double coordinateY, int shapeIndex)
         {
-            if (_isPressed)
+            _state.HandleCanvasReleased(coordinateX, coordinateY, shapeIndex);
+            if (_state._isPressed)
             {
-                _isPressed = false;
-                CoordinateSet confirmOne = new CoordinateSet();
-                confirmOne._point1 = _firstPoint;
-                confirmOne._point2 = (new Coordinate((int)coordinateX, (int)coordinateY));
-                _shapes.DrawShape(shapeIndex, confirmOne);
                 NotifyModelChanged();
             }
+            _state._isPressed = false;
         }
 
         /// <summary>
@@ -197,5 +184,23 @@ namespace PowerPointLike
             }
         }
 
+        /// <summary>
+        /// Method <c>ClickToolButton</c> 
+        /// update current state index when the button is clicked
+        /// </summary>
+        /// <param name="index"></param>
+        public void ClickToolButton(int index)
+        {
+            _state = _state.CreateState(index, _shapes);
+        }
+
+        /// <summary>
+        ///  Method <c>GetCurrentStateIndex</c>
+        /// </summary>
+        /// <returns>current state index</returns>
+        public int GetCurrentStateIndex()
+        {
+            return _state._currentStateIndex;
+        }
     }
 }

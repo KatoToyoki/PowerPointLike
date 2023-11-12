@@ -71,8 +71,12 @@ namespace PowerPointLike
         ///  to get the current shape from container
         /// </summary>
         /// <returns>the current shape element</returns>
-        public string[] GetCurrentElement()
+        public string[] GetCurrentElement(int command)
         {
+            if (!((GetIfIsSelect() && command == (int)PowerPointLike.Command.Generate) || (command == (int)PowerPointLike.Command.Draw && GetIfIsDraw())))
+            {
+                return null;
+            }
             return _model.GetCurrentElement();
         }
 
@@ -116,50 +120,63 @@ namespace PowerPointLike
             {
                 _buttonChecked[i] = false;
             }
+            _currentButtonIndex = INVALID;
         }
 
         /// <summary>
         /// Method <c>ClickLineButton</c>
         /// when line buttin is clicked, except for line, all become false;
         /// </summary>
-        public void ClickLineButton()
+        public void ClickLineButton(int index)
         {
             ResetAllButtonCheck();
             _buttonChecked[(int)ShapeIndex.Line] = true;
             _currentButtonIndex = (int)ShapeIndex.Line;
+            _model.ClickToolButton(index);
         }
 
         /// <summary>
         /// Method <c>ClickRectangleButton</c>
         /// when line buttin is clicked, except for rectangle, all become false;
         /// </summary>
-        public void ClickRectangleButton()
+        public void ClickRectangleButton(int index)
         {
             ResetAllButtonCheck();
             _buttonChecked[(int)ShapeIndex.Rectangle] = true;
             _currentButtonIndex = (int)ShapeIndex.Rectangle;
+            _model.ClickToolButton(index);
         }
 
         /// <summary>
         /// Method <c>ClickCircleButton</c>
         /// when line buttin is clicked, except for circle, all become false;
         /// </summary>
-        public void ClickCircleButton()
+        public void ClickCircleButton(int index)
         {
             ResetAllButtonCheck();
             _buttonChecked[(int)ShapeIndex.Circle] = true;
             _currentButtonIndex = (int)ShapeIndex.Circle;
+            _model.ClickToolButton(index);
         }
 
         /// <summary>
         /// Method <c>ClickMouseButton</c>
         /// when mouse buttin is clicked, except for current button, all become false;
         /// </summary>
-        public void ClickMouseButton()
+        public void ClickMouseButton(int index)
         {
             ResetAllButtonCheck();
             _buttonChecked[(int)ShapeIndex.Mouse] = true;
             _currentButtonIndex = INVALID;
+        }
+
+        /// <summary>
+        /// Method <c>SetStateSelect</c>
+        /// reset the state to select
+        /// </summary>
+        public void SetStateSelect()
+        {
+            _model.ClickToolButton(INVALID);
         }
 
         /// <summary>
@@ -180,6 +197,10 @@ namespace PowerPointLike
         /// <param name="y"></param>
         public void PressPointer(double coordinateX, double coordinateY)
         {
+            if (!DrawIsReady() && _model.GetCurrentStateIndex() == (int)State.StateIndex.Draw)
+            {
+                return;
+            }
             _model.PressPointer(coordinateX, coordinateY, _currentButtonIndex);
         }
 
@@ -191,6 +212,10 @@ namespace PowerPointLike
         /// <param name="y"></param>
         public void MovePointer(double coordinateX, double coordinateY)
         {
+            if (!DrawIsReady() && _model.GetCurrentStateIndex() == (int)State.StateIndex.Draw)
+            {
+                return;
+            }
             _model.MovePointer(coordinateX, coordinateY);
         }
 
@@ -202,8 +227,11 @@ namespace PowerPointLike
         /// <param name="y"></param>
         public void ReleasePointer(double coordinateX, double coordinateY)
         {
+            if (!DrawIsReady() && _model.GetCurrentStateIndex() == (int)State.StateIndex.Draw)
+            {
+                return;
+            }
             _model.ReleasePointer(coordinateX, coordinateY, _currentButtonIndex);
-            _currentButtonIndex = INVALID;
         }
 
         /// <summary>
@@ -228,6 +256,41 @@ namespace PowerPointLike
                 return false;
             }
             return true;
+        }
+
+        /// <summary>
+        ///  Method <c>GetCurrentStateIndex</c>
+        /// </summary>
+        /// <returns>current state index</returns>
+        public int GetCurrentStateIndex()
+        {
+            return _model.GetCurrentStateIndex();
+        }
+
+        /// <summary>
+        ///  Method <c>GetIfIsSelect</c>
+        /// </summary>
+        /// <returns></returns>
+        public bool GetIfIsSelect()
+        {
+            if (GetCurrentStateIndex() == (int)State.StateIndex.Select)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Method <c>GetIfIsDraw</c>
+        /// </summary>
+        /// <returns></returns>
+        public bool GetIfIsDraw()
+        {
+            if (GetCurrentStateIndex() == (int)State.StateIndex.Draw)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
