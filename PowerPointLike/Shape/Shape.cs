@@ -42,5 +42,14 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="graphics"></param>
         public abstract void Draw(IGraphics graphics);
+
+        /// <summary>
+        ///  Method <c>GetCoordinateSet</c>
+        /// </summary>
+        /// <returns>CoordinateSet</returns>
+        public CoordinateSet GetCoordinateSet()
+        {
+            return _coordinateSet;
+        }
     }
 }

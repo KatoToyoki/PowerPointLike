@@ -148,5 +148,59 @@ namespace PowerPointLike
             }
             return null;
         }
+
+        /// <summary>
+        /// Method <c>GetShape</c>
+        /// to get one certain shape 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>the shape</returns>
+        public Shape GetShape(int index)
+        {
+            return _shapeContainer[index];
+        }
+
+        /// <summary>
+        ///  Method <c>GetIfIsBetween</c>
+        ///  to check if is click a shape(position is between two coordinate)
+        /// </summary>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        private bool GetIfIsBetween(double point1, double point2, double point)
+        {
+            if (point >= Math.Min(point1, point2) && point <= Math.Max(point1, point2))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Method <c>PickShape</c>
+        /// to find the picked shape
+        /// </summary>
+        /// <param name="coordinateX"></param>
+        /// <param name="coordinateY"></param>
+        public int? PickShape(double coordinateX, double coordinateY, out CoordinateSet selectedCoordinate)
+        {
+            selectedCoordinate = new CoordinateSet();
+
+            for (int i = 0; i < GetContainerLength(); i++)
+            {
+                CoordinateSet temp = GetShape(i).GetCoordinateSet();
+
+                if (GetIfIsBetween(temp._point1._x, temp._point2._x, coordinateX) &&
+                    GetIfIsBetween(temp._point1._y, temp._point2._y, coordinateY))
+                {
+                    Console.WriteLine(i + " in it!\n=====\n");
+                    selectedCoordinate = temp;
+                    return i;
+                }
+            }
+
+            return null;
+        }
     }
 }

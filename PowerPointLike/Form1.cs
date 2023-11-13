@@ -145,6 +145,7 @@ namespace PowerPointLike
         /// <param name="e"></param>
         public void HandleCanvasPressed(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            _canvas.Invalidate();
             _presentationModel.PressPointer(e.X, e.Y);
         }
 
@@ -275,6 +276,24 @@ namespace PowerPointLike
         public void HandleModelChanged()
         {
             Invalidate(true);
+        }
+
+        /// <summary>
+        /// Method <c>ChangeCanvas</c> 
+        /// to deal with the situation of canvas's change
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChangeCanvas(object sender, PaintEventArgs e)
+        {
+            if (_presentationModel.GetSelectIndex() == null)
+            {
+                return;
+            }
+            int index = (int)_presentationModel.GetSelectIndex();
+            CoordinateSet selectedOne = _presentationModel.GetSelectedOneCoordinate();
+
+            selectedOne.DrawSelectFrame(e);
         }
     }
 }

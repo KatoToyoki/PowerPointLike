@@ -68,7 +68,7 @@ namespace PowerPointLike
             this._menuInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._menuInfoAbout});
             this._menuInfo.Name = "_menuInfo";
-            this._menuInfo.Size = new System.Drawing.Size(53, 26);
+            this._menuInfo.Size = new System.Drawing.Size(53, 23);
             this._menuInfo.Text = "說明";
             // 
             // _menuInfoAbout
@@ -84,6 +84,7 @@ namespace PowerPointLike
             this._canvas.Name = "_canvas";
             this._canvas.Size = new System.Drawing.Size(888, 640);
             this._canvas.TabIndex = 2;
+            this._canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.ChangeCanvas);
             // 
             // _canvas1
             // 
@@ -221,7 +222,7 @@ namespace PowerPointLike
             this._mouseButton.Image = global::PowerPointLike.Properties.Resources.mouse;
             this._mouseButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._mouseButton.Name = "_mouseButton";
-            this._mouseButton.Size = new System.Drawing.Size(29, 28);
+            this._mouseButton.Size = new System.Drawing.Size(29, 24);
             this._mouseButton.Text = "toolStripButton1";
             this._mouseButton.ToolTipText = "Mouse";
             this._mouseButton.Click += new System.EventHandler(this.ClickMouseButton);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -291,6 +292,24 @@ namespace PowerPointLike
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Method <c>GetSelectIndex</c>
+        /// </summary>
+        /// <returns>the selected shape's index in the container</returns>
+        public int? GetSelectIndex()
+        {
+            return _model.GetSelectIndex();
+        }
+
+        /// <summary>
+        /// Method <c>GetSelectedOneCoordinate</c>
+        /// </summary>
+        /// <returns>the selected shape's coordinate</returns>
+        public CoordinateSet GetSelectedOneCoordinate()
+        {
+            return _model.GetSelectedOneCoordinate();
         }
     }
 }

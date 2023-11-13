@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PowerPointLike
 {
@@ -21,7 +23,12 @@ namespace PowerPointLike
         public const string DELETE = "刪除";
 
         protected Shapes _shapes = new Shapes();
-        private State _state = new PointState();
+        private State _state;
+
+        public Model()
+        {
+            _state = new PointState(_shapes);
+        }
 
         /// <summary>
         /// Method <c>PrintTest</c>
@@ -201,6 +208,28 @@ namespace PowerPointLike
         public int GetCurrentStateIndex()
         {
             return _state._currentStateIndex;
+        }
+
+        /// <summary>
+        /// Method <c>GetSelectIndex</c>
+        /// </summary>
+        /// <returns>the selected shape's index in the container</returns>
+        public int? GetSelectIndex()
+        {
+            if (_state._index == State.INVALID || GetCurrentStateIndex() == (int)State.StateIndex.Draw)
+            {
+                return null;
+            }
+            return _state._index;
+        }
+
+        /// <summary>
+        /// Method <c>GetSelectedOneCoordinate</c>
+        /// </summary>
+        /// <returns>the selected shape's coordinate</returns>
+        public CoordinateSet GetSelectedOneCoordinate()
+        {
+            return _state._selectedOneCoordinate;
         }
     }
 }

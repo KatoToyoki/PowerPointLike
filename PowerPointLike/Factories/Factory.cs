@@ -8,8 +8,15 @@ namespace PowerPointLike
 {
     public partial class Factory
     {
+        enum ShapeIndex
+        {
+            Line,
+            Rectangle,
+            Circle
+        }
         public const int MAX_WIDTH = 445;
         public const int MAX_HEIGHT = 320;
+        public const int MULTIPLE = 2;
 
         /// <summary>
         /// Method <c>RandomCoordinate</c>
@@ -17,9 +24,15 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="random"></param>
         /// <returns></returns>
-        public Coordinate CreateRandomCoordinate(Random random)
+        public Coordinate CreateRandomCoordinate(Random random, int? shape = null)
         {
             Coordinate coordinate = new Coordinate();
+            if (shape == (int)ShapeIndex.Line)
+            {
+                coordinate._x = random.Next(MAX_WIDTH * MULTIPLE);
+                coordinate._y = random.Next(MAX_HEIGHT * MULTIPLE);
+                return coordinate;
+            }
             coordinate._x = random.Next(MAX_WIDTH);
             coordinate._y = random.Next(MAX_HEIGHT);
             return coordinate;
@@ -30,12 +43,12 @@ namespace PowerPointLike
         /// to set coordinate to the set
         /// </summary>
         /// <param name="length">the container length</param>
-        protected CoordinateSet InitializeSet()
+        protected CoordinateSet InitializeSet(int? shape = null)
         {
             CoordinateSet coordinateSet = new CoordinateSet();
             var random = new Random();
-            coordinateSet._point1 = CreateRandomCoordinate(random);
-            coordinateSet._point2 = CreateRandomCoordinate(random);
+            coordinateSet._point1 = CreateRandomCoordinate(random, shape);
+            coordinateSet._point2 = CreateRandomCoordinate(random, shape);
             return coordinateSet;
         }
 
@@ -57,7 +70,7 @@ namespace PowerPointLike
         /// <returns>line element</returns>
         public Shape CreateLine()
         {
-            Shape line = new Line(InitializeSet());
+            Shape line = new Line(InitializeSet((int)ShapeIndex.Line));
             return line;
         }
 

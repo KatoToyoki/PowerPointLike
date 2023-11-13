@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PowerPointLike
 {
@@ -26,6 +28,18 @@ namespace PowerPointLike
         {
             get; set;
         }
+
+        public int _index
+        {
+            get; set;
+        }
+
+        public CoordinateSet _selectedOneCoordinate
+        {
+            get; set;
+        }
+
+        public const int INVALID = -1;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="State"/> class.
@@ -70,7 +84,7 @@ namespace PowerPointLike
             }
             else if (_currentStateIndex == (int)StateIndex.Select)
             {
-                return new PointState();
+                return new PointState(shapes);
             }
             return null;
         }
