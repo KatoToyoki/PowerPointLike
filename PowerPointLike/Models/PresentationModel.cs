@@ -11,36 +11,22 @@ namespace PowerPointLike
 {
     public class PresentationModel
     {
-        public enum ShapeIndex
+        // button(view) ================================================================
+        // ControlViewButton _controlViewButton = new ControlViewButton();
+        enum Data
         {
-            Line,
-            Rectangle,
-            Circle,
-            Mouse
+            DataDeleteIndex,
+            DataNameIndex,
+            DataCoordinateIndex
         }
-        public const int DATA_DELETE_INDEX = 0;
-        public const int INVALID = -1;
-        public const int LENGTH = 4;
-
-        private Model _model;
-
         public int _currentButtonIndex
         {
             get; set;
         }
-
+        public const int DATA_DELETE_INDEX = 0;
+        public const int INVALID = -1;
+        public const int LENGTH = 4;
         private bool[] _buttonChecked = new bool[LENGTH];
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PresentationModel"/> class.
-        /// </summary>
-        /// <param name="model">the member model</param>
-        public PresentationModel(Model model)
-        {
-            _model = model;
-            ResetAllButtonCheck();
-            _currentButtonIndex = INVALID;
-        }
 
         /// <summary>
         /// Method <c>GetbuttonChecked</c>
@@ -55,44 +41,7 @@ namespace PowerPointLike
         public bool GetButtonChecked(int index)
         {
             return _buttonChecked[index];
-        }
-
-        /// <summary>
-        /// Method <c>AddItem</c>
-        /// add the assigned shape to the shape container
-        /// </summary>
-        /// <param name="shape">the assigned shape</param>
-        public void AddItem(string shape)
-        {
-            _model.AddItem(shape);
-        }
-
-        /// <summary>
-        ///  Method <c>GetCurrentElement</c>
-        ///  to get the current shape from container
-        /// </summary>
-        /// <returns>the current shape element</returns>
-        public string[] GetCurrentElement(int command)
-        {
-            if (!((GetIfIsSelect() && command == (int)PowerPointLike.Command.Generate) || (command == (int)PowerPointLike.Command.Draw && GetIfIsDraw())))
-            {
-                return null;
-            }
-            return _model.GetCurrentElement();
-        }
-
-        /// <summary>
-        /// Method <c>DeleteCertainElement</c>
-        /// delete the assigned element
-        /// </summary>
-        /// <param name="dataIndex">to determine if this function will be executed</param>
-        /// <param name="deleteIndex">the index of the shape in the container</param>
-        public void DeleteCertainElement(int dataIndex, int deleteIndex)
-        {
-            if (dataIndex == DATA_DELETE_INDEX)
-            {
-                _model.DeleteCertainElement(deleteIndex);
-            }
+            // return _controlViewButton.GetButtonChecked(index);
         }
 
         /// <summary>
@@ -109,6 +58,7 @@ namespace PowerPointLike
                 return deleteIndex;
             }
             return null;
+            // return _controlViewButton.GetDeleteIndex(dataIndex, deleteIndex);
         }
 
         /// <summary>
@@ -122,6 +72,7 @@ namespace PowerPointLike
                 _buttonChecked[i] = false;
             }
             _currentButtonIndex = INVALID;
+            // _controlViewButton.ResetAllButtonCheck();
         }
 
         /// <summary>
@@ -134,6 +85,7 @@ namespace PowerPointLike
             _buttonChecked[(int)ShapeIndex.Line] = true;
             _currentButtonIndex = (int)ShapeIndex.Line;
             _model.ClickToolButton(index);
+            // _controlViewButton.ClickLineButton(index);
         }
 
         /// <summary>
@@ -146,6 +98,8 @@ namespace PowerPointLike
             _buttonChecked[(int)ShapeIndex.Rectangle] = true;
             _currentButtonIndex = (int)ShapeIndex.Rectangle;
             _model.ClickToolButton(index);
+
+            // _controlViewButton.ClickRectangleButton(index);
         }
 
         /// <summary>
@@ -158,6 +112,8 @@ namespace PowerPointLike
             _buttonChecked[(int)ShapeIndex.Circle] = true;
             _currentButtonIndex = (int)ShapeIndex.Circle;
             _model.ClickToolButton(index);
+
+            // _controlViewButton.ClickCircleButton(index);
         }
 
         /// <summary>
@@ -169,6 +125,53 @@ namespace PowerPointLike
             ResetAllButtonCheck();
             _buttonChecked[(int)ShapeIndex.Mouse] = true;
             _currentButtonIndex = INVALID;
+            // _controlViewButton.ClickMouseButton(index);
+        }
+
+        // presentation model ================================================================
+        public enum ShapeIndex
+        {
+            Line,
+            Rectangle,
+            Circle,
+            Mouse
+        }
+
+        private Model _model;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PresentationModel"/> class.
+        /// </summary>
+        /// <param name="model">the member model</param>
+        public PresentationModel(Model model)
+        {
+            _model = model;
+            ResetAllButtonCheck();
+        }
+
+        /// <summary>
+        /// Method <c>AddItem</c>
+        /// add the assigned shape to the shape container
+        /// </summary>
+        /// <param name="shape">the assigned shape</param>
+        public void AddItem(string shape)
+        {
+            _model.AddItem(shape);
+        }
+
+        /// <summary>
+        /// Method <c>DeleteCertainElement</c>
+        /// delete the assigned element
+        /// </summary>
+        /// <param name="dataIndex">to determine if this function will be executed</param>
+        /// <param name="deleteIndex">the index of the shape in the container</param>
+        public void DeleteCertainElement(int dataIndex, int deleteIndex)
+        {
+            // if (dataIndex == (int)_controlViewButton.DATA_DELETE_INDEX)
+            if (dataIndex == (int)DATA_DELETE_INDEX)
+            {
+                _model.DeleteCertainElement(deleteIndex);
+            }
         }
 
         /// <summary>
@@ -177,6 +180,7 @@ namespace PowerPointLike
         /// </summary>
         public void SetStateSelect()
         {
+            // _model.ClickToolButton(_controlViewButton.INVALID);
             _model.ClickToolButton(INVALID);
         }
 
@@ -202,6 +206,7 @@ namespace PowerPointLike
             {
                 return;
             }
+            // _model.PressPointer(coordinateX, coordinateY, _controlViewButton._currentButtonIndex);
             _model.PressPointer(coordinateX, coordinateY, _currentButtonIndex);
         }
 
@@ -217,6 +222,7 @@ namespace PowerPointLike
             {
                 return;
             }
+            // _model.MovePointer(coordinateX, coordinateY, _controlViewButton._currentButtonIndex);
             _model.MovePointer(coordinateX, coordinateY, _currentButtonIndex);
         }
 
@@ -232,6 +238,7 @@ namespace PowerPointLike
             {
                 return;
             }
+            // _model.ReleasePointer(coordinateX, coordinateY, _controlViewButton._currentButtonIndex);
             _model.ReleasePointer(coordinateX, coordinateY, _currentButtonIndex);
         }
 
@@ -257,6 +264,7 @@ namespace PowerPointLike
                 return false;
             }
             return true;
+            // return _controlViewButton.DrawIsReady();
         }
 
         /// <summary>
@@ -266,19 +274,6 @@ namespace PowerPointLike
         public int GetCurrentStateIndex()
         {
             return _model.GetCurrentStateIndex();
-        }
-
-        /// <summary>
-        ///  Method <c>GetIfIsSelect</c>
-        /// </summary>
-        /// <returns></returns>
-        public bool GetIfIsSelect()
-        {
-            if (GetCurrentStateIndex() == (int)State.StateIndex.Select)
-            {
-                return true;
-            }
-            return false;
         }
 
         /// <summary>
@@ -318,6 +313,55 @@ namespace PowerPointLike
         public void ResetSelectIndex()
         {
             _model.ResetSelectIndex();
+        }
+
+        /// <summary>
+        /// Method <c>GetContainerLength</c>
+        /// to get the shapes container's length
+        /// </summary>
+        /// <returns>the length of shapes container</returns>
+        public int GetContainerLength()
+        {
+            return _model.GetContainerLength();
+        }
+
+        /// <summary>
+        /// Method <c>GetOneElement</c>
+        /// get the delete button, name, and its coordinate in one time
+        /// the informatiob is constructed by a string array
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>one element info separated in string array</returns>
+        public string[] GetOneElement(int index)
+        {
+            return _model.GetOneElement(index);
+        }
+
+        /// <summary>
+        /// Method <c>DeleteSelectOne</c>
+        /// </summary>
+        /// <param name="index"></param>
+        public void DeleteSelectOne()
+        {
+            _model.DeleteSelectOne();
+        }
+
+        /// <summary>
+        /// Method <c>GetAllContainerData</c>
+        /// </summary>
+        /// <returns></returns>
+        public List<string[]> GetAllContainerData()
+        {
+            List<string[]> tableData = new List<string[]>();
+
+            for (int i = 0; i < GetContainerLength(); i++)
+            {
+                string[] element = GetOneElement(i);
+                tableData.Add(new string[] { element[(int)Data.DataDeleteIndex], element[(int)Data.DataNameIndex], element[(int)Data.DataCoordinateIndex] });
+            }
+
+            return tableData;
+            // return _controlViewButton.GetAllContainerData();
         }
     }
 }

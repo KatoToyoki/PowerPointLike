@@ -13,20 +13,8 @@ namespace PowerPointLike
 {
     public partial class PowerPointLike : Form
     {
-        enum Data
-        {
-            DataDeleteIndex,
-            DataNameIndex,
-            DataCoordinateIndex
-        }
-
-        public enum Command
-        {
-            Draw,
-            Generate
-        }
-
         public const string EMPTY_STRING = "";
+        public const int START_DATA_GRID_VIEW_INDEX = 2;
         private PresentationModel _presentationModel;
 
         /// <summary>
@@ -43,6 +31,9 @@ namespace PowerPointLike
             _canvas.Paint += HandleCanvasPaint;
             Controls.Add(_canvas);
 
+            this.KeyPreview = true;
+            this.KeyDown += ClickKey;
+
             _presentationModel.GetModelEvent()._modelChanged += HandleModelChanged;
         }
 
@@ -57,7 +48,8 @@ namespace PowerPointLike
             if (_elementsChoicesBox.Text != EMPTY_STRING)
             {
                 _presentationModel.AddItem(_elementsChoicesBox.Text);
-                AddDataToTable((int)Command.Generate);
+                // UpdateDataToTable((int)Command.Generate);
+                UpdateDataToTable();
             }
         }
 
@@ -74,8 +66,8 @@ namespace PowerPointLike
                 return;
             }
             _presentationModel.DeleteCertainElement(e.ColumnIndex, e.RowIndex);
-            _elementDataGrid.Rows.RemoveAt((int)_presentationModel.GetDeleteIndex(e.ColumnIndex, e.RowIndex));
             _presentationModel.ResetSelectIndex();
+            UpdateDataToTable();
         }
 
         /// <summary>
@@ -174,7 +166,9 @@ namespace PowerPointLike
         public void HandleCanvasReleased(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             _presentationModel.ReleasePointer(e.X, e.Y);
-            AddDataToTable((int)Command.Draw);
+            // UpdateDataToTable((int)Command.Draw);
+
+            UpdateDataToTable();
 
             _presentationModel.ResetAllButtonCheck();
             RefreshToolButtonClick();
@@ -197,14 +191,27 @@ namespace PowerPointLike
         /// Method <c>AddElementToDataRridView</c>
         /// add data whenever it's generated or painted
         /// </summary>
-        public void AddDataToTable(int command)
+        public void UpdateDataToTable()
         {
-            string[] element = _presentationModel.GetCurrentElement(command);
-            if (element == null)
+            DeleteAllDataGridViewData();
+
+            List<string[]> tableData = _presentationModel.GetAllContainerData();
+
+            foreach (var element in tableData)
             {
-                return;
+                _elementDataGrid.Rows.Add(element);
             }
-            _elementDataGrid.Rows.Add(element[(int)Data.DataDeleteIndex], element[(int)Data.DataNameIndex], element[(int)Data.DataCoordinateIndex]);
+        }
+
+        /// <summary>
+        /// Method <c>DeleteAllDataGridViewData</c>
+        /// </summary>
+        public void DeleteAllDataGridViewData()
+        {
+            for (int i = _elementDataGrid.RowCount - START_DATA_GRID_VIEW_INDEX; i >= 0; i--)
+            {
+                _elementDataGrid.Rows.RemoveAt(i);
+            }
         }
 
         /// <summary>
@@ -299,6 +306,23 @@ namespace PowerPointLike
             CoordinateSet selectedOne = _presentationModel.GetSelectedOneCoordinate();
 
             selectedOne.DrawSelectFrame(e);
+        }
+
+        /// <summary>
+        /// Method <c>ClickKey</c> 
+        /// to deal with keyin
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickKey(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                _presentationModel.DeleteSelectOne();
+                UpdateDataToTable();
+                _presentationModel.ResetSelectIndex();
+                _canvas.Invalidate();
+            }
         }
     }
 }

@@ -85,16 +85,6 @@ namespace PowerPointLike
         }
 
         /// <summary>
-        /// Method <c>GetCurrentElement</c>
-        /// to get the current(last) element
-        /// </summary>
-        /// <returns>the current element, which is a string array contains delete, name, coordinate</returns>
-        public string[] GetCurrentElement()
-        {
-            return GetOneElement(_shapes.GetContainerLength() - 1);
-        }
-
-        /// <summary>
         /// Method <c>DeleteCertainElement</c>
         /// </summary>
         /// <param name="index">the wanted index</param>
@@ -238,6 +228,19 @@ namespace PowerPointLike
         public void ResetSelectIndex()
         {
             _state.ResetSelectIndex();
+        }
+
+        /// <summary>
+        /// Method <c>DeleteSelectOne</c>
+        /// </summary>
+        /// <param name="index"></param>
+        public void DeleteSelectOne()
+        {
+            if (GetSelectIndex() == null)
+            {
+                return;
+            }
+            _shapes.DeleteCertainElement((int)GetSelectIndex());
         }
     }
 }

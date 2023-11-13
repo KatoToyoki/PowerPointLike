@@ -8,8 +8,8 @@ namespace PowerPointLike
 {
     public partial class Factory
     {
-        public const int MAX_WIDTH = 850;
-        public const int MAX_HEIGHT = 600;
+        public const int MAX_WIDTH = 600;
+        public const int MAX_HEIGHT = 500;
 
         /// <summary>
         /// Method <c>RandomCoordinate</c>

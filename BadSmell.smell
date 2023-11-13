@@ -188,13 +188,13 @@
           <Reviews>
             <Smell>
               <Id>1</Id>
-              <SmellType>Literal constants(字面常數)-" in it!\n=====\n"</SmellType>
-              <HashCode>LiteralConstants.PickShape." in it!\n=====\n"</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
+              <SmellType>Large class(過大類別)</SmellType>
+              <HashCode>LargeClass.PowerPointLike.PresentationModel.323</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>323</Weight>
               <Project>PowerPointLike</Project>
-              <File>Shapes.cs</File>
-              <Line>197</Line>
+              <File>PresentationModel.cs</File>
+              <Line>12</Line>
               <StartLine>0</StartLine>
               <StartCol>0</StartCol>
               <EndLine>0</EndLine>
@@ -309,7 +309,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>2379</ProductionLoc>
+          <ProductionLoc>2450</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>
