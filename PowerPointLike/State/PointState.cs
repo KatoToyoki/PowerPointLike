@@ -41,7 +41,7 @@ namespace PowerPointLike
         /// <param name="coordinateX">x</param>
         /// <param name="coordinateY">y</param>
         /// <param name="shapeIndex">shapeIndex</param>
-        public override void HandleCanvasMoved(double coordinateX, double coordinateY)
+        public override void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex)
         {
             PressMiddle(coordinateX, coordinateY);
             PickShape(coordinateX, coordinateY);

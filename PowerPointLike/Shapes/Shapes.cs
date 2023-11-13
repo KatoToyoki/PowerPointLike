@@ -194,13 +194,36 @@ namespace PowerPointLike
                 if (GetIfIsBetween(temp._point1._x, temp._point2._x, coordinateX) &&
                     GetIfIsBetween(temp._point1._y, temp._point2._y, coordinateY))
                 {
-                    Console.WriteLine(i + " in it!\n=====\n");
+                    // Console.WriteLine(i + " in it!\n=====\n");
                     selectedCoordinate = temp;
                     return i;
                 }
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Method <c>AddShapeInEnd</c>
+        /// </summary>
+        /// <param name="shape"></param>
+        public void AddShapeInEnd(int shapeIndex, CoordinateSet newShapeCoordinateSet)
+        {
+            _shapeContainer.Add(CreateTempShape(shapeIndex, newShapeCoordinateSet));
+        }
+
+        /// <summary>
+        /// Method <c>DeleteEndShape</c>
+        /// to check if it's in the process of drawing, and delete the temp shape in the container
+        /// </summary>
+        /// <param name="currentLength"></param>
+        public void DeleteEndShape(int currentLength)
+        {
+            if (currentLength == GetContainerLength())
+            {
+                _shapeContainer.RemoveAt(GetContainerLength() - 1);
+
+            }
         }
     }
 }

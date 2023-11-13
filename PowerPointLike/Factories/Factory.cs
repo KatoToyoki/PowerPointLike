@@ -8,15 +8,8 @@ namespace PowerPointLike
 {
     public partial class Factory
     {
-        enum ShapeIndex
-        {
-            Line,
-            Rectangle,
-            Circle
-        }
-        public const int MAX_WIDTH = 445;
-        public const int MAX_HEIGHT = 320;
-        public const int MULTIPLE = 2;
+        public const int MAX_WIDTH = 850;
+        public const int MAX_HEIGHT = 600;
 
         /// <summary>
         /// Method <c>RandomCoordinate</c>
@@ -24,18 +17,36 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="random"></param>
         /// <returns></returns>
-        public Coordinate CreateRandomCoordinate(Random random, int? shape = null)
+        public Coordinate CreateRandomCoordinate(Random random)
         {
             Coordinate coordinate = new Coordinate();
-            if (shape == (int)ShapeIndex.Line)
-            {
-                coordinate._x = random.Next(MAX_WIDTH * MULTIPLE);
-                coordinate._y = random.Next(MAX_HEIGHT * MULTIPLE);
-                return coordinate;
-            }
             coordinate._x = random.Next(MAX_WIDTH);
             coordinate._y = random.Next(MAX_HEIGHT);
             return coordinate;
+        }
+
+        /// <summary>
+        /// Method <c>SetCoordinateSet</c>
+        /// order the two points with x
+        /// </summary>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
+        /// <returns></returns>
+        private CoordinateSet SetCoordinateSet(Coordinate point1, Coordinate point2)
+        {
+            CoordinateSet result = new CoordinateSet();
+            if (point1.GetIfSelfBigger(point2))
+            {
+                result._point1 = point2;
+                result._point2 = point1;
+            }
+            else
+            {
+                result._point1 = point1;
+                result._point2 = point2;
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -43,12 +54,16 @@ namespace PowerPointLike
         /// to set coordinate to the set
         /// </summary>
         /// <param name="length">the container length</param>
-        protected CoordinateSet InitializeSet(int? shape = null)
+        protected CoordinateSet InitializeSet()
         {
             CoordinateSet coordinateSet = new CoordinateSet();
+            Coordinate point1 = new Coordinate();
+            Coordinate point2 = new Coordinate();
             var random = new Random();
-            coordinateSet._point1 = CreateRandomCoordinate(random, shape);
-            coordinateSet._point2 = CreateRandomCoordinate(random, shape);
+            point1 = CreateRandomCoordinate(random);
+            point2 = CreateRandomCoordinate(random);
+            coordinateSet = SetCoordinateSet(point1, point2);
+
             return coordinateSet;
         }
 
@@ -70,7 +85,7 @@ namespace PowerPointLike
         /// <returns>line element</returns>
         public Shape CreateLine()
         {
-            Shape line = new Line(InitializeSet((int)ShapeIndex.Line));
+            Shape line = new Line(InitializeSet());
             return line;
         }
 

@@ -152,9 +152,9 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void MovePointer(double coordinateX, double coordinateY)
+        public void MovePointer(double coordinateX, double coordinateY, int shapeIndex)
         {
-            _state.HandleCanvasMoved(coordinateX, coordinateY);
+            _state.HandleCanvasMoved(coordinateX, coordinateY, shapeIndex);
 
             if (_state._isPressed)
             {
@@ -230,6 +230,14 @@ namespace PowerPointLike
         public CoordinateSet GetSelectedOneCoordinate()
         {
             return _state._selectedOneCoordinate;
+        }
+
+        /// <summary>
+        /// Method <c>ResetSelectIndex</c>
+        /// </summary>
+        public void ResetSelectIndex()
+        {
+            _state.ResetSelectIndex();
         }
     }
 }

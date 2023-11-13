@@ -39,6 +39,8 @@ namespace PowerPointLike
             get; set;
         }
 
+        protected int _oldLength = -1;
+        protected int _newLength = -1;
         public const int INVALID = -1;
 
         /// <summary>
@@ -105,7 +107,7 @@ namespace PowerPointLike
         /// 2. drag the shape to new position
         /// </summary>
         /// <param name="e"></param>
-        public abstract void HandleCanvasMoved(double coordinateX, double coordinateY);
+        public abstract void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex);
 
         /// <summary>
         /// Method <c>HandleCanvasReleased</c>
@@ -148,6 +150,14 @@ namespace PowerPointLike
                 temp._y = (int)coordinateY;
                 _newShapeCoordinateSet._point2 = temp;
             }
+        }
+
+        /// <summary>
+        /// Method <c>ResetSelectIndex</c>
+        /// </summary>
+        public void ResetSelectIndex()
+        {
+            _index = INVALID;
         }
     }
 }

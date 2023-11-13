@@ -69,8 +69,13 @@ namespace PowerPointLike
         /// <param name="e"></param>
         private void DeleteElement(object sender, DataGridViewCellEventArgs e)
         {
+            if (_presentationModel.GetDeleteIndex(e.ColumnIndex, e.RowIndex) == null)
+            {
+                return;
+            }
             _presentationModel.DeleteCertainElement(e.ColumnIndex, e.RowIndex);
-            _elementDataGrid.Rows.RemoveAt(_presentationModel.GetDeleteIndex(e.ColumnIndex, e.RowIndex));
+            _elementDataGrid.Rows.RemoveAt((int)_presentationModel.GetDeleteIndex(e.ColumnIndex, e.RowIndex));
+            _presentationModel.ResetSelectIndex();
         }
 
         /// <summary>

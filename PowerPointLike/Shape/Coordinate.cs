@@ -73,6 +73,21 @@ namespace PowerPointLike
         {
             return Math.Abs(anotherPoint._y - _y);
         }
+
+        /// <summary>
+        /// Method <c>GetIfSelfXBigger</c>
+        /// check if my x is bigger
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public bool GetIfSelfBigger(Coordinate point)
+        {
+            if (_x > point._x)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     public struct CoordinateSet

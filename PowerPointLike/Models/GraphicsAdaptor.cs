@@ -38,7 +38,7 @@ namespace PowerPointLike.Models
         /// <param name="coordinateSet">the two coordinates</param>
         public void DrawRectangle(CoordinateSet coordinateSet)
         {
-            _graphics.DrawRectangle(_pen, coordinateSet._point1._x, coordinateSet._point1._y, coordinateSet.GetWidth(), coordinateSet.GetHeight());
+            _graphics.DrawRectangle(_pen, coordinateSet.GetLeft(), coordinateSet.GetTop(), coordinateSet.GetWidth(), coordinateSet.GetHeight());
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace PowerPointLike.Models
         /// <param name="coordinateSet">the two coordinates</param>
         public void DrawCircle(CoordinateSet coordinateSet)
         {
-            _graphics.DrawEllipse(_pen, coordinateSet._point1._x, coordinateSet._point1._y, coordinateSet.GetWidth(), coordinateSet.GetHeight());
+            _graphics.DrawEllipse(_pen, coordinateSet.GetLeft(), coordinateSet.GetTop(), coordinateSet.GetWidth(), coordinateSet.GetHeight());
         }
     }
 }

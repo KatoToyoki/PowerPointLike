@@ -102,13 +102,13 @@ namespace PowerPointLike
         /// <param name="dataIndex">to determine if this function will be executed</param>
         /// <param name="deleteIndex">the index of the shape in the container</param>
         /// <returns>the index</returns>
-        public int GetDeleteIndex(int dataIndex, int deleteIndex)
+        public int? GetDeleteIndex(int dataIndex, int deleteIndex)
         {
             if (dataIndex == DATA_DELETE_INDEX)
             {
                 return deleteIndex;
             }
-            return INVALID;
+            return null;
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace PowerPointLike
             {
                 return;
             }
-            _model.MovePointer(coordinateX, coordinateY);
+            _model.MovePointer(coordinateX, coordinateY, _currentButtonIndex);
         }
 
         /// <summary>
@@ -310,6 +310,14 @@ namespace PowerPointLike
         public CoordinateSet GetSelectedOneCoordinate()
         {
             return _model.GetSelectedOneCoordinate();
+        }
+
+        /// <summary>
+        /// Method <c>ResetSelectIndex</c>
+        /// </summary>
+        public void ResetSelectIndex()
+        {
+            _model.ResetSelectIndex();
         }
     }
 }

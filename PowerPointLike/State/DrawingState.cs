@@ -41,9 +41,13 @@ namespace PowerPointLike
         /// <param name="coordinateX">x</param>
         /// <param name="coordinateY">y</param>
         /// <param name="shapeIndex">shapeIndex</param>
-        public override void HandleCanvasMoved(double coordinateX, double coordinateY)
+        public override void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex)
         {
+            _shapes.DeleteEndShape(_newLength);
+            _oldLength = _shapes.GetContainerLength();
             PressMiddle(coordinateX, coordinateY);
+            _shapes.AddShapeInEnd(shapeIndex, _newShapeCoordinateSet);
+            _newLength = _shapes.GetContainerLength();
         }
 
         /// <summary>
@@ -57,11 +61,13 @@ namespace PowerPointLike
         {
             if (_isPressed)
             {
-
+                _shapes.DeleteEndShape(_newLength);
                 CoordinateSet confirmOne = new CoordinateSet();
                 confirmOne._point1 = _firstPoint;
                 confirmOne._point2 = (new Coordinate((int)coordinateX, (int)coordinateY));
                 _shapes.DrawShape(shapeIndex, confirmOne);
+                _oldLength = -1;
+                _newLength = -1;
             }
         }
     }
