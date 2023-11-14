@@ -14,7 +14,10 @@ namespace PowerPointLike
             get; set;
         }
 
-        protected CoordinateSet _coordinateSet = new CoordinateSet();
+        public CoordinateSet _coordinateSet
+        {
+            get; set;
+        } = new CoordinateSet();
 
         /// <summary>
         /// Method <c>GetOneElementData</c>
@@ -50,6 +53,11 @@ namespace PowerPointLike
         public CoordinateSet GetCoordinateSet()
         {
             return _coordinateSet;
+        }
+
+        public void SetCoordinate(CoordinateSet set)
+        {
+            _coordinateSet = set;
         }
     }
 }

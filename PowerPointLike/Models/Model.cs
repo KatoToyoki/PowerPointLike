@@ -207,7 +207,9 @@ namespace PowerPointLike
         public int? GetSelectIndex()
         {
             if (_state._index == State.INVALID || GetCurrentStateIndex() == (int)State.StateIndex.Draw)
+            // if (GetCurrentStateIndex() == (int)State.StateIndex.Draw)
             {
+                Console.WriteLine("no such a thing model " + _state._index);
                 return null;
             }
             return _state._index;

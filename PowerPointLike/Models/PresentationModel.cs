@@ -295,6 +295,7 @@ namespace PowerPointLike
         /// <returns>the selected shape's index in the container</returns>
         public int? GetSelectIndex()
         {
+            Console.WriteLine("get from model, presentation " + _model.GetSelectIndex());
             return _model.GetSelectIndex();
         }
 

@@ -88,6 +88,27 @@ namespace PowerPointLike
             }
             return false;
         }
+
+        public int GetDeltaX(Coordinate point)
+        {
+            Console.WriteLine("----view nums 1 2 " + _x + " " + point._x);
+            return point._x - _x;
+        }
+
+        public int GetDeltaY(Coordinate point)
+        {
+            return point._y - _y;
+        }
+
+        public bool GetIfIsSame(Coordinate point)
+        {
+            if (point._x == _x && point._y == _y)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 
     public struct CoordinateSet
@@ -99,6 +120,36 @@ namespace PowerPointLike
         public Coordinate _point2
         {
             get; set;
+        }
+
+        public CoordinateSet(Coordinate point1, Coordinate point2)
+        {
+            _point1 = point1;
+            _point2 = point2;
+        }
+
+        public CoordinateSet Offset(int offsetX, int offsetY)
+        {
+            Console.WriteLine("before " + _point1._x + " " + _point1._y);
+
+            _point1 = new Coordinate(_point1._x + offsetX, _point1._y + offsetY);
+            _point2 = new Coordinate(_point2._x + offsetX, _point2._y + offsetY);
+
+            CoordinateSet result = new CoordinateSet(_point1, _point2);
+
+            Console.WriteLine("after " + _point1._x + " " + _point1._y);
+
+            return result;
+        }
+
+        public int GetDeltaX()
+        {
+            return _point1.GetDeltaX(_point2);
+        }
+
+        public int GetDeltaY()
+        {
+            return _point1.GetDeltaY(_point2);
         }
 
         public const int TIDY_2 = 2;

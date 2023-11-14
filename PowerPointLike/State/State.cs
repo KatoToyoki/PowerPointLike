@@ -21,6 +21,7 @@ namespace PowerPointLike
             get; set;
         }
 
+        protected Coordinate _startPoint;
         protected Coordinate _firstPoint;
         protected CoordinateSet _newShapeCoordinateSet = new CoordinateSet();
         protected Shape _newShape;
@@ -127,11 +128,14 @@ namespace PowerPointLike
         /// <param name="shapeIndex">shapeindex</param>
         public void PressFirst(double coordinateX, double coordinateY, int shapeIndex)
         {
-
-            _firstPoint._x = (int)coordinateX;
-            _firstPoint._y = (int)coordinateY;
+            // _firstPoint._x = (int)coordinateX;
+            // _firstPoint._y = (int)coordinateY;
+            _firstPoint = new Coordinate((int)coordinateX, (int)coordinateY);
+            _startPoint = _firstPoint;
             _newShapeCoordinateSet._point1 = _firstPoint;
             _isPressed = true;
+
+            // Console.WriteLine("press first: start, first " + _startPoint.GetCoordinateString() + " " + _firstPoint.GetCoordinateString());
         }
 
         /// <summary>
@@ -145,10 +149,7 @@ namespace PowerPointLike
         {
             if (_isPressed)
             {
-                Coordinate temp = new Coordinate();
-                temp._x = (int)coordinateX;
-                temp._y = (int)coordinateY;
-                _newShapeCoordinateSet._point2 = temp;
+                _newShapeCoordinateSet._point2 = new Coordinate((int)coordinateX, (int)coordinateY);
             }
         }
 

@@ -56,7 +56,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ControlViewButton.cs" />
     <Compile Include="Models\GraphicsAdaptor.cs" />
     <Compile Include="Models\IGraphics.cs" />
     <Compile Include="Models\PresentationModel.cs" />

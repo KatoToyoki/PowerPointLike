@@ -222,8 +222,16 @@ namespace PowerPointLike
             if (currentLength == GetContainerLength())
             {
                 _shapeContainer.RemoveAt(GetContainerLength() - 1);
-
             }
+        }
+
+        public void ChangeCoordinate(int index, int x, int y)
+        {
+            if (index == State.INVALID)
+            {
+                return;
+            }
+            _shapeContainer[index].SetCoordinate(_shapeContainer[index]._coordinateSet.Offset(x, y));
         }
     }
 }
