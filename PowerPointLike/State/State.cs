@@ -29,7 +29,6 @@ namespace PowerPointLike
         {
             get; set;
         }
-
         public int _index
         {
             get; set;
@@ -159,6 +158,16 @@ namespace PowerPointLike
         public void ResetSelectIndex()
         {
             _index = INVALID;
+        }
+
+        /// <summary>
+        /// Method <c>ResetThreePoint</c>
+        /// </summary>
+        public void ResetThreePoint()
+        {
+            _firstPoint = new Coordinate(0, 0);
+            _startPoint = new Coordinate(0, 0);
+            _newShapeCoordinateSet = new CoordinateSet(new Coordinate(0, 0), new Coordinate(0, 0));
         }
     }
 }

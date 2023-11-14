@@ -225,13 +225,20 @@ namespace PowerPointLike
             }
         }
 
-        public void ChangeCoordinate(int index, int x, int y)
+        /// <summary>
+        /// Method <c>ChangeCoordinate</c>
+        /// to set new Coordinate
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="coordinateX"></param>
+        /// <param name="coordinateY"></param>
+        public void ChangeCoordinate(int index, int coordinateX, int coordinateY)
         {
             if (index == State.INVALID)
             {
                 return;
             }
-            _shapeContainer[index].SetCoordinate(_shapeContainer[index]._coordinateSet.Offset(x, y));
+            _shapeContainer[index].SetCoordinate(_shapeContainer[index]._coordinateSet.Offset(coordinateX, coordinateY));
         }
     }
 }

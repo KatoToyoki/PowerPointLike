@@ -44,11 +44,6 @@ namespace PowerPointLike
         /// <param name="shapeIndex">shapeIndex</param>
         public override void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex)
         {
-            if (!(_firstPoint._x == 0 || _firstPoint._y == 0))
-            {
-                Console.WriteLine("first changed? in MOVE!!! " + _firstPoint.GetCoordinateString());
-            }
-
             if (_index == INVALID)
             {
                 return;
@@ -61,7 +56,6 @@ namespace PowerPointLike
             }
 
             PressMiddle(coordinateX, coordinateY);
-            Console.WriteLine("~~~~~~~~capture point2? " + _newShapeCoordinateSet.GetCoordinateSetString());
             PickShape(coordinateX, coordinateY);
         }
 
@@ -74,36 +68,14 @@ namespace PowerPointLike
         /// <param name="shapeIndex">shapeIndex</param>
         public override void HandleCanvasReleased(double coordinateX, double coordinateY, int shapeIndex)
         {
-
-            int deltaX = _newShapeCoordinateSet.GetDeltaX();
-            int deltaY = _newShapeCoordinateSet.GetDeltaY();
-
-            Console.WriteLine("look how far " + _newShapeCoordinateSet.GetDeltaX() + " " + _newShapeCoordinateSet.GetDeltaY());
-
-            if (!(_newShapeCoordinateSet._point2._x == 0 && _newShapeCoordinateSet._point2._y == 0))
+            if (_newShapeCoordinateSet._point2.GetIfIsSame(new Coordinate(0, 0)))
             {
-                Console.WriteLine("===============here?");
-                _shapes.ChangeCoordinate(_index, deltaX, deltaY);
-
-                if (_index != -1)
-                {
-                    Console.WriteLine("changed " + _shapes.GetElementCoordinateString(_index));
-                }
-
-                _firstPoint = new Coordinate(0, 0);
-                _startPoint = _firstPoint;
-                _newShapeCoordinateSet = new CoordinateSet(_firstPoint, _firstPoint);
-
-            }
-            else
-            {
-                Console.WriteLine("just click!!");
+                return;
             }
 
-
-            // _index = -1;
-            PickShape(coordinateX + deltaX / 2, coordinateY + deltaY / 2);
-            Console.WriteLine("end change position " + _index);
+            _shapes.ChangeCoordinate(_index, _newShapeCoordinateSet.GetDeltaX(), _newShapeCoordinateSet.GetDeltaY());
+            ResetThreePoint();
+            // PickShape(coordinateX + deltaX / 2, coordinateY + deltaY / 2);
         }
 
         /// <summary>

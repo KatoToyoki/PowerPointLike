@@ -89,17 +89,31 @@ namespace PowerPointLike
             return false;
         }
 
+        /// <summary>
+        /// Method <c>GetDeltaX</c>
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public int GetDeltaX(Coordinate point)
         {
-            Console.WriteLine("----view nums 1 2 " + _x + " " + point._x);
             return point._x - _x;
         }
 
+        /// <summary>
+        /// Method <c>GetDeltaY</c>
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public int GetDeltaY(Coordinate point)
         {
             return point._y - _y;
         }
 
+        /// <summary>
+        /// Method <c>GetIfIsSame</c>
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public bool GetIfIsSame(Coordinate point)
         {
             if (point._x == _x && point._y == _y)
@@ -108,6 +122,17 @@ namespace PowerPointLike
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Method <c>SetNewOne</c>
+        /// </summary>
+        /// <param name="offsetX"></param>
+        /// <param name="offsetY"></param>
+        /// <returns></returns>
+        public Coordinate SetNewOne(int offsetX, int offsetY)
+        {
+            return new Coordinate(_x + offsetX, _y + offsetY);
         }
     }
 
@@ -122,34 +147,15 @@ namespace PowerPointLike
             get; set;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CoordinateSet"/> class.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public CoordinateSet(Coordinate point1, Coordinate point2)
         {
             _point1 = point1;
             _point2 = point2;
-        }
-
-        public CoordinateSet Offset(int offsetX, int offsetY)
-        {
-            Console.WriteLine("before " + _point1._x + " " + _point1._y);
-
-            _point1 = new Coordinate(_point1._x + offsetX, _point1._y + offsetY);
-            _point2 = new Coordinate(_point2._x + offsetX, _point2._y + offsetY);
-
-            CoordinateSet result = new CoordinateSet(_point1, _point2);
-
-            Console.WriteLine("after " + _point1._x + " " + _point1._y);
-
-            return result;
-        }
-
-        public int GetDeltaX()
-        {
-            return _point1.GetDeltaX(_point2);
-        }
-
-        public int GetDeltaY()
-        {
-            return _point1.GetDeltaY(_point2);
         }
 
         public const int TIDY_2 = 2;
@@ -277,7 +283,6 @@ namespace PowerPointLike
         /// to draw the 8 dots
         /// </summary>
         /// <param name="e"></param>
-
         private void DrawDots(PaintEventArgs e)
         {
             SolidBrush grayBrush = new SolidBrush(Color.Gray);
@@ -297,6 +302,41 @@ namespace PowerPointLike
 
             e.Graphics.FillEllipse(grayBrush, middleWidth, top, TIDY_12, TIDY_12);
             e.Graphics.FillEllipse(grayBrush, middleWidth, bottom, TIDY_12, TIDY_12);
+        }
+
+        /// <summary>
+        /// Method <c>Offset</c>
+        /// </summary>
+        /// <param name="offsetX"></param>
+        /// <param name="offsetY"></param>
+        /// <returns></returns>
+        public CoordinateSet Offset(int offsetX, int offsetY)
+        {
+            _point1 = _point1.SetNewOne(offsetX, offsetY);
+            _point2 = _point2.SetNewOne(offsetX, offsetY);
+            CoordinateSet result = new CoordinateSet(_point1, _point2);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Method <c>GetDeltaX</c>
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public int GetDeltaX()
+        {
+            return _point1.GetDeltaX(_point2);
+        }
+
+        /// <summary>
+        /// Method <c>GetDeltaY</c>
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public int GetDeltaY()
+        {
+            return _point1.GetDeltaY(_point2);
         }
     }
 }

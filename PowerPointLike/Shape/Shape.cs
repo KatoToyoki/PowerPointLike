@@ -17,7 +17,7 @@ namespace PowerPointLike
         public CoordinateSet _coordinateSet
         {
             get; set;
-        } = new CoordinateSet();
+        }
 
         /// <summary>
         /// Method <c>GetOneElementData</c>
@@ -55,6 +55,10 @@ namespace PowerPointLike
             return _coordinateSet;
         }
 
+        /// <summary>
+        ///  Method <c>SetCoordinate</c>
+        /// </summary>
+        /// <param name="set"></param>
         public void SetCoordinate(CoordinateSet set)
         {
             _coordinateSet = set;
