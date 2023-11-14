@@ -11,124 +11,6 @@ namespace PowerPointLike
 {
     public class PresentationModel
     {
-        // button(view) ================================================================
-        // ControlViewButton _controlViewButton = new ControlViewButton();
-        enum Data
-        {
-            DataDeleteIndex,
-            DataNameIndex,
-            DataCoordinateIndex
-        }
-        public int _currentButtonIndex
-        {
-            get; set;
-        }
-        public const int DATA_DELETE_INDEX = 0;
-        public const int INVALID = -1;
-        public const int LENGTH = 4;
-        private bool[] _buttonChecked = new bool[LENGTH];
-
-        /// <summary>
-        /// Method <c>GetbuttonChecked</c>
-        /// thank you, dr.smell, for not letting me use the new syntax
-        /// I originally didn't have to do this, thanks A LOT :))))
-        /// public bool[] _buttonChecked{
-        /// get; set;
-        /// }= new bool[3];
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public bool GetButtonChecked(int index)
-        {
-            return _buttonChecked[index];
-            // return _controlViewButton.GetButtonChecked(index);
-        }
-
-        /// <summary>
-        /// Method <c>GetDeleteIndex</c>
-        /// to get at which position should the shape be deleted
-        /// </summary>
-        /// <param name="dataIndex">to determine if this function will be executed</param>
-        /// <param name="deleteIndex">the index of the shape in the container</param>
-        /// <returns>the index</returns>
-        public int? GetDeleteIndex(int dataIndex, int deleteIndex)
-        {
-            if (dataIndex == DATA_DELETE_INDEX)
-            {
-                return deleteIndex;
-            }
-            return null;
-            // return _controlViewButton.GetDeleteIndex(dataIndex, deleteIndex);
-        }
-
-        /// <summary>
-        /// Method <c>ResetAllButtonCheck</c>
-        /// reset all the button status of isCheck
-        /// </summary>
-        public void ResetAllButtonCheck()
-        {
-            for (int i = 0; i < _buttonChecked.Length; i++)
-            {
-                _buttonChecked[i] = false;
-            }
-            _currentButtonIndex = INVALID;
-            // _controlViewButton.ResetAllButtonCheck();
-        }
-
-        /// <summary>
-        /// Method <c>ClickLineButton</c>
-        /// when line buttin is clicked, except for line, all become false;
-        /// </summary>
-        public void ClickLineButton(int index)
-        {
-            ResetAllButtonCheck();
-            _buttonChecked[(int)ShapeIndex.Line] = true;
-            _currentButtonIndex = (int)ShapeIndex.Line;
-            _model.ClickToolButton(index);
-            // _controlViewButton.ClickLineButton(index);
-        }
-
-        /// <summary>
-        /// Method <c>ClickRectangleButton</c>
-        /// when line buttin is clicked, except for rectangle, all become false;
-        /// </summary>
-        public void ClickRectangleButton(int index)
-        {
-            ResetAllButtonCheck();
-            _buttonChecked[(int)ShapeIndex.Rectangle] = true;
-            _currentButtonIndex = (int)ShapeIndex.Rectangle;
-            _model.ClickToolButton(index);
-
-            // _controlViewButton.ClickRectangleButton(index);
-        }
-
-        /// <summary>
-        /// Method <c>ClickCircleButton</c>
-        /// when line buttin is clicked, except for circle, all become false;
-        /// </summary>
-        public void ClickCircleButton(int index)
-        {
-            ResetAllButtonCheck();
-            _buttonChecked[(int)ShapeIndex.Circle] = true;
-            _currentButtonIndex = (int)ShapeIndex.Circle;
-            _model.ClickToolButton(index);
-
-            // _controlViewButton.ClickCircleButton(index);
-        }
-
-        /// <summary>
-        /// Method <c>ClickMouseButton</c>
-        /// when mouse buttin is clicked, except for current button, all become false;
-        /// </summary>
-        public void ClickMouseButton(int index)
-        {
-            ResetAllButtonCheck();
-            _buttonChecked[(int)ShapeIndex.Mouse] = true;
-            _currentButtonIndex = INVALID;
-            // _controlViewButton.ClickMouseButton(index);
-        }
-
-        // presentation model ================================================================
         public enum ShapeIndex
         {
             Line,
@@ -138,6 +20,7 @@ namespace PowerPointLike
         }
 
         private Model _model;
+        private ButtonModel _buttonModel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PresentationModel"/> class.
@@ -146,6 +29,7 @@ namespace PowerPointLike
         public PresentationModel(Model model)
         {
             _model = model;
+            _buttonModel = new ButtonModel(ref _model);
             ResetAllButtonCheck();
         }
 
@@ -167,8 +51,7 @@ namespace PowerPointLike
         /// <param name="deleteIndex">the index of the shape in the container</param>
         public void DeleteCertainElement(int dataIndex, int deleteIndex)
         {
-            // if (dataIndex == (int)_controlViewButton.DATA_DELETE_INDEX)
-            if (dataIndex == (int)DATA_DELETE_INDEX)
+            if (dataIndex == (int)ButtonModel.DATA_DELETE_INDEX)
             {
                 _model.DeleteCertainElement(deleteIndex);
             }
@@ -180,8 +63,7 @@ namespace PowerPointLike
         /// </summary>
         public void SetStateSelect()
         {
-            // _model.ClickToolButton(_controlViewButton.INVALID);
-            _model.ClickToolButton(INVALID);
+            _model.ClickToolButton(ButtonModel.INVALID);
         }
 
         /// <summary>
@@ -206,8 +88,7 @@ namespace PowerPointLike
             {
                 return;
             }
-            // _model.PressPointer(coordinateX, coordinateY, _controlViewButton._currentButtonIndex);
-            _model.PressPointer(coordinateX, coordinateY, _currentButtonIndex);
+            _model.PressPointer(coordinateX, coordinateY, _buttonModel._currentButtonIndex);
         }
 
         /// <summary>
@@ -222,8 +103,7 @@ namespace PowerPointLike
             {
                 return;
             }
-            // _model.MovePointer(coordinateX, coordinateY, _controlViewButton._currentButtonIndex);
-            _model.MovePointer(coordinateX, coordinateY, _currentButtonIndex);
+            _model.MovePointer(coordinateX, coordinateY, _buttonModel._currentButtonIndex);
         }
 
         /// <summary>
@@ -238,8 +118,7 @@ namespace PowerPointLike
             {
                 return;
             }
-            // _model.ReleasePointer(coordinateX, coordinateY, _controlViewButton._currentButtonIndex);
-            _model.ReleasePointer(coordinateX, coordinateY, _currentButtonIndex);
+            _model.ReleasePointer(coordinateX, coordinateY, _buttonModel._currentButtonIndex);
         }
 
         /// <summary>
@@ -259,12 +138,11 @@ namespace PowerPointLike
         /// <returns>if the current state is for drawing</returns>
         public bool DrawIsReady()
         {
-            if (_currentButtonIndex == INVALID)
+            if (_buttonModel._currentButtonIndex == State.INVALID)
             {
                 return false;
             }
             return true;
-            // return _controlViewButton.DrawIsReady();
         }
 
         /// <summary>
@@ -357,11 +235,82 @@ namespace PowerPointLike
             for (int i = 0; i < GetContainerLength(); i++)
             {
                 string[] element = GetOneElement(i);
-                tableData.Add(new string[] { element[(int)Data.DataDeleteIndex], element[(int)Data.DataNameIndex], element[(int)Data.DataCoordinateIndex] });
+                tableData.Add(new string[] { element[(int)ButtonModel.Data.DataDeleteIndex], element[(int)ButtonModel.Data.DataNameIndex], element[(int)ButtonModel.Data.DataCoordinateIndex] });
             }
 
             return tableData;
-            // return _controlViewButton.GetAllContainerData();
+        }
+
+        /// <summary>
+        /// Method <c>GetbuttonChecked</c>
+        /// thank you, dr.smell, for not letting me use the new syntax
+        /// I originally didn't have to do this, thanks A LOT :))))
+        /// public bool[] _buttonChecked{
+        /// get; set;
+        /// }= new bool[3];
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public bool GetButtonChecked(int index)
+        {
+            return _buttonModel.GetButtonChecked(index);
+        }
+
+        /// <summary>
+        /// Method <c>GetDeleteIndex</c>
+        /// to get at which position should the shape be deleted
+        /// </summary>
+        /// <param name="dataIndex">to determine if this function will be executed</param>
+        /// <param name="deleteIndex">the index of the shape in the container</param>
+        /// <returns>the index</returns>
+        public int? GetDeleteIndex(int dataIndex, int deleteIndex)
+        {
+            return _buttonModel.GetDeleteIndex(dataIndex, deleteIndex);
+        }
+
+        /// <summary>
+        /// Method <c>ResetAllButtonCheck</c>
+        /// reset all the button status of isCheck
+        /// </summary>
+        public void ResetAllButtonCheck()
+        {
+            _buttonModel.ResetAllButtonCheck();
+        }
+
+        /// <summary>
+        /// Method <c>ClickLineButton</c>
+        /// when line buttin is clicked, except for line, all become false;
+        /// </summary>
+        public void ClickLineButton(int index)
+        {
+            _buttonModel.ClickLineButton(index);
+        }
+
+        /// <summary>
+        /// Method <c>ClickRectangleButton</c>
+        /// when line buttin is clicked, except for rectangle, all become false;
+        /// </summary>
+        public void ClickRectangleButton(int index)
+        {
+            _buttonModel.ClickRectangleButton(index);
+        }
+
+        /// <summary>
+        /// Method <c>ClickCircleButton</c>
+        /// when line buttin is clicked, except for circle, all become false;
+        /// </summary>
+        public void ClickCircleButton(int index)
+        {
+            _buttonModel.ClickCircleButton(index);
+        }
+
+        /// <summary>
+        /// Method <c>ClickMouseButton</c>
+        /// when mouse buttin is clicked, except for current button, all become false;
+        /// </summary>
+        public void ClickMouseButton(int index)
+        {
+            _buttonModel.ClickMouseButton(index);
         }
     }
 }

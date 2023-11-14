@@ -185,24 +185,7 @@
     <div class="data">
       <Data id="ReviewPalData">
         <CodeReview xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-          <Reviews>
-            <Smell>
-              <Id>1</Id>
-              <SmellType>Large class(過大類別)</SmellType>
-              <HashCode>LargeClass.PowerPointLike.PresentationModel.323</HashCode>
-              <Severity>Warning</Severity>
-              <Weight>323</Weight>
-              <Project>PowerPointLike</Project>
-              <File>PresentationModel.cs</File>
-              <Line>12</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment />
-              <Auto>false</Auto>
-            </Smell>
-          </Reviews>
+          <Reviews />
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList />
           <AnalysisFileManager>
@@ -221,6 +204,11 @@
                 <RelativePath>Form1.Designer.cs</RelativePath>
                 <ProjectName>PowerPointLike</ProjectName>
                 <AnalysisFileType>Designer</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Models\ButtonModel.cs</RelativePath>
+                <ProjectName>PowerPointLike</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
                 <RelativePath>Models\GraphicsAdaptor.cs</RelativePath>
@@ -309,7 +297,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>2599</ProductionLoc>
+          <ProductionLoc>2670</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>
