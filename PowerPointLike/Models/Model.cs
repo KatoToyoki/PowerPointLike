@@ -22,12 +22,19 @@ namespace PowerPointLike
         public const string EMPTY_STRING = "";
         public const string DELETE = "刪除";
 
-        protected Shapes _shapes = new Shapes();
-        private State _state;
+        public Shapes _shapes
+        {
+            get; set;
+        }
+        public State _state
+        {
+            get; set;
+        }
 
         public Model()
         {
             _state = new PointState(_shapes);
+            _shapes = new Shapes();
         }
 
         /// <summary>

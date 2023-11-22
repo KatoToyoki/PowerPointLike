@@ -127,14 +127,10 @@ namespace PowerPointLike
         /// <param name="shapeIndex">shapeindex</param>
         public void PressFirst(double coordinateX, double coordinateY, int shapeIndex)
         {
-            // _firstPoint._x = (int)coordinateX;
-            // _firstPoint._y = (int)coordinateY;
             _firstPoint = new Coordinate((int)coordinateX, (int)coordinateY);
             _startPoint = _firstPoint;
             _newShapeCoordinateSet._point1 = _firstPoint;
             _isPressed = true;
-
-            // Console.WriteLine("press first: start, first " + _startPoint.GetCoordinateString() + " " + _firstPoint.GetCoordinateString());
         }
 
         /// <summary>

@@ -40,6 +40,10 @@ namespace PowerPointLike
         /// <param name="shape">the assigned shape</param>
         public void AddItem(string shape)
         {
+            if (shape == string.Empty)
+            {
+                return;
+            }
             _model.AddItem(shape);
         }
 
@@ -239,6 +243,20 @@ namespace PowerPointLike
             }
 
             return tableData;
+        }
+
+        /// <summary>
+        /// Method <c>ClickKey</c> 
+        /// to deal with keyin
+        /// </summary>
+        /// <param name="e"></param>
+        public void ClickKey(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                DeleteSelectOne();
+                ResetSelectIndex();
+            }
         }
 
         /// <summary>

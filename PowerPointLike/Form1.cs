@@ -45,12 +45,8 @@ namespace PowerPointLike
         /// <param name="e"></param>
         private void AddNewElement(object sender, EventArgs e)
         {
-            if (_elementsChoicesBox.Text != EMPTY_STRING)
-            {
-                _presentationModel.AddItem(_elementsChoicesBox.Text);
-                // UpdateDataToTable((int)Command.Generate);
-                UpdateDataToTable();
-            }
+            _presentationModel.AddItem(_elementsChoicesBox.Text);
+            UpdateDataToTable();
         }
 
         /// <summary>
@@ -61,10 +57,6 @@ namespace PowerPointLike
         /// <param name="e"></param>
         private void DeleteElement(object sender, DataGridViewCellEventArgs e)
         {
-            if (_presentationModel.GetDeleteIndex(e.ColumnIndex, e.RowIndex) == null)
-            {
-                return;
-            }
             _presentationModel.DeleteCertainElement(e.ColumnIndex, e.RowIndex);
             _presentationModel.ResetSelectIndex();
             UpdateDataToTable();
@@ -166,7 +158,6 @@ namespace PowerPointLike
         public void HandleCanvasReleased(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             _presentationModel.ReleasePointer(e.X, e.Y);
-            // UpdateDataToTable((int)Command.Draw);
 
             UpdateDataToTable();
 
@@ -298,13 +289,7 @@ namespace PowerPointLike
         /// <param name="e"></param>
         private void ChangeCanvas(object sender, PaintEventArgs e)
         {
-            if (_presentationModel.GetSelectIndex() == null)
-            {
-                return;
-            }
-            int index = (int)_presentationModel.GetSelectIndex();
             CoordinateSet selectedOne = _presentationModel.GetSelectedOneCoordinate();
-
             selectedOne.DrawSelectFrame(e);
         }
 
@@ -316,13 +301,9 @@ namespace PowerPointLike
         /// <param name="e"></param>
         private void ClickKey(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
-            {
-                _presentationModel.DeleteSelectOne();
-                UpdateDataToTable();
-                _presentationModel.ResetSelectIndex();
-                _canvas.Invalidate();
-            }
+            _presentationModel.ClickKey(e);
+            UpdateDataToTable();
+            _canvas.Invalidate();
         }
     }
 }
