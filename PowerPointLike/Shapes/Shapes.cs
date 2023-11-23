@@ -12,7 +12,16 @@ namespace PowerPointLike
         const string LINE = "線";
         const string CIRCLE = "圓";
         private List<Shape> _shapeContainer = new List<Shape>();
-        private Factory _factory = new Factory();
+        public Factory _factory
+        {
+            get;set;
+        }
+
+        public Shapes()
+        {
+
+            _factory = new Factory();
+        }
 
         /// <summary>
         /// Method <c>AddShape</c>
@@ -33,10 +42,7 @@ namespace PowerPointLike
             {
                 _shapeContainer.Add(_factory.CreateCircle());
             }
-            else
-            {
-                return;
-            }
+           
         }
 
         /// <summary>

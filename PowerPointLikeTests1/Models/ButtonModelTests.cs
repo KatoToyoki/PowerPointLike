@@ -11,48 +11,63 @@ namespace PowerPointLike.Tests
     [TestClass()]
     public class ButtonModelTests
     {
-        [TestMethod()]
-        public void ButtonModelTest()
-        {
-            Assert.Fail();
-        }
-
+        /// <summary>
+        /// test if getter works fine
+        /// </summary>
         [TestMethod()]
         public void GetButtonCheckedTest()
         {
             Assert.Fail();
         }
 
+        /// <summary>
+        /// test if getter works fine
+        /// </summary>
         [TestMethod()]
         public void GetDeleteIndexTest()
         {
             Assert.Fail();
         }
 
+        /// <summary>
+        /// test if reset works fine
+        /// </summary>
         [TestMethod()]
         public void ResetAllButtonCheckTest()
         {
             Assert.Fail();
         }
 
+        /// <summary>
+        /// test if click line button works fine
+        /// </summary>
         [TestMethod()]
         public void ClickLineButtonTest()
         {
             Assert.Fail();
         }
 
+        /// <summary>
+        /// test if click rectangle button works fine
+        /// </summary>
         [TestMethod()]
         public void ClickRectangleButtonTest()
         {
             Assert.Fail();
         }
 
+        /// <summary>
+        /// test if click circle button works fine
+        /// </summary>
         [TestMethod()]
         public void ClickCircleButtonTest()
         {
             Assert.Fail();
         }
 
+        /// <summary>
+        /// test if click mouse button works fine
+        /// </summary>
         [TestMethod()]
         public void ClickMouseButtonTest()
         {

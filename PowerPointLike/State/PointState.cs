@@ -49,13 +49,6 @@ namespace PowerPointLike
                 return;
             }
 
-            if (!_startPoint.GetIfIsSame(_firstPoint))
-            {
-                _firstPoint = _newShapeCoordinateSet._point2;
-                _newShapeCoordinateSet._point1 = _firstPoint;
-            }
-
-            PressMiddle(coordinateX, coordinateY);
             PickShape(coordinateX, coordinateY);
         }
 

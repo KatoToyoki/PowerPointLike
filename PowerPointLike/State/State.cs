@@ -53,6 +53,24 @@ namespace PowerPointLike
         }
 
         /// <summary>
+        /// getter
+        /// </summary>
+        /// <returns></returns>
+        public CoordinateSet GetNewShapeCoordinate()
+        {
+            return _newShapeCoordinateSet;
+        }
+
+        /// <summary>
+        /// setter
+        /// </summary>
+        /// <param name="coordinateSet"></param>
+        public void SetNewShapeCoordinate(CoordinateSet coordinateSet)
+        {
+            _newShapeCoordinateSet = coordinateSet;
+        }
+
+        /// <summary>
         /// Method <c>ChangeCurrentIndex</c>
         /// depends on the button index to change the state index
         /// </summary>

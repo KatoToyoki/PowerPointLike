@@ -180,7 +180,7 @@ namespace PowerPointLike
         /// Method <c>NotifyModelChanged</c>
         /// model is changing
         /// </summary>
-        void NotifyModelChanged()
+        public void NotifyModelChanged()
         {
             if (_modelChanged != null)
             {

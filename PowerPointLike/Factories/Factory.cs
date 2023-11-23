@@ -32,7 +32,7 @@ namespace PowerPointLike
         /// <param name="point1"></param>
         /// <param name="point2"></param>
         /// <returns></returns>
-        private CoordinateSet SetCoordinateSet(Coordinate point1, Coordinate point2)
+        public CoordinateSet SetCoordinateSet(Coordinate point1, Coordinate point2)
         {
             CoordinateSet result = new CoordinateSet();
             if (point1.GetIfSelfBigger(point2))
