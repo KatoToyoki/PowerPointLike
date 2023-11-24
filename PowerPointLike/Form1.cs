@@ -8,14 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PowerPointLike.Models;
 
 namespace PowerPointLike
 {
     public partial class PowerPointLike : Form
     {
-        public const string EMPTY_STRING = "";
         public const int START_DATA_GRID_VIEW_INDEX = 2;
-        private PresentationModel _presentationModel;
+        public PresentationModel _presentationModel
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Form"/> class.
@@ -43,7 +46,7 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddNewElement(object sender, EventArgs e)
+        public void AddNewElement(object sender, EventArgs e)
         {
             _presentationModel.AddItem(_elementsChoicesBox.Text);
             UpdateDataToTable();
@@ -55,7 +58,7 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DeleteElement(object sender, DataGridViewCellEventArgs e)
+        public void DeleteElement(object sender, DataGridViewCellEventArgs e)
         {
             _presentationModel.DeleteCertainElement(e.ColumnIndex, e.RowIndex);
             _presentationModel.ResetSelectIndex();
@@ -68,7 +71,7 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClickLineButton(object sender, EventArgs e)
+        public void ClickLineButton(object sender, EventArgs e)
         {
             _presentationModel.ClickLineButton(_lineButton.MergeIndex);
             RefreshToolButtonClick();
@@ -81,7 +84,7 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClickRectangleButton(object sender, EventArgs e)
+        public void ClickRectangleButton(object sender, EventArgs e)
         {
             _presentationModel.ClickRectangleButton(_rectangleButton.MergeIndex);
             RefreshToolButtonClick();
@@ -94,7 +97,7 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClickCircleButton(object sender, EventArgs e)
+        public void ClickCircleButton(object sender, EventArgs e)
         {
             _presentationModel.ClickCircleButton(_circleButton.MergeIndex);
             RefreshToolButtonClick();
@@ -107,7 +110,7 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClickMouseButton(object sender, EventArgs e)
+        public void ClickMouseButton(object sender, EventArgs e)
         {
             _presentationModel.ClickMouseButton(_mouseButton.MergeIndex);
             RefreshToolButtonClick();
@@ -174,7 +177,8 @@ namespace PowerPointLike
         /// <param name="sender"></param>
         public void HandleCanvasPaint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
-            _presentationModel.Draw(e.Graphics);
+            IGraphics graphicsAdaptor = new GraphicsAdaptor(e.Graphics);
+            _presentationModel.Draw(graphicsAdaptor);
             _canvas1.Image = GetScaleImage();
         }
 
@@ -233,7 +237,7 @@ namespace PowerPointLike
         /// <param name="control">the panel</param>
         /// <param name="region">the rectangle that represent panel</param>
         /// <returns></returns>
-        private Bitmap CaptureRegion(Control control, System.Drawing.Rectangle region)
+        public Bitmap CaptureRegion(Control control, System.Drawing.Rectangle region)
         {
             Bitmap capturedImage = new Bitmap(region.Width, region.Height);
             using (Graphics g = Graphics.FromImage(capturedImage))
@@ -254,7 +258,7 @@ namespace PowerPointLike
         /// <param name="originalImage">the origin capture img</param>
         /// <param name="newSize">the size of button</param>
         /// <returns></returns>
-        private Bitmap ResizeImage(Bitmap originalImage, Size newSize)
+        public Bitmap ResizeImage(Bitmap originalImage, Size newSize)
         {
             float percentWidth = ((float)newSize.Width / (float)originalImage.Width);
             float percentHeight = ((float)newSize.Height / (float)originalImage.Height);
@@ -287,7 +291,7 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ChangeCanvas(object sender, PaintEventArgs e)
+        public void ChangeCanvas(object sender, PaintEventArgs e)
         {
             CoordinateSet selectedOne = _presentationModel.GetSelectedOneCoordinate();
             selectedOne.DrawSelectFrame(e);
@@ -299,7 +303,7 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClickKey(object sender, KeyEventArgs e)
+        public void ClickKey(object sender, KeyEventArgs e)
         {
             _presentationModel.ClickKey(e);
             UpdateDataToTable();

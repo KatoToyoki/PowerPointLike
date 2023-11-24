@@ -14,7 +14,7 @@ namespace PowerPointLike
         private List<Shape> _shapeContainer = new List<Shape>();
         public Factory _factory
         {
-            get;set;
+            get; set;
         }
 
         public Shapes()
@@ -42,7 +42,7 @@ namespace PowerPointLike
             {
                 _shapeContainer.Add(_factory.CreateCircle());
             }
-           
+
         }
 
         /// <summary>
@@ -106,6 +106,7 @@ namespace PowerPointLike
         /// <param name="graphics"></param>
         public void Draw(IGraphics graphics)
         {
+            Console.WriteLine("test!!!" + _shapeContainer.Count);
             foreach (Shape shape in _shapeContainer)
             {
                 shape.Draw(graphics);
@@ -200,7 +201,6 @@ namespace PowerPointLike
                 if (GetIfIsBetween(temp._point1._x, temp._point2._x, coordinateX) &&
                     GetIfIsBetween(temp._point1._y, temp._point2._y, coordinateY))
                 {
-                    // Console.WriteLine(i + " in it!\n=====\n");
                     selectedCoordinate = temp;
                     return i;
                 }

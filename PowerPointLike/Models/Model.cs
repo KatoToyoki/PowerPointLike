@@ -33,8 +33,8 @@ namespace PowerPointLike
 
         public Model()
         {
-            _state = new PointState(_shapes);
             _shapes = new Shapes();
+            _state = new PointState(_shapes);
         }
 
         /// <summary>

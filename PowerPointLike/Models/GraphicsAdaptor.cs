@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PowerPointLike.Models
 {
-    class GraphicsAdaptor : IGraphics
+    public class GraphicsAdaptor : IGraphics
     {
         Graphics _graphics;
         Pen _pen = new Pen(Brushes.Black);

@@ -19,8 +19,15 @@ namespace PowerPointLike
             Mouse
         }
 
-        private Model _model;
-        private ButtonModel _buttonModel;
+        public Model _model
+        {
+            get; set;
+        }
+
+        public ButtonModel _buttonModel
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PresentationModel"/> class.
@@ -29,7 +36,7 @@ namespace PowerPointLike
         public PresentationModel(Model model)
         {
             _model = model;
-            _buttonModel = new ButtonModel(ref _model);
+            _buttonModel = new ButtonModel(_model);
             ResetAllButtonCheck();
         }
 
@@ -75,9 +82,9 @@ namespace PowerPointLike
         /// let model draw
         /// </summary>
         /// <param name="graphics"></param>
-        public void Draw(System.Drawing.Graphics graphics)
+        public void Draw(IGraphics graphics)
         {
-            _model.Draw(new GraphicsAdaptor(graphics));
+            _model.Draw(graphics);
         }
 
         /// <summary>
@@ -169,15 +176,6 @@ namespace PowerPointLike
                 return true;
             }
             return false;
-        }
-
-        /// <summary>
-        /// Method <c>GetSelectIndex</c>
-        /// </summary>
-        /// <returns>the selected shape's index in the container</returns>
-        public int? GetSelectIndex()
-        {
-            return _model.GetSelectIndex();
         }
 
         /// <summary>

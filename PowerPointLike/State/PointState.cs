@@ -48,7 +48,7 @@ namespace PowerPointLike
             {
                 return;
             }
-
+            PressMiddle(coordinateX, coordinateY);
             PickShape(coordinateX, coordinateY);
         }
 

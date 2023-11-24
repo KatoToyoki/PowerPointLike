@@ -26,7 +26,7 @@ namespace PowerPointLike
 
         private Model _model;
 
-        public ButtonModel(ref Model model)
+        public ButtonModel(Model model)
         {
             _model = model;
         }
