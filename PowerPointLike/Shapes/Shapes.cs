@@ -245,5 +245,23 @@ namespace PowerPointLike
             }
             _shapeContainer[index].SetCoordinate(_shapeContainer[index]._coordinateSet.Offset(coordinateX, coordinateY));
         }
+
+        /// <summary>
+        /// Method <c>ExistInContainer</c>
+        /// to check if the item is exist
+        /// </summary>
+        /// <param name="coordinateSet"></param>
+        /// <returns></returns>
+        public bool ExistInContainer(CoordinateSet coordinateSet)
+        {
+            foreach (Shape shape in _shapeContainer)
+            {
+                if (shape._coordinateSet.GetIfIsSame(coordinateSet))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

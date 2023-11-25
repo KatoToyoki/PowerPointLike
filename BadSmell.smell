@@ -185,7 +185,24 @@
     <div class="data">
       <Data id="ReviewPalData">
         <CodeReview xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-          <Reviews />
+          <Reviews>
+            <Smell>
+              <Id>1</Id>
+              <SmellType>Large class(過大類別)</SmellType>
+              <HashCode>LargeClass.PowerPointLike.PresentationModel.302</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>302</Weight>
+              <Project>PowerPointLike</Project>
+              <File>PresentationModel.cs</File>
+              <Line>12</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+          </Reviews>
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList />
           <AnalysisFileManager>
@@ -312,7 +329,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>2731</ProductionLoc>
+          <ProductionLoc>2792</ProductionLoc>
           <TestLoc>528</TestLoc>
         </CodeReview>
       </Data>

@@ -69,10 +69,10 @@ namespace PowerPointLike
         }
 
         /// <summary>
-        /// Method <c>SetStateSelect</c>
+        /// Method <c>ResetStateSelect</c>
         /// reset the state to select
         /// </summary>
-        public void SetStateSelect()
+        public void ResetStateSelect()
         {
             _model.ClickToolButton(ButtonModel.INVALID);
         }
@@ -327,6 +327,19 @@ namespace PowerPointLike
         public void ClickMouseButton(int index)
         {
             _buttonModel.ClickMouseButton(index);
+        }
+
+        /// <summary>
+        /// Method <c>DrawSelectFrame</c>
+        /// </summary>
+        /// <param name="e"></param>
+        public void DrawSelectFrame(PaintEventArgs e)
+        {
+            CoordinateSet selectedOne = GetSelectedOneCoordinate();
+            if (_model.ExistInContainer(selectedOne))
+            {
+                selectedOne.DrawSelectFrame(e);
+            }
         }
     }
 }

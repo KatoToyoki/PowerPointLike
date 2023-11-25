@@ -49,7 +49,7 @@ namespace PowerPointLike.Tests
             view._presentationModel.DeleteCertainElement(0, 0);
             Assert.AreEqual(2, view._presentationModel.GetContainerLength());
 
-            view._presentationModel.SetStateSelect();
+            view._presentationModel.ResetStateSelect();
         }
 
         /// <summary>

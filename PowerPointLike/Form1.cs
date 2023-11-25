@@ -167,7 +167,7 @@ namespace PowerPointLike
             _presentationModel.ResetAllButtonCheck();
             RefreshToolButtonClick();
             ClickMouseButton(sender, e);
-            _presentationModel.SetStateSelect();
+            _presentationModel.ResetStateSelect();
         }
 
         /// <summary>
@@ -293,8 +293,7 @@ namespace PowerPointLike
         /// <param name="e"></param>
         public void ChangeCanvas(object sender, PaintEventArgs e)
         {
-            CoordinateSet selectedOne = _presentationModel.GetSelectedOneCoordinate();
-            selectedOne.DrawSelectFrame(e);
+            _presentationModel.DrawSelectFrame(e);
         }
 
         /// <summary>

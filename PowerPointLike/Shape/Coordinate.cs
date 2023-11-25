@@ -338,5 +338,25 @@ namespace PowerPointLike
         {
             return _point1.GetDeltaY(_point2);
         }
+
+        /// <summary>
+        /// Method <c>GetIfIsSame</c>
+        /// check if the two is the same
+        /// </summary>
+        /// <param name="coordinateSet"></param>
+        /// <returns></returns>
+        public bool GetIfIsSame(CoordinateSet coordinateSet)
+        {
+            if (!_point1.GetIfIsSame(coordinateSet._point1))
+            {
+                return false;
+            }
+            if (!_point2.GetIfIsSame(coordinateSet._point2))
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

@@ -249,5 +249,16 @@ namespace PowerPointLike
             }
             _shapes.DeleteCertainElement((int)GetSelectIndex());
         }
+
+        /// <summary>
+        /// Method <c>ExistInContainer</c>
+        /// to check if the item is exist
+        /// </summary>
+        /// <param name="coordinateSet"></param>
+        /// <returns></returns>
+        public bool ExistInContainer(CoordinateSet coordinateSet)
+        {
+            return _shapes.ExistInContainer(coordinateSet);
+        }
     }
 }
