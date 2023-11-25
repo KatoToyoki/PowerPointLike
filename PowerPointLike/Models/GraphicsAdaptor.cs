@@ -9,8 +9,8 @@ namespace PowerPointLike.Models
 {
     public class GraphicsAdaptor : IGraphics
     {
-        Graphics _graphics;
-        Pen _pen = new Pen(Brushes.Black);
+        private readonly Graphics _graphics;
+        private readonly Pen _pen;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GraphicAdaptor"/> class.
@@ -19,6 +19,7 @@ namespace PowerPointLike.Models
         public GraphicsAdaptor(Graphics graphics)
         {
             _graphics = graphics;
+            _pen = new Pen(Brushes.Black);
         }
 
         /// <summary>

@@ -296,11 +296,6 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Models\ButtonModelTests.cs</RelativePath>
-                <ProjectName>PowerPointLikeTests1</ProjectName>
-                <AnalysisFileType>Test</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
                 <RelativePath>Models\ModelTests.cs</RelativePath>
                 <ProjectName>PowerPointLikeTests1</ProjectName>
                 <AnalysisFileType>Test</AnalysisFileType>
@@ -317,8 +312,8 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>2725</ProductionLoc>
-          <TestLoc>639</TestLoc>
+          <ProductionLoc>2731</ProductionLoc>
+          <TestLoc>528</TestLoc>
         </CodeReview>
       </Data>
     </div>

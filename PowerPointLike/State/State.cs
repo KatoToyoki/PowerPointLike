@@ -77,13 +77,17 @@ namespace PowerPointLike
         /// <param name="index">button index</param>
         public void ChangeCurrentIndex(int index)
         {
-            if (index == -1)
+            if (index == INVALID)
             {
                 _currentStateIndex = (int)StateIndex.Select;
             }
-            else
+            else if (index == (int)PresentationModel.ShapeIndex.Line || index == (int)PresentationModel.ShapeIndex.Rectangle || index == (int)PresentationModel.ShapeIndex.Circle)
             {
                 _currentStateIndex = (int)StateIndex.Draw;
+            }
+            else
+            {
+                _currentStateIndex = INVALID;
             }
         }
 

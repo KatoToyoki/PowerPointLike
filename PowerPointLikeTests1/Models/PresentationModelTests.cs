@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using PowerPointLike.Models;
 
 namespace PowerPointLike.Tests
 {
@@ -177,6 +178,7 @@ namespace PowerPointLike.Tests
             presentationModel.ClickMouseButton(-1);
 
             presentationModel.GetDeleteIndex(0, 0);
+            presentationModel.GetDeleteIndex(555, 0);
         }
 
         /// <summary>

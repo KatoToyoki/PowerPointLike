@@ -106,7 +106,6 @@ namespace PowerPointLike
         /// <param name="graphics"></param>
         public void Draw(IGraphics graphics)
         {
-            Console.WriteLine("test!!!" + _shapeContainer.Count);
             foreach (Shape shape in _shapeContainer)
             {
                 shape.Draw(graphics);
