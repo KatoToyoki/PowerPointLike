@@ -41,6 +41,29 @@ namespace PowerPointLike
         }
 
         /// <summary>
+        /// Method <c>HandleModelChanged</c>
+        /// refresh when model is changed
+        /// </summary>
+        public void HandleModelChanged()
+        {
+            Invalidate(true);
+        }
+
+        /// <summary>
+        /// Method <c>ClickKey</c> 
+        /// to deal with keyin
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void ClickKey(object sender, KeyEventArgs e)
+        {
+            _presentationModel.ClickKey(e);
+            UpdateDataToTable();
+            _canvas.Invalidate();
+        }
+
+        // data =====================================================================
+        /// <summary>
         /// Method <c>AddElement</c>
         /// when the button is clicked, add new item in the container
         /// </summary>
@@ -65,6 +88,34 @@ namespace PowerPointLike
             UpdateDataToTable();
         }
 
+        /// <summary>
+        /// Method <c>AddElementToDataRridView</c>
+        /// add data whenever it's generated or painted
+        /// </summary>
+        public void UpdateDataToTable()
+        {
+            DeleteAllDataGridViewData();
+
+            List<string[]> tableData = _presentationModel.GetAllContainerData();
+
+            foreach (var element in tableData)
+            {
+                _elementDataGrid.Rows.Add(element);
+            }
+        }
+
+        /// <summary>
+        /// Method <c>DeleteAllDataGridViewData</c>
+        /// </summary>
+        public void DeleteAllDataGridViewData()
+        {
+            for (int i = _elementDataGrid.RowCount - START_DATA_GRID_VIEW_INDEX; i >= 0; i--)
+            {
+                _elementDataGrid.Rows.RemoveAt(i);
+            }
+        }
+
+        // button ===================================================================
         /// <summary>
         /// Method <c>ClickLineButton</c>
         /// change the status of all buttons
@@ -129,6 +180,7 @@ namespace PowerPointLike
             _mouseButton.Checked = _presentationModel.GetButtonChecked((int)PresentationModel.ShapeIndex.Mouse);
         }
 
+        // state ====================================================================
         /// <summary>
         /// Method <c>HandleCanvasPressed</c>
         /// this function is to deal with the situation of the starting of the drawing
@@ -183,32 +235,17 @@ namespace PowerPointLike
         }
 
         /// <summary>
-        /// Method <c>AddElementToDataRridView</c>
-        /// add data whenever it's generated or painted
+        /// Method <c>ChangeCanvas</c> 
+        /// to deal with the situation of canvas's change
         /// </summary>
-        public void UpdateDataToTable()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void ChangeCanvas(object sender, PaintEventArgs e)
         {
-            DeleteAllDataGridViewData();
-
-            List<string[]> tableData = _presentationModel.GetAllContainerData();
-
-            foreach (var element in tableData)
-            {
-                _elementDataGrid.Rows.Add(element);
-            }
+            _presentationModel.DrawSelectFrame(e);
         }
 
-        /// <summary>
-        /// Method <c>DeleteAllDataGridViewData</c>
-        /// </summary>
-        public void DeleteAllDataGridViewData()
-        {
-            for (int i = _elementDataGrid.RowCount - START_DATA_GRID_VIEW_INDEX; i >= 0; i--)
-            {
-                _elementDataGrid.Rows.RemoveAt(i);
-            }
-        }
-
+        // thumbnail ================================================================
         /// <summary>
         /// Method <c>GetscaleImage</c>
         /// to get change the button's image to the panel's thumbnail
@@ -274,39 +311,6 @@ namespace PowerPointLike
             }
 
             return resizedImage;
-        }
-
-        /// <summary>
-        /// Method <c>HandleModelChanged</c>
-        /// refresh when model is changed
-        /// </summary>
-        public void HandleModelChanged()
-        {
-            Invalidate(true);
-        }
-
-        /// <summary>
-        /// Method <c>ChangeCanvas</c> 
-        /// to deal with the situation of canvas's change
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void ChangeCanvas(object sender, PaintEventArgs e)
-        {
-            _presentationModel.DrawSelectFrame(e);
-        }
-
-        /// <summary>
-        /// Method <c>ClickKey</c> 
-        /// to deal with keyin
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void ClickKey(object sender, KeyEventArgs e)
-        {
-            _presentationModel.ClickKey(e);
-            UpdateDataToTable();
-            _canvas.Invalidate();
         }
     }
 }

@@ -29,6 +29,16 @@ namespace PowerPointLike
             get; set;
         }
 
+        public DataModel _dataModel
+        {
+            get; set;
+        }
+
+        public StateModel _stateModel
+        {
+            get; set;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PresentationModel"/> class.
         /// </summary>
@@ -37,99 +47,9 @@ namespace PowerPointLike
         {
             _model = model;
             _buttonModel = new ButtonModel(_model);
+            _dataModel = new DataModel(_model);
+            _stateModel = new StateModel(_model, _buttonModel);
             ResetAllButtonCheck();
-        }
-
-        /// <summary>
-        /// Method <c>AddItem</c>
-        /// add the assigned shape to the shape container
-        /// </summary>
-        /// <param name="shape">the assigned shape</param>
-        public void AddItem(string shape)
-        {
-            if (shape == string.Empty)
-            {
-                return;
-            }
-            _model.AddItem(shape);
-        }
-
-        /// <summary>
-        /// Method <c>DeleteCertainElement</c>
-        /// delete the assigned element
-        /// </summary>
-        /// <param name="dataIndex">to determine if this function will be executed</param>
-        /// <param name="deleteIndex">the index of the shape in the container</param>
-        public void DeleteCertainElement(int dataIndex, int deleteIndex)
-        {
-            if (dataIndex == (int)ButtonModel.DATA_DELETE_INDEX)
-            {
-                _model.DeleteCertainElement(deleteIndex);
-            }
-        }
-
-        /// <summary>
-        /// Method <c>ResetStateSelect</c>
-        /// reset the state to select
-        /// </summary>
-        public void ResetStateSelect()
-        {
-            _model.ClickToolButton(ButtonModel.INVALID);
-        }
-
-        /// <summary>
-        /// Method <c>Draw</c>
-        /// let model draw
-        /// </summary>
-        /// <param name="graphics"></param>
-        public void Draw(IGraphics graphics)
-        {
-            _model.Draw(graphics);
-        }
-
-        /// <summary>
-        /// Method <c>PressPointer</c>
-        /// let model handle with PressPointer
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void PressPointer(double coordinateX, double coordinateY)
-        {
-            if (!DrawIsReady() && _model.GetCurrentStateIndex() == (int)State.StateIndex.Draw)
-            {
-                return;
-            }
-            _model.PressPointer(coordinateX, coordinateY, _buttonModel._currentButtonIndex);
-        }
-
-        /// <summary>
-        /// Method <c>MovePointer</c>
-        /// let model handle with MovePointer
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void MovePointer(double coordinateX, double coordinateY)
-        {
-            if (!DrawIsReady() && _model.GetCurrentStateIndex() == (int)State.StateIndex.Draw)
-            {
-                return;
-            }
-            _model.MovePointer(coordinateX, coordinateY, _buttonModel._currentButtonIndex);
-        }
-
-        /// <summary>
-        /// Method <c>ReleasePointer</c>
-        /// let model handle with ReleasePointer
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void ReleasePointer(double coordinateX, double coordinateY)
-        {
-            if (!DrawIsReady() && _model.GetCurrentStateIndex() == (int)State.StateIndex.Draw)
-            {
-                return;
-            }
-            _model.ReleasePointer(coordinateX, coordinateY, _buttonModel._currentButtonIndex);
         }
 
         /// <summary>
@@ -140,107 +60,6 @@ namespace PowerPointLike
         public Model GetModelEvent()
         {
             return _model;
-        }
-
-        /// <summary>
-        ///  Method <c>DrawIsReady</c>
-        /// if the button index is not line, rectangle or circle(namely, the mouse), can't draw
-        /// </summary>
-        /// <returns>if the current state is for drawing</returns>
-        public bool DrawIsReady()
-        {
-            if (_buttonModel._currentButtonIndex == State.INVALID)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        /// <summary>
-        ///  Method <c>GetCurrentStateIndex</c>
-        /// </summary>
-        /// <returns>current state index</returns>
-        public int GetCurrentStateIndex()
-        {
-            return _model.GetCurrentStateIndex();
-        }
-
-        /// <summary>
-        /// Method <c>GetIfIsDraw</c>
-        /// </summary>
-        /// <returns></returns>
-        public bool GetIfIsDraw()
-        {
-            if (GetCurrentStateIndex() == (int)State.StateIndex.Draw)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Method <c>GetSelectedOneCoordinate</c>
-        /// </summary>
-        /// <returns>the selected shape's coordinate</returns>
-        public CoordinateSet GetSelectedOneCoordinate()
-        {
-            return _model.GetSelectedOneCoordinate();
-        }
-
-        /// <summary>
-        /// Method <c>ResetSelectIndex</c>
-        /// </summary>
-        public void ResetSelectIndex()
-        {
-            _model.ResetSelectIndex();
-        }
-
-        /// <summary>
-        /// Method <c>GetContainerLength</c>
-        /// to get the shapes container's length
-        /// </summary>
-        /// <returns>the length of shapes container</returns>
-        public int GetContainerLength()
-        {
-            return _model.GetContainerLength();
-        }
-
-        /// <summary>
-        /// Method <c>GetOneElement</c>
-        /// get the delete button, name, and its coordinate in one time
-        /// the informatiob is constructed by a string array
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns>one element info separated in string array</returns>
-        public string[] GetOneElement(int index)
-        {
-            return _model.GetOneElement(index);
-        }
-
-        /// <summary>
-        /// Method <c>DeleteSelectOne</c>
-        /// </summary>
-        /// <param name="index"></param>
-        public void DeleteSelectOne()
-        {
-            _model.DeleteSelectOne();
-        }
-
-        /// <summary>
-        /// Method <c>GetAllContainerData</c>
-        /// </summary>
-        /// <returns></returns>
-        public List<string[]> GetAllContainerData()
-        {
-            List<string[]> tableData = new List<string[]>();
-
-            for (int i = 0; i < GetContainerLength(); i++)
-            {
-                string[] element = GetOneElement(i);
-                tableData.Add(new string[] { element[(int)ButtonModel.Data.DataDeleteIndex], element[(int)ButtonModel.Data.DataNameIndex], element[(int)ButtonModel.Data.DataCoordinateIndex] });
-            }
-
-            return tableData;
         }
 
         /// <summary>
@@ -257,6 +76,188 @@ namespace PowerPointLike
             }
         }
 
+        // data ===============================================================
+        /// <summary>
+        /// Method <c>AddItem</c>
+        /// add the assigned shape to the shape container
+        /// </summary>
+        /// <param name="shape">the assigned shape</param>
+        public void AddItem(string shape)
+        {
+            _dataModel.AddItem(shape);
+        }
+
+        /// <summary>
+        /// Method <c>DeleteCertainElement</c>
+        /// delete the assigned element
+        /// </summary>
+        /// <param name="dataIndex">to determine if this function will be executed</param>
+        /// <param name="deleteIndex">the index of the shape in the container</param>
+        public void DeleteCertainElement(int dataIndex, int deleteIndex)
+        {
+            _dataModel.DeleteCertainElement(dataIndex, deleteIndex);
+        }
+
+        /// <summary>
+        /// Method <c>GetDeleteIndex</c>
+        /// to get at which position should the shape be deleted
+        /// </summary>
+        /// <param name="dataIndex">to determine if this function will be executed</param>
+        /// <param name="deleteIndex">the index of the shape in the container</param>
+        /// <returns>the index</returns>
+        public int? GetDeleteIndex(int dataIndex, int deleteIndex)
+        {
+            return _dataModel.GetDeleteIndex(dataIndex, deleteIndex);
+        }
+
+        /// <summary>
+        /// Method <c>GetContainerLength</c>
+        /// to get the shapes container's length
+        /// </summary>
+        /// <returns>the length of shapes container</returns>
+        public int GetContainerLength()
+        {
+            return _dataModel.GetContainerLength();
+        }
+
+        /// <summary>
+        /// Method <c>GetOneElement</c>
+        /// get the delete button, name, and its coordinate in one time
+        /// the informatiob is constructed by a string array
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>one element info separated in string array</returns>
+        public string[] GetOneElement(int index)
+        {
+            return _dataModel.GetOneElement(index);
+        }
+
+        /// <summary>
+        /// Method <c>DeleteSelectOne</c>
+        /// </summary>
+        /// <param name="index"></param>
+        public void DeleteSelectOne()
+        {
+            _dataModel.DeleteSelectOne();
+        }
+
+        /// <summary>
+        /// Method <c>GetAllContainerData</c>
+        /// </summary>
+        /// <returns></returns>
+        public List<string[]> GetAllContainerData()
+        {
+            return _dataModel.GetAllContainerData();
+        }
+
+        // state ==============================================================
+        /// <summary>
+        /// Method <c>ResetStateSelect</c>
+        /// reset the state to select
+        /// </summary>
+        public void ResetStateSelect()
+        {
+            _stateModel.ResetStateSelect();
+        }
+
+        /// <summary>
+        /// Method <c>Draw</c>
+        /// let model draw
+        /// </summary>
+        /// <param name="graphics"></param>
+        public void Draw(IGraphics graphics)
+        {
+            _stateModel.Draw(graphics);
+        }
+
+        /// <summary>
+        /// Method <c>PressPointer</c>
+        /// let model handle with PressPointer
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void PressPointer(double coordinateX, double coordinateY)
+        {
+            _stateModel.PressPointer(coordinateX, coordinateY);
+        }
+
+        /// <summary>
+        /// Method <c>MovePointer</c>
+        /// let model handle with MovePointer
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void MovePointer(double coordinateX, double coordinateY)
+        {
+            _stateModel.MovePointer(coordinateX, coordinateY);
+        }
+
+        /// <summary>
+        /// Method <c>ReleasePointer</c>
+        /// let model handle with ReleasePointer
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void ReleasePointer(double coordinateX, double coordinateY)
+        {
+            _stateModel.ReleasePointer(coordinateX, coordinateY);
+        }
+
+        /// <summary>
+        ///  Method <c>DrawIsReady</c>
+        /// if the button index is not line, rectangle or circle(namely, the mouse), can't draw
+        /// </summary>
+        /// <returns>if the current state is for drawing</returns>
+        public bool IsDrawReady()
+        {
+            return _stateModel.IsDrawReady();
+        }
+
+        /// <summary>
+        ///  Method <c>GetCurrentStateIndex</c>
+        /// </summary>
+        /// <returns>current state index</returns>
+        public int GetCurrentStateIndex()
+        {
+            return _stateModel.GetCurrentStateIndex();
+        }
+
+        /// <summary>
+        /// Method <c>GetIfIsDraw</c>
+        /// </summary>
+        /// <returns></returns>
+        public bool IsDraw()
+        {
+            return _stateModel.IsDraw();
+        }
+
+        /// <summary>
+        /// Method <c>GetSelectedOneCoordinate</c>
+        /// </summary>
+        /// <returns>the selected shape's coordinate</returns>
+        public CoordinateSet GetSelectedOneCoordinate()
+        {
+            return _stateModel.GetSelectedOneCoordinate();
+        }
+
+        /// <summary>
+        /// Method <c>ResetSelectIndex</c>
+        /// </summary>
+        public void ResetSelectIndex()
+        {
+            _stateModel.ResetSelectIndex();
+        }
+
+        /// <summary>
+        /// Method <c>DrawSelectFrame</c>
+        /// </summary>
+        /// <param name="e"></param>
+        public void DrawSelectFrame(PaintEventArgs e)
+        {
+            _stateModel.DrawSelectFrame(e);
+        }
+
+        // button ==============================================================
         /// <summary>
         /// Method <c>GetbuttonChecked</c>
         /// thank you, dr.smell, for not letting me use the new syntax
@@ -270,18 +271,6 @@ namespace PowerPointLike
         public bool GetButtonChecked(int index)
         {
             return _buttonModel.GetButtonChecked(index);
-        }
-
-        /// <summary>
-        /// Method <c>GetDeleteIndex</c>
-        /// to get at which position should the shape be deleted
-        /// </summary>
-        /// <param name="dataIndex">to determine if this function will be executed</param>
-        /// <param name="deleteIndex">the index of the shape in the container</param>
-        /// <returns>the index</returns>
-        public int? GetDeleteIndex(int dataIndex, int deleteIndex)
-        {
-            return _buttonModel.GetDeleteIndex(dataIndex, deleteIndex);
         }
 
         /// <summary>
@@ -327,19 +316,6 @@ namespace PowerPointLike
         public void ClickMouseButton(int index)
         {
             _buttonModel.ClickMouseButton(index);
-        }
-
-        /// <summary>
-        /// Method <c>DrawSelectFrame</c>
-        /// </summary>
-        /// <param name="e"></param>
-        public void DrawSelectFrame(PaintEventArgs e)
-        {
-            CoordinateSet selectedOne = GetSelectedOneCoordinate();
-            if (_model.ExistInContainer(selectedOne))
-            {
-                selectedOne.DrawSelectFrame(e);
-            }
         }
     }
 }

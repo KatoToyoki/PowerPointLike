@@ -8,18 +8,11 @@ namespace PowerPointLike
 {
     public class ButtonModel
     {
-        public enum Data
-        {
-            DataDeleteIndex,
-            DataNameIndex,
-            DataCoordinateIndex
-        }
         public int _currentButtonIndex
         {
             get; set;
         }
 
-        public const int DATA_DELETE_INDEX = 0;
         public const int INVALID = -1;
         public const int LENGTH = 4;
         private bool[] _buttonChecked = new bool[LENGTH];
@@ -44,22 +37,6 @@ namespace PowerPointLike
         public bool GetButtonChecked(int index)
         {
             return _buttonChecked[index];
-        }
-
-        /// <summary>
-        /// Method <c>GetDeleteIndex</c>
-        /// to get at which position should the shape be deleted
-        /// </summary>
-        /// <param name="dataIndex">to determine if this function will be executed</param>
-        /// <param name="deleteIndex">the index of the shape in the container</param>
-        /// <returns>the index</returns>
-        public int? GetDeleteIndex(int dataIndex, int deleteIndex)
-        {
-            if (dataIndex == DATA_DELETE_INDEX)
-            {
-                return deleteIndex;
-            }
-            return null;
         }
 
         /// <summary>

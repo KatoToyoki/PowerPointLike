@@ -135,11 +135,11 @@ namespace PowerPointLike.Tests
             Assert.AreEqual(3, presentationModel.GetContainerLength());
 
             presentationModel._buttonModel._currentButtonIndex = 0;
-            Assert.IsTrue(presentationModel.DrawIsReady());
+            Assert.IsTrue(presentationModel.IsDrawReady());
 
-            Assert.IsFalse(presentationModel.GetIfIsDraw());
+            Assert.IsFalse(presentationModel.IsDraw());
             presentationModel._model._state._currentStateIndex = 0;
-            Assert.IsTrue(presentationModel.GetIfIsDraw());
+            Assert.IsTrue(presentationModel.IsDraw());
 
             Assert.AreEqual(0, presentationModel.GetCurrentStateIndex());
 

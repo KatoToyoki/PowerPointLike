@@ -65,9 +65,11 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ButtonModel.cs" />
+    <Compile Include="Models\DataModel.cs" />
     <Compile Include="Models\GraphicsAdaptor.cs" />
     <Compile Include="Models\IGraphics.cs" />
     <Compile Include="Models\PresentationModel.cs" />
+    <Compile Include="Models\StateModel.cs" />
     <Compile Include="Shape\Circle.cs" />
     <Compile Include="Shape\Line.cs" />
     <Compile Include="Models\Model.cs" />
