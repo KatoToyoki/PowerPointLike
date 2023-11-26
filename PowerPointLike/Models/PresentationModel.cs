@@ -39,6 +39,11 @@ namespace PowerPointLike
             get; set;
         }
 
+        public Cursor _cursor
+        {
+            get; set;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PresentationModel"/> class.
         /// </summary>
@@ -77,242 +82,183 @@ namespace PowerPointLike
         }
 
         // data ===============================================================
-        /// <summary>
-        /// Method <c>AddItem</c>
-        /// add the assigned shape to the shape container
-        /// </summary>
-        /// <param name="shape">the assigned shape</param>
+        // Method <c>AddItem</c>
         public void AddItem(string shape)
         {
             _dataModel.AddItem(shape);
         }
 
-        /// <summary>
-        /// Method <c>DeleteCertainElement</c>
-        /// delete the assigned element
-        /// </summary>
-        /// <param name="dataIndex">to determine if this function will be executed</param>
-        /// <param name="deleteIndex">the index of the shape in the container</param>
+        //  Method <c>DeleteCertainElement</c>
         public void DeleteCertainElement(int dataIndex, int deleteIndex)
         {
             _dataModel.DeleteCertainElement(dataIndex, deleteIndex);
         }
 
-        /// <summary>
-        /// Method <c>GetDeleteIndex</c>
-        /// to get at which position should the shape be deleted
-        /// </summary>
-        /// <param name="dataIndex">to determine if this function will be executed</param>
-        /// <param name="deleteIndex">the index of the shape in the container</param>
-        /// <returns>the index</returns>
+        // Method <c>GetDeleteIndex</c>
         public int? GetDeleteIndex(int dataIndex, int deleteIndex)
         {
             return _dataModel.GetDeleteIndex(dataIndex, deleteIndex);
         }
 
-        /// <summary>
-        /// Method <c>GetContainerLength</c>
-        /// to get the shapes container's length
-        /// </summary>
-        /// <returns>the length of shapes container</returns>
+        // Method <c>GetContainerLength</c>
         public int GetContainerLength()
         {
             return _dataModel.GetContainerLength();
         }
 
-        /// <summary>
-        /// Method <c>GetOneElement</c>
-        /// get the delete button, name, and its coordinate in one time
-        /// the informatiob is constructed by a string array
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns>one element info separated in string array</returns>
+        // Method <c>GetOneElement</c>
         public string[] GetOneElement(int index)
         {
             return _dataModel.GetOneElement(index);
         }
 
-        /// <summary>
-        /// Method <c>DeleteSelectOne</c>
-        /// </summary>
-        /// <param name="index"></param>
+        // Method <c>DeleteSelectOne</c>
         public void DeleteSelectOne()
         {
             _dataModel.DeleteSelectOne();
         }
 
-        /// <summary>
-        /// Method <c>GetAllContainerData</c>
-        /// </summary>
-        /// <returns></returns>
+        // Method <c>GetAllContainerData</c>
         public List<string[]> GetAllContainerData()
         {
             return _dataModel.GetAllContainerData();
         }
 
         // state ==============================================================
-        /// <summary>
-        /// Method <c>ResetStateSelect</c>
-        /// reset the state to select
-        /// </summary>
+        // Method <c>ResetStateSelect</c>
         public void ResetStateSelect()
         {
             _stateModel.ResetStateSelect();
         }
 
-        /// <summary>
-        /// Method <c>Draw</c>
-        /// let model draw
-        /// </summary>
-        /// <param name="graphics"></param>
+        // Method <c>Draw</c>
         public void Draw(IGraphics graphics)
         {
             _stateModel.Draw(graphics);
         }
 
-        /// <summary>
-        /// Method <c>PressPointer</c>
-        /// let model handle with PressPointer
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        // Method <c>PressPointer</c>
         public void PressPointer(double coordinateX, double coordinateY, Cursor cursor)
         {
             _stateModel.PressPointer(coordinateX, coordinateY, cursor);
         }
 
-        /// <summary>
-        /// Method <c>MovePointer</c>
-        /// let model handle with MovePointer
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        // Method <c>MovePointer</c>
         public void MovePointer(double coordinateX, double coordinateY)
         {
             _stateModel.MovePointer(coordinateX, coordinateY);
         }
 
-        /// <summary>
-        /// Method <c>ReleasePointer</c>
-        /// let model handle with ReleasePointer
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        // Method <c>ReleasePointer</c>
         public void ReleasePointer(double coordinateX, double coordinateY)
         {
             _stateModel.ReleasePointer(coordinateX, coordinateY);
         }
 
-        /// <summary>
-        ///  Method <c>DrawIsReady</c>
-        /// if the button index is not line, rectangle or circle(namely, the mouse), can't draw
-        /// </summary>
-        /// <returns>if the current state is for drawing</returns>
+        //  Method <c>DrawIsReady</c>
         public bool IsDrawReady()
         {
             return _stateModel.IsDrawReady();
         }
 
-        /// <summary>
-        ///  Method <c>GetCurrentStateIndex</c>
-        /// </summary>
-        /// <returns>current state index</returns>
+        //  Method <c>GetCurrentStateIndex</c>
         public int GetCurrentStateIndex()
         {
             return _stateModel.GetCurrentStateIndex();
         }
 
-        /// <summary>
-        /// Method <c>GetIfIsDraw</c>
-        /// </summary>
-        /// <returns></returns>
+        // Method <c>GetIfIsDraw</c>
         public bool IsDraw()
         {
             return _stateModel.IsDraw();
         }
 
-        /// <summary>
-        /// Method <c>GetSelectedOneCoordinate</c>
-        /// </summary>
-        /// <returns>the selected shape's coordinate</returns>
+        // Method <c>GetSelectedOneCoordinate</c>
         public CoordinateSet GetSelectedOneCoordinate()
         {
             return _stateModel.GetSelectedOneCoordinate();
         }
 
-        /// <summary>
-        /// Method <c>ResetSelectIndex</c>
-        /// </summary>
+        // Method <c>ResetSelectIndex</c>
         public void ResetSelectIndex()
         {
             _stateModel.ResetSelectIndex();
         }
 
-        /// <summary>
-        /// Method <c>DrawSelectFrame</c>
-        /// </summary>
-        /// <param name="e"></param>
+        // Method <c>DrawSelectFrame</c>
         public void DrawSelectFrame(PaintEventArgs e)
         {
             _stateModel.DrawSelectFrame(e);
         }
 
-        // button ==============================================================
         /// <summary>
-        /// Method <c>GetbuttonChecked</c>
-        /// thank you, dr.smell, for not letting me use the new syntax
-        /// I originally didn't have to do this, thanks A LOT :))))
-        /// public bool[] _buttonChecked{
-        /// get; set;
-        /// }= new bool[3];
+        /// Method <c>DetectButtonDraw</c>
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        public void DetectButtonDraw()
+        {
+            if (_buttonModel._currentButtonIndex != ButtonModel.INVALID)
+            {
+                _cursor = System.Windows.Forms.Cursors.Cross;
+            }
+            else
+            {
+                _cursor = System.Windows.Forms.Cursors.Default;
+            }
+        }
+
+        /// <summary>
+        /// Method <c>DetectScale</c>
+        /// </summary>
+        /// <param name="coordinateX"></param>
+        /// <param name="coordinateY"></param>
+        public void DetectScale(double coordinateX, double coordinateY)
+        {
+            if (_buttonModel._currentButtonIndex != ButtonModel.INVALID)
+            {
+                _cursor = System.Windows.Forms.Cursors.Cross;
+            }
+            else if (_stateModel.IsScale(coordinateX, coordinateY))
+            {
+                _cursor = System.Windows.Forms.Cursors.SizeNWSE;
+            }
+            else
+            {
+                _cursor = System.Windows.Forms.Cursors.Default;
+            }
+        }
+
+        // button ==============================================================
+        // Method <c>GetbuttonChecked</c>
         public bool GetButtonChecked(int index)
         {
             return _buttonModel.GetButtonChecked(index);
         }
 
-        /// <summary>
-        /// Method <c>ResetAllButtonCheck</c>
-        /// reset all the button status of isCheck
-        /// </summary>
+        // Method <c>ResetAllButtonCheck</c>
         public void ResetAllButtonCheck()
         {
             _buttonModel.ResetAllButtonCheck();
         }
 
-        /// <summary>
-        /// Method <c>ClickLineButton</c>
-        /// when line buttin is clicked, except for line, all become false;
-        /// </summary>
+        // Method <c>ClickLineButton</c>
         public void ClickLineButton(int index)
         {
             _buttonModel.ClickLineButton(index);
         }
 
-        /// <summary>
-        /// Method <c>ClickRectangleButton</c>
-        /// when line buttin is clicked, except for rectangle, all become false;
-        /// </summary>
+        // Method <c>ClickRectangleButton</c>
         public void ClickRectangleButton(int index)
         {
             _buttonModel.ClickRectangleButton(index);
         }
 
-        /// <summary>
-        /// Method <c>ClickCircleButton</c>
-        /// when line buttin is clicked, except for circle, all become false;
-        /// </summary>
+        // Method <c>ClickCircleButton</c>
         public void ClickCircleButton(int index)
         {
             _buttonModel.ClickCircleButton(index);
         }
 
-        /// <summary>
-        /// Method <c>ClickMouseButton</c>
-        /// when mouse buttin is clicked, except for current button, all become false;
-        /// </summary>
+        // Method <c>ClickMouseButton</c>
         public void ClickMouseButton(int index)
         {
             _buttonModel.ClickMouseButton(index);

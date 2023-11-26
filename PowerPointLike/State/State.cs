@@ -177,5 +177,18 @@ namespace PowerPointLike
             _startPoint = new Coordinate(0, 0);
             _newShapeCoordinateSet = new CoordinateSet(new Coordinate(0, 0), new Coordinate(0, 0));
         }
+
+        /// <summary>
+        /// Method <c>ViolateMove</c>
+        /// </summary>
+        /// <returns></returns>
+        public bool ViolateMove()
+        {
+            if (_index == INVALID && !_isPressed)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

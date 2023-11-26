@@ -164,6 +164,8 @@ namespace PowerPointLike
         public const int TIDY_7 = 7;
         public const int TIDY_12 = 12;
         public const int PEN_WIDTH = 3;
+        public const string EMPTY_COORDINATE = "(0,0),(0,0)";
+        public const int SCALE_RANGE = 15;
 
         /// <summary>
         /// Method <c>GetMiddlePoint</c>
@@ -357,6 +359,26 @@ namespace PowerPointLike
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Method <c>IsScale</c>
+        /// </summary>
+        /// <param name="coordinateX"></param>
+        /// <param name="coordinateY"></param>
+        /// <returns></returns>
+        public bool IsScale(double coordinateX, double coordinateY)
+        {
+            Console.WriteLine(GetCoordinateSetString());
+            if (GetCoordinateSetString() == EMPTY_COORDINATE)
+            {
+                return false;
+            }
+            if (Math.Abs(coordinateX - GetRight()) <= CoordinateSet.SCALE_RANGE && Math.Abs(coordinateY - GetBottom()) <= CoordinateSet.SCALE_RANGE)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

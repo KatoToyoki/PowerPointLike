@@ -201,13 +201,9 @@ namespace PowerPointLike
                     GetIfIsBetween(temp._point1._y, temp._point2._y, coordinateY))
                 {
                     selectedCoordinate = temp;
-                    Console.WriteLine("find " + i + selectedCoordinate.GetCoordinateSetString());
                     return i;
                 }
             }
-
-            Console.WriteLine("=======!!!doesn't find");
-
             return null;
         }
 

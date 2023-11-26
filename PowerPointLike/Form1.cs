@@ -126,7 +126,8 @@ namespace PowerPointLike
         {
             _presentationModel.ClickLineButton(_lineButton.MergeIndex);
             RefreshToolButtonClick();
-            _canvas.Cursor = System.Windows.Forms.Cursors.Cross;
+            _presentationModel.DetectButtonDraw();
+            _canvas.Cursor = _presentationModel._cursor;
         }
 
         /// <summary>
@@ -139,7 +140,8 @@ namespace PowerPointLike
         {
             _presentationModel.ClickRectangleButton(_rectangleButton.MergeIndex);
             RefreshToolButtonClick();
-            _canvas.Cursor = System.Windows.Forms.Cursors.Cross;
+            _presentationModel.DetectButtonDraw();
+            _canvas.Cursor = _presentationModel._cursor;
         }
 
         /// <summary>
@@ -152,7 +154,8 @@ namespace PowerPointLike
         {
             _presentationModel.ClickCircleButton(_circleButton.MergeIndex);
             RefreshToolButtonClick();
-            _canvas.Cursor = System.Windows.Forms.Cursors.Cross;
+            _presentationModel.DetectButtonDraw();
+            _canvas.Cursor = _presentationModel._cursor;
         }
 
         /// <summary>
@@ -165,7 +168,8 @@ namespace PowerPointLike
         {
             _presentationModel.ClickMouseButton(_mouseButton.MergeIndex);
             RefreshToolButtonClick();
-            _canvas.Cursor = System.Windows.Forms.Cursors.Default;
+            _presentationModel.DetectButtonDraw();
+            _canvas.Cursor = _presentationModel._cursor;
         }
 
         /// <summary>
@@ -202,6 +206,8 @@ namespace PowerPointLike
         public void HandleCanvasMoved(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             _presentationModel.MovePointer(e.X, e.Y);
+            _presentationModel.DetectScale(e.X, e.Y);
+            _canvas.Cursor = _presentationModel._cursor;
         }
 
         /// <summary>

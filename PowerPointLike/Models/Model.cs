@@ -148,7 +148,6 @@ namespace PowerPointLike
             CoordinateSet selectedOne = new CoordinateSet(new Coordinate(0, 0), new Coordinate(0, 0));
             _state.HandleCanvasPressed(coordinateX, coordinateY, shapeIndex, out selectedOne);
             _selectedOneCoordinate = selectedOne;
-            Console.WriteLine("---in model!! outer!!! " + _selectedOneCoordinate.GetCoordinateSetString());
         }
 
         /// <summary>
@@ -179,19 +178,15 @@ namespace PowerPointLike
         /// <param name="shapeIndex">to know which shape to draw</param>
         public void ReleasePointer(double coordinateX, double coordinateY, int shapeIndex)
         {
-
             CoordinateSet selectedOne = new CoordinateSet(new Coordinate(0, 0), new Coordinate(0, 0));
             _state.HandleCanvasReleased(coordinateX, coordinateY, shapeIndex, out selectedOne);
             _selectedOneCoordinate = selectedOne;
-            Console.WriteLine("release have some problem LOCAl MY" + selectedOne.GetCoordinateSetString() + " " + _selectedOneCoordinate.GetCoordinateSetString());
 
             if (_state._isPressed)
             {
                 NotifyModelChanged();
             }
             _state._isPressed = false;
-
-            Console.WriteLine("the select item should exist " + _selectedOneCoordinate.GetCoordinateSetString());
         }
 
         /// <summary>
@@ -277,6 +272,17 @@ namespace PowerPointLike
         public bool ExistInContainer(CoordinateSet coordinateSet)
         {
             return _shapes.ExistInContainer(coordinateSet);
+        }
+
+        /// <summary>
+        /// Method <c>IsScale</c>
+        /// </summary>
+        /// <param name="coordinateX"></param>
+        /// <param name="coordinateY"></param>
+        /// <returns></returns>
+        public bool IsScale(double coordinateX, double coordinateY)
+        {
+            return _selectedOneCoordinate.IsScale(coordinateX, coordinateY);
         }
     }
 }

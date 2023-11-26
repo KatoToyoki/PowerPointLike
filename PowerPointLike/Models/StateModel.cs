@@ -18,6 +18,11 @@ namespace PowerPointLike
             _buttonModel = buttonModel;
         }
 
+        public bool _isScale
+        {
+            get; set;
+        }
+
         // state ========================================
         /// <summary>
         /// Method <c>ResetStateSelect</c>
@@ -128,7 +133,6 @@ namespace PowerPointLike
         /// <returns>the selected shape's coordinate</returns>
         public CoordinateSet GetSelectedOneCoordinate()
         {
-            Console.WriteLine("i am seleccted! " + _model._selectedOneCoordinate.GetCoordinateSetString());
             return _model._selectedOneCoordinate;
         }
 
@@ -147,12 +151,21 @@ namespace PowerPointLike
         public void DrawSelectFrame(PaintEventArgs e)
         {
             CoordinateSet selectedOne = GetSelectedOneCoordinate();
-            Console.WriteLine("about to draw " + selectedOne.GetCoordinateSetString());
             if (_model.ExistInContainer(selectedOne))
             {
-                Console.WriteLine("draw!! " + selectedOne.GetCoordinateSetString());
                 selectedOne.DrawSelectFrame(e);
             }
+        }
+
+        // Method <c>IsScale</c>
+        public bool IsScale(double coordinateX, double coordinateY)
+        {
+            if (_model._state._currentStateIndex == (int)State.StateIndex.Draw)
+            {
+                return false;
+            }
+            _isScale = true;
+            return _model.IsScale(coordinateX, coordinateY);
         }
     }
 }
