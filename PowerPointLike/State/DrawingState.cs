@@ -27,11 +27,12 @@ namespace PowerPointLike
         /// <param name="coordinateX">x</param>
         /// <param name="coordinateY">y</param>
         /// <param name="shapeIndex">shapeIndex</param>
-        public override void HandleCanvasPressed(double coordinateX, double coordinateY, int shapeIndex)
+        public override void HandleCanvasPressed(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne)
         {
             ChangeCurrentIndex(shapeIndex);
             PressFirst(coordinateX, coordinateY, shapeIndex);
             _newShape = _shapes.CreateTempShape(shapeIndex, _newShapeCoordinateSet);
+            selectedOne = _selectedOneCoordinate;
         }
 
         /// <summary>
@@ -41,13 +42,15 @@ namespace PowerPointLike
         /// <param name="coordinateX">x</param>
         /// <param name="coordinateY">y</param>
         /// <param name="shapeIndex">shapeIndex</param>
-        public override void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex)
+        public override void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne)
         {
             _shapes.DeleteEndShape(_newLength);
             _oldLength = _shapes.GetContainerLength();
             PressMiddle(coordinateX, coordinateY);
             _shapes.AddShapeInEnd(shapeIndex, _newShapeCoordinateSet);
             _newLength = _shapes.GetContainerLength();
+            selectedOne = _selectedOneCoordinate;
+
         }
 
         /// <summary>
@@ -57,8 +60,10 @@ namespace PowerPointLike
         /// <param name="coordinateX">x</param>
         /// <param name="coordinateY">y</param>
         /// <param name="shapeIndex">shapeIndex</param>
-        public override void HandleCanvasReleased(double coordinateX, double coordinateY, int shapeIndex)
+        public override void HandleCanvasReleased(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne)
         {
+            selectedOne = _selectedOneCoordinate;
+
             if (_isPressed)
             {
                 _shapes.DeleteEndShape(_newLength);

@@ -38,11 +38,15 @@ namespace PowerPointLike
         /// <param name="coordinateX">x</param>
         /// <param name="coordinateY">y</param>
         /// <param name="shapeIndex">shapeIndex</param>
-        public override void HandleCanvasPressed(double coordinateX, double coordinateY, int shapeIndex)
+        public override void HandleCanvasPressed(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne)
         {
+
             _index = INVALID;
             PressFirst(coordinateX, coordinateY, shapeIndex);
             PickShape(coordinateX, coordinateY);
+            Console.WriteLine("picked should changed " + _selectedOneCoordinate.GetCoordinateSetString());
+            selectedOne = _selectedOneCoordinate;
+            Console.WriteLine("press " + _selectedOneCoordinate.GetCoordinateSetString());
             _currentItem = _index;
         }
 
@@ -53,15 +57,34 @@ namespace PowerPointLike
         /// <param name="coordinateX">x</param>
         /// <param name="coordinateY">y</param>
         /// <param name="shapeIndex">shapeIndex</param>
-        public override void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex)
+        public override void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne)
         {
             if (_index == INVALID)
             {
+
+                // selectedOne = default;
+                PickShape(coordinateX, coordinateY);
+
+                selectedOne = _selectedOneCoordinate;
+
+                return;
+            }
+            if (!_isPressed)
+            {
+                // selectedOne = default;
+                PickShape(coordinateX, coordinateY);
+
+                selectedOne = _selectedOneCoordinate;
+
                 return;
             }
             PressMiddle(coordinateX, coordinateY);
             _shapes.ChangeCoordinate(_currentItem, _newShapeCoordinateSet.GetDeltaX(), _newShapeCoordinateSet.GetDeltaY());
             PickShape(coordinateX, coordinateY);
+
+            selectedOne = _selectedOneCoordinate;
+
+            Console.WriteLine("move " + _selectedOneCoordinate.GetCoordinateSetString());
         }
 
         /// <summary>
@@ -71,10 +94,16 @@ namespace PowerPointLike
         /// <param name="coordinateX">x</param>
         /// <param name="coordinateY">y</param>
         /// <param name="shapeIndex">shapeIndex</param>
-        public override void HandleCanvasReleased(double coordinateX, double coordinateY, int shapeIndex)
+        public override void HandleCanvasReleased(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne)
         {
             if (_newShapeCoordinateSet._point2.GetIfIsSame(new Coordinate(0, 0)))
             {
+                Console.WriteLine("release just a click" + _selectedOneCoordinate.GetCoordinateSetString());
+
+                PickShape(coordinateX, coordinateY);
+                selectedOne = _selectedOneCoordinate;
+                Console.WriteLine("JUST click should have one as well!" + selectedOne.GetCoordinateSetString());
+
                 return;
             }
 
@@ -84,6 +113,10 @@ namespace PowerPointLike
             _isFirstMove = false;
 
             PickShape(coordinateX, coordinateY);
+
+            selectedOne = _selectedOneCoordinate;
+
+            Console.WriteLine("release movement " + _selectedOneCoordinate.GetCoordinateSetString());
         }
 
         /// <summary>
@@ -94,16 +127,20 @@ namespace PowerPointLike
         /// <param name="coordinateY"></param>
         public void PickShape(double coordinateX, double coordinateY)
         {
+
+            Console.WriteLine("before pick " + _selectedOneCoordinate.GetCoordinateSetString());
             CoordinateSet selectedCoordinate;
             if (_shapes.PickShape(coordinateX, coordinateY, out selectedCoordinate) == null)
             {
                 return;
             }
             _index = (int)_shapes.PickShape(coordinateX, coordinateY, out selectedCoordinate);
-            if (_index == _currentItem)
-            {
-                _selectedOneCoordinate = selectedCoordinate;
-            }
+            Console.WriteLine("pick shape " + coordinateX + " " + coordinateY + " " + _index + " " + _currentItem);
+            // if (_index == _currentItem)
+            // {
+            _selectedOneCoordinate = selectedCoordinate;
+            // }
+            Console.WriteLine(_selectedOneCoordinate.GetCoordinateSetString());
         }
 
         /// <summary>

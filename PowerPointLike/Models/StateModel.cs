@@ -128,7 +128,8 @@ namespace PowerPointLike
         /// <returns>the selected shape's coordinate</returns>
         public CoordinateSet GetSelectedOneCoordinate()
         {
-            return _model.GetSelectedOneCoordinate();
+            Console.WriteLine("i am seleccted! " + _model._selectedOneCoordinate.GetCoordinateSetString());
+            return _model._selectedOneCoordinate;
         }
 
         /// <summary>
@@ -146,8 +147,10 @@ namespace PowerPointLike
         public void DrawSelectFrame(PaintEventArgs e)
         {
             CoordinateSet selectedOne = GetSelectedOneCoordinate();
+            Console.WriteLine("about to draw " + selectedOne.GetCoordinateSetString());
             if (_model.ExistInContainer(selectedOne))
             {
+                Console.WriteLine("draw!! " + selectedOne.GetCoordinateSetString());
                 selectedOne.DrawSelectFrame(e);
             }
         }

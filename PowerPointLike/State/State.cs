@@ -125,7 +125,7 @@ namespace PowerPointLike
         /// 2. select one certain shape
         /// </summary>
         /// <param name="e"></param>
-        public abstract void HandleCanvasPressed(double coordinateX, double coordinateY, int shapeIndex);
+        public abstract void HandleCanvasPressed(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne);
 
         /// <summary>
         /// Method <c>HandleCanvasMoved</c>
@@ -134,7 +134,7 @@ namespace PowerPointLike
         /// 2. drag the shape to new position
         /// </summary>
         /// <param name="e"></param>
-        public abstract void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex);
+        public abstract void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne);
 
         /// <summary>
         /// Method <c>HandleCanvasReleased</c>
@@ -143,7 +143,7 @@ namespace PowerPointLike
         /// 2. release select a graph
         /// </summary>
         /// <param name="e"></param>
-        public abstract void HandleCanvasReleased(double coordinateX, double coordinateY, int shapeIndex);
+        public abstract void HandleCanvasReleased(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne);
 
         /// <summary>
         /// Method <c>PressFirst</c>

@@ -31,6 +31,11 @@ namespace PowerPointLike
             get; set;
         }
 
+        public CoordinateSet _selectedOneCoordinate
+        {
+            get; set;
+        }
+
         public Model()
         {
             _shapes = new Shapes();
@@ -140,7 +145,10 @@ namespace PowerPointLike
             {
                 return;
             }
-            _state.HandleCanvasPressed(coordinateX, coordinateY, shapeIndex);
+            CoordinateSet selectedOne = new CoordinateSet(new Coordinate(0, 0), new Coordinate(0, 0));
+            _state.HandleCanvasPressed(coordinateX, coordinateY, shapeIndex, out selectedOne);
+            _selectedOneCoordinate = selectedOne;
+            Console.WriteLine("---in model!! outer!!! " + _selectedOneCoordinate.GetCoordinateSetString());
         }
 
         /// <summary>
@@ -151,7 +159,10 @@ namespace PowerPointLike
         /// <param name="y"></param>
         public void MovePointer(double coordinateX, double coordinateY, int shapeIndex)
         {
-            _state.HandleCanvasMoved(coordinateX, coordinateY, shapeIndex);
+
+            CoordinateSet selectedOne = new CoordinateSet(new Coordinate(0, 0), new Coordinate(0, 0));
+            _state.HandleCanvasMoved(coordinateX, coordinateY, shapeIndex, out selectedOne);
+            _selectedOneCoordinate = selectedOne;
 
             if (_state._isPressed)
             {
@@ -168,12 +179,19 @@ namespace PowerPointLike
         /// <param name="shapeIndex">to know which shape to draw</param>
         public void ReleasePointer(double coordinateX, double coordinateY, int shapeIndex)
         {
-            _state.HandleCanvasReleased(coordinateX, coordinateY, shapeIndex);
+
+            CoordinateSet selectedOne = new CoordinateSet(new Coordinate(0, 0), new Coordinate(0, 0));
+            _state.HandleCanvasReleased(coordinateX, coordinateY, shapeIndex, out selectedOne);
+            _selectedOneCoordinate = selectedOne;
+            Console.WriteLine("release have some problem LOCAl MY" + selectedOne.GetCoordinateSetString() + " " + _selectedOneCoordinate.GetCoordinateSetString());
+
             if (_state._isPressed)
             {
                 NotifyModelChanged();
             }
             _state._isPressed = false;
+
+            Console.WriteLine("the select item should exist " + _selectedOneCoordinate.GetCoordinateSetString());
         }
 
         /// <summary>
