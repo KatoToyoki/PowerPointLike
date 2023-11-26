@@ -70,5 +70,20 @@ namespace PowerPointLike
                 _newLength = -1;
             }
         }
+
+        /// <summary>
+        /// Method <c>PressMiddle</c>
+        /// common things both draw and select need to do
+        /// </summary>
+        /// <param name="coordinateX">x</param>
+        /// <param name="coordinateY">y</param>
+        /// <param name="shapeIndex">shapeindex</param>
+        public void PressMiddle(double coordinateX, double coordinateY)
+        {
+            if (_isPressed)
+            {
+                _newShapeCoordinateSet._point2 = new Coordinate((int)coordinateX, (int)coordinateY);
+            }
+        }
     }
 }

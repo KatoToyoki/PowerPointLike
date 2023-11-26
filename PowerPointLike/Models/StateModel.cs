@@ -34,12 +34,13 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void PressPointer(double coordinateX, double coordinateY)
+        public void PressPointer(double coordinateX, double coordinateY, Cursor cursor)
         {
             if (!IsDrawReady() && _model.GetCurrentStateIndex() == (int)State.StateIndex.Draw)
             {
                 return;
             }
+            // check if is around right bottom
             _model.PressPointer(coordinateX, coordinateY, _buttonModel._currentButtonIndex);
         }
 

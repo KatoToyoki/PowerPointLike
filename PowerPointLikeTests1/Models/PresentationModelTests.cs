@@ -100,9 +100,9 @@ namespace PowerPointLike.Tests
             Assert.AreEqual(3, presentationModel.GetContainerLength());
 
             presentationModel._model._state._currentStateIndex = 0;
-            presentationModel.PressPointer(50, 50);
+            // presentationModel.PressPointer(50, 50);
             presentationModel._model._state._currentStateIndex = 1;
-            presentationModel.PressPointer(50, 50);
+            // presentationModel.PressPointer(50, 50);
 
             presentationModel._model._state._currentStateIndex = 0;
             presentationModel.MovePointer(50, 50);

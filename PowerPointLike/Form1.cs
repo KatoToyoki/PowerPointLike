@@ -190,7 +190,7 @@ namespace PowerPointLike
         public void HandleCanvasPressed(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             _canvas.Invalidate();
-            _presentationModel.PressPointer(e.X, e.Y);
+            _presentationModel.PressPointer(e.X, e.Y, _canvas.Cursor);
         }
 
         /// <summary>

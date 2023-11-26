@@ -239,6 +239,10 @@ namespace PowerPointLike
         /// <param name="coordinateY"></param>
         public void ChangeCoordinate(int index, int coordinateX, int coordinateY)
         {
+            if (_shapeContainer.Count == 0)
+            {
+                return;
+            }
             if (index == State.INVALID)
             {
                 return;

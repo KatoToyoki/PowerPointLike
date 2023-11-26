@@ -11,6 +11,15 @@ namespace PowerPointLike
     public class PointState : State
     {
         private Shapes _shapes;
+        public bool _isScale
+        {
+            get; set;
+        }
+
+        public int _currentItem
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DrawingState"/> class.
@@ -18,7 +27,8 @@ namespace PowerPointLike
         public PointState(Shapes shapes)
         {
             _shapes = shapes;
-            // _index = INVALID;
+            _isScale = false;
+            _isFirstMove = false;
         }
 
         /// <summary>
@@ -33,6 +43,7 @@ namespace PowerPointLike
             _index = INVALID;
             PressFirst(coordinateX, coordinateY, shapeIndex);
             PickShape(coordinateX, coordinateY);
+            _currentItem = _index;
         }
 
         /// <summary>
@@ -49,6 +60,7 @@ namespace PowerPointLike
                 return;
             }
             PressMiddle(coordinateX, coordinateY);
+            _shapes.ChangeCoordinate(_currentItem, _newShapeCoordinateSet.GetDeltaX(), _newShapeCoordinateSet.GetDeltaY());
             PickShape(coordinateX, coordinateY);
         }
 
@@ -66,9 +78,12 @@ namespace PowerPointLike
                 return;
             }
 
-            _shapes.ChangeCoordinate(_index, _newShapeCoordinateSet.GetDeltaX(), _newShapeCoordinateSet.GetDeltaY());
+            _shapes.ChangeCoordinate(_currentItem, _newShapeCoordinateSet.GetDeltaX(), _newShapeCoordinateSet.GetDeltaY());
             ResetThreePoint();
-            // PickShape(coordinateX + deltaX / 2, coordinateY + deltaY / 2);
+            _isPressed = false;
+            _isFirstMove = false;
+
+            PickShape(coordinateX, coordinateY);
         }
 
         /// <summary>
@@ -84,9 +99,37 @@ namespace PowerPointLike
             {
                 return;
             }
-
             _index = (int)_shapes.PickShape(coordinateX, coordinateY, out selectedCoordinate);
-            _selectedOneCoordinate = selectedCoordinate;
+            if (_index == _currentItem)
+            {
+                _selectedOneCoordinate = selectedCoordinate;
+            }
+        }
+
+        /// <summary>
+        /// Method <c>PressMiddle</c>
+        /// common things both draw and select need to do
+        /// </summary>
+        /// <param name="coordinateX">x</param>
+        /// <param name="coordinateY">y</param>
+        /// <param name="shapeIndex">shapeindex</param>
+        public void PressMiddle(double coordinateX, double coordinateY)
+        {
+            if (!_isPressed)
+            {
+                return;
+            }
+            if (!_isFirstMove)
+            {
+                _newShapeCoordinateSet._point2 = new Coordinate((int)coordinateX, (int)coordinateY);
+                _isFirstMove = true;
+            }
+            else
+            {
+                Coordinate temp = new Coordinate((int)coordinateX, (int)coordinateY);
+                _newShapeCoordinateSet._point1 = _newShapeCoordinateSet._point2;
+                _newShapeCoordinateSet._point2 = temp;
+            }
         }
     }
 }

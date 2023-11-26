@@ -176,9 +176,9 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void PressPointer(double coordinateX, double coordinateY)
+        public void PressPointer(double coordinateX, double coordinateY, Cursor cursor)
         {
-            _stateModel.PressPointer(coordinateX, coordinateY);
+            _stateModel.PressPointer(coordinateX, coordinateY, cursor);
         }
 
         /// <summary>

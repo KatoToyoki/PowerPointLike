@@ -39,6 +39,11 @@ namespace PowerPointLike
             get; set;
         }
 
+        public bool _isFirstMove
+        {
+            get; set;
+        }
+
         protected int _oldLength = -1;
         protected int _newLength = -1;
         public const int INVALID = -1;
@@ -153,21 +158,6 @@ namespace PowerPointLike
             _startPoint = _firstPoint;
             _newShapeCoordinateSet._point1 = _firstPoint;
             _isPressed = true;
-        }
-
-        /// <summary>
-        /// Method <c>PressMiddle</c>
-        /// common things both draw and select need to do
-        /// </summary>
-        /// <param name="coordinateX">x</param>
-        /// <param name="coordinateY">y</param>
-        /// <param name="shapeIndex">shapeindex</param>
-        public void PressMiddle(double coordinateX, double coordinateY)
-        {
-            if (_isPressed)
-            {
-                _newShapeCoordinateSet._point2 = new Coordinate((int)coordinateX, (int)coordinateY);
-            }
         }
 
         /// <summary>
