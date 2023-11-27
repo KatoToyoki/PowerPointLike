@@ -266,7 +266,6 @@ namespace PowerPointLike
             {
                 return;
             }
-            // Console.WriteLine("new val " + _shapeContainer[index]._coordinateSet.ScaleOffset(coordinateX, coordinateY).GetCoordinateSetString());
             _shapeContainer[index].SetCoordinate(_shapeContainer[index]._coordinateSet.ScaleOffset((int)coordinateX, (int)coordinateY));
         }
 

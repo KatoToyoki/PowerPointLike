@@ -194,6 +194,8 @@ namespace PowerPointLike
         public void HandleCanvasPressed(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             _canvas.Invalidate();
+
+            _presentationModel.DetectScale(e.X, e.Y);
             _presentationModel.PressPointer(e.X, e.Y, _canvas.Cursor);
         }
 
@@ -226,6 +228,9 @@ namespace PowerPointLike
             RefreshToolButtonClick();
             ClickMouseButton(sender, e);
             _presentationModel.ResetStateSelect();
+
+            // _presentationModel.DetectScale(1000, 1000);
+            // _canvas.Cursor = _presentationModel._cursor;
         }
 
         /// <summary>

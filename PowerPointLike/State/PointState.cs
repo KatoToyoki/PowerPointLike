@@ -12,7 +12,6 @@ namespace PowerPointLike
     {
         private Shapes _shapes;
 
-
         public int _currentItem
         {
             get; set;
@@ -45,7 +44,6 @@ namespace PowerPointLike
             if (_selectedOneCoordinate.IsScale(coordinateX, coordinateY))
             {
                 _isScale = true;
-                Console.WriteLine("~~~~~~~~~~~~It's scale now");
             }
         }
 
@@ -58,13 +56,11 @@ namespace PowerPointLike
         /// <param name="shapeIndex">shapeIndex</param>
         public override void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne)
         {
-            Console.WriteLine("offset val? " + coordinateX + " " + coordinateY);
             PickShape(coordinateX, coordinateY);
             selectedOne = _selectedOneCoordinate;
-            // selectedOne = default;
+
             if (ViolateMove())
             {
-                // selectedOne = default;
                 return;
             }
             if (_isScale)
@@ -77,18 +73,25 @@ namespace PowerPointLike
             }
         }
 
+        /// <summary>
+        /// Method <c>Move</c>
+        /// </summary>
+        /// <param name="coordinateX"></param>
+        /// <param name="coordinateY"></param>
         public void Move(double coordinateX, double coordinateY)
         {
             PressMiddle(coordinateX, coordinateY);
             _shapes.ChangeCoordinate(_currentItem, _newShapeCoordinateSet.GetDeltaX(), _newShapeCoordinateSet.GetDeltaY());
         }
 
+        /// <summary>
+        /// Method <c>ScaleMove</c>
+        /// </summary>
+        /// <param name="coordinateX"></param>
+        /// <param name="coordinateY"></param>
         public void ScaleMove(double coordinateX, double coordinateY)
         {
-            Console.WriteLine("---offset val in SCALE MOVE? " + coordinateX + " " + coordinateY);
             PressMiddle(coordinateX, coordinateY);
-
-            Console.WriteLine("---check newShapeCoor " + coordinateX + " " + coordinateY + " " + _newShapeCoordinateSet.GetCoordinateSetString());
             _shapes.ScaleCoordinate(_currentItem, _newShapeCoordinateSet.GetDeltaX(), _newShapeCoordinateSet.GetDeltaY());
         }
 
@@ -108,6 +111,17 @@ namespace PowerPointLike
                 return;
             }
 
+            ReleaseCoordinate();
+            ResetThreePoint();
+            PickShape(coordinateX, coordinateY);
+            selectedOne = _selectedOneCoordinate;
+        }
+
+        /// <summary>
+        /// Method <c>ReleaseCoordinate</c>
+        /// </summary>
+        public void ReleaseCoordinate()
+        {
             if (_isScale)
             {
                 _shapes.ScaleCoordinate(_currentItem, _newShapeCoordinateSet.GetDeltaX(), _newShapeCoordinateSet.GetDeltaY());
@@ -116,14 +130,6 @@ namespace PowerPointLike
             {
                 _shapes.ChangeCoordinate(_currentItem, _newShapeCoordinateSet.GetDeltaX(), _newShapeCoordinateSet.GetDeltaY());
             }
-
-            ResetThreePoint();
-            _isPressed = false;
-            _isFirstMove = false;
-            _isScale = false;
-
-            PickShape(coordinateX, coordinateY);
-            selectedOne = _selectedOneCoordinate;
         }
 
         /// <summary>
@@ -153,29 +159,51 @@ namespace PowerPointLike
         /// <param name="shapeIndex">shapeindex</param>
         public void PressMiddle(double coordinateX, double coordinateY)
         {
-            if (!_isPressed & !_isScale)
+            if (ViolateSelectMove())
             {
                 return;
             }
-            if (!_isFirstMove && _isScale)
+            if (IsNowScale())
             {
-                _newShapeCoordinateSet._point1 = new Coordinate(_selectedOneCoordinate.GetRight(), _selectedOneCoordinate.GetBottom());
-                _newShapeCoordinateSet._point2 = new Coordinate((int)coordinateX, (int)coordinateY);
-                _isFirstMove = true;
+                ScaleFirstMove(coordinateX, coordinateY);
             }
-            else if (!_isFirstMove)
+            if (!_isFirstMove)
             {
-                _newShapeCoordinateSet._point2 = new Coordinate((int)coordinateX, (int)coordinateY);
-                _isFirstMove = true;
+                MoveFirstMove(coordinateX, coordinateY);
             }
             else
             {
-                Coordinate temp = new Coordinate((int)coordinateX, (int)coordinateY);
-                _newShapeCoordinateSet._point1 = _newShapeCoordinateSet._point2;
-                _newShapeCoordinateSet._point2 = temp;
-
-                Console.WriteLine("==== PRESS MIDDLE?" + temp.GetCoordinateString());
+                MoveMiddle(coordinateX, coordinateY);
             }
+        }
+
+        /// <summary>
+        /// Method <c>ScaleFirstMove</c>
+        /// </summary>
+        public void ScaleFirstMove(double coordinateX, double coordinateY)
+        {
+            _newShapeCoordinateSet._point1 = new Coordinate(_selectedOneCoordinate.GetRight(), _selectedOneCoordinate.GetBottom());
+            _newShapeCoordinateSet._point2 = new Coordinate((int)coordinateX, (int)coordinateY);
+            _isFirstMove = true;
+        }
+
+        /// <summary>
+        /// Method <c>MoveFirstMove</c>
+        /// </summary>
+        public void MoveFirstMove(double coordinateX, double coordinateY)
+        {
+            _newShapeCoordinateSet._point2 = new Coordinate((int)coordinateX, (int)coordinateY);
+            _isFirstMove = true;
+        }
+
+        /// <summary>
+        /// Method <c>MoveMiddle</c>
+        /// </summary>
+        public void MoveMiddle(double coordinateX, double coordinateY)
+        {
+            Coordinate temp = new Coordinate((int)coordinateX, (int)coordinateY);
+            _newShapeCoordinateSet._point1 = _newShapeCoordinateSet._point2;
+            _newShapeCoordinateSet._point2 = temp;
         }
     }
 }

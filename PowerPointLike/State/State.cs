@@ -181,6 +181,9 @@ namespace PowerPointLike
             _firstPoint = new Coordinate(0, 0);
             _startPoint = new Coordinate(0, 0);
             _newShapeCoordinateSet = new CoordinateSet(new Coordinate(0, 0), new Coordinate(0, 0));
+            _isPressed = false;
+            _isFirstMove = false;
+            _isScale = false;
         }
 
         /// <summary>
@@ -190,6 +193,32 @@ namespace PowerPointLike
         public bool ViolateMove()
         {
             if (_index == INVALID && !_isPressed)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Method <c>ViolateSelectMove</c>
+        /// </summary>
+        /// <returns></returns>
+        public bool ViolateSelectMove()
+        {
+            if (!_isPressed & !_isScale)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Method <c>IsNowScale</c>
+        /// </summary>
+        /// <returns></returns>
+        public bool IsNowScale()
+        {
+            if (!_isFirstMove && _isScale)
             {
                 return true;
             }
