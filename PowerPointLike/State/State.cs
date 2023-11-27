@@ -44,6 +44,11 @@ namespace PowerPointLike
             get; set;
         }
 
+        public bool _isScale
+        {
+            get; set;
+        }
+
         protected int _oldLength = -1;
         protected int _newLength = -1;
         public const int INVALID = -1;

@@ -165,7 +165,7 @@ namespace PowerPointLike
         public const int TIDY_12 = 12;
         public const int PEN_WIDTH = 3;
         public const string EMPTY_COORDINATE = "(0,0),(0,0)";
-        public const int SCALE_RANGE = 15;
+        public const int SCALE_RANGE = 30;
 
         /// <summary>
         /// Method <c>GetMiddlePoint</c>
@@ -314,10 +314,26 @@ namespace PowerPointLike
         /// <returns></returns>
         public CoordinateSet Offset(int offsetX, int offsetY)
         {
+            Console.WriteLine("move ori " + GetCoordinateSetString() + " " + offsetX + " " + offsetY);
             _point1 = _point1.SetNewOne(offsetX, offsetY);
             _point2 = _point2.SetNewOne(offsetX, offsetY);
             CoordinateSet result = new CoordinateSet(_point1, _point2);
 
+            return result;
+        }
+
+        public CoordinateSet ScaleOffset(int offsetX, int offsetY)
+        {
+            Console.WriteLine("BEFORE CHANGE POINT2 " + offsetX + " " + offsetY + " " + this.GetCoordinateSetString());
+            // this._point2 = this._point2.SetNewOne(_point2._x + offsetX, _point2._y + offsetY);
+            // Console.WriteLine("do point2 change? " + _point2.GetCoordinateString());
+            // Console.WriteLine("AFTER scale offset " + this.GetCoordinateSetString());
+
+            Console.WriteLine("----Try to ADD MYSELF " + _point2._x + " " + offsetX + " " + _point2._y + " " + offsetY);
+            Coordinate tempTest = new Coordinate(_point2._x + offsetX, _point2._y + offsetY);
+            Console.WriteLine("----ADD MYSELF " + tempTest.GetCoordinateString());
+
+            CoordinateSet result = new CoordinateSet(_point1, tempTest);
             return result;
         }
 
@@ -369,7 +385,7 @@ namespace PowerPointLike
         /// <returns></returns>
         public bool IsScale(double coordinateX, double coordinateY)
         {
-            Console.WriteLine(GetCoordinateSetString());
+            Console.WriteLine("in is scale" + GetCoordinateSetString());
             if (GetCoordinateSetString() == EMPTY_COORDINATE)
             {
                 return false;

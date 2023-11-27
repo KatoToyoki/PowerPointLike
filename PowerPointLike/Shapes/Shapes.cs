@@ -250,6 +250,27 @@ namespace PowerPointLike
         }
 
         /// <summary>
+        /// Method <c>ScaleCoordinate</c>
+        /// to set new Coordinate
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="coordinateX"></param>
+        /// <param name="coordinateY"></param>
+        public void ScaleCoordinate(int index, double coordinateX, double coordinateY)
+        {
+            if (_shapeContainer.Count == 0)
+            {
+                return;
+            }
+            if (index == State.INVALID)
+            {
+                return;
+            }
+            // Console.WriteLine("new val " + _shapeContainer[index]._coordinateSet.ScaleOffset(coordinateX, coordinateY).GetCoordinateSetString());
+            _shapeContainer[index].SetCoordinate(_shapeContainer[index]._coordinateSet.ScaleOffset((int)coordinateX, (int)coordinateY));
+        }
+
+        /// <summary>
         /// Method <c>ExistInContainer</c>
         /// to check if the item is exist
         /// </summary>
