@@ -196,7 +196,7 @@ namespace PowerPointLike
             _canvas.Invalidate();
 
             _presentationModel.DetectScale(e.X, e.Y);
-            _presentationModel.PressPointer(e.X, e.Y, _canvas.Cursor);
+            _presentationModel.PressPointer(e.X, e.Y);
         }
 
         /// <summary>

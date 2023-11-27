@@ -61,7 +61,7 @@ namespace PowerPointLike.Tests
             var mockModel = new Mock<Model>();
             var presentationModel = new PresentationModel(mockModel.Object);
             var mockGraphicsAdaptor = new Mock<IGraphics>();
-            
+
             presentationModel.AddItem("圓");
             presentationModel.AddItem("線");
             presentationModel.AddItem("矩形");
@@ -100,9 +100,9 @@ namespace PowerPointLike.Tests
             Assert.AreEqual(3, presentationModel.GetContainerLength());
 
             presentationModel._model._state._currentStateIndex = 0;
-            // presentationModel.PressPointer(50, 50);
+            presentationModel.PressPointer(50, 50);
             presentationModel._model._state._currentStateIndex = 1;
-            // presentationModel.PressPointer(50, 50);
+            presentationModel.PressPointer(50, 50);
 
             presentationModel._model._state._currentStateIndex = 0;
             presentationModel.MovePointer(50, 50);
@@ -179,6 +179,13 @@ namespace PowerPointLike.Tests
 
             presentationModel.GetDeleteIndex(0, 0);
             presentationModel.GetDeleteIndex(555, 0);
+
+            Coordinate a = new Coordinate(0, 0);
+            Coordinate b = new Coordinate(0, 1);
+            Coordinate c = new Coordinate(0, 1);
+            CoordinateSet A = new CoordinateSet(b, a);
+            CoordinateSet B = new CoordinateSet(b, c);
+            A.GetIfIsSame(B);
         }
 
         /// <summary>
@@ -202,10 +209,114 @@ namespace PowerPointLike.Tests
             var keyEventArgs = new KeyEventArgs(Keys.Delete);
             view.ClickKey(mockSender.Object, keyEventArgs);
 
-            var bitmap = new Bitmap(500,500);
+            var bitmap = new Bitmap(500, 500);
             var graphics = Graphics.FromImage(bitmap);
             var paintEventArgs = new PaintEventArgs(graphics, new System.Drawing.Rectangle());
             view.ChangeCanvas(mockSender, paintEventArgs);
+
+            CoordinateSet coordinateSet2 = new CoordinateSet(new Coordinate(1, 1), new Coordinate(100, 100));
+            presentationModel._model._shapes.AddShapeInEnd(0, coordinateSet2);
+            presentationModel._model._shapes.AddShapeInEnd(1, coordinateSet2);
+            presentationModel._model._shapes.AddShapeInEnd(2, coordinateSet2);
+
+            presentationModel._model._state._currentStateIndex = 0;
+            presentationModel.PressPointer(50, 50);
+            presentationModel._model._state._currentStateIndex = 1;
+            presentationModel.PressPointer(50, 50);
+
+            presentationModel._model._state._currentStateIndex = 0;
+            presentationModel.MovePointer(50, 50);
+            presentationModel._model._state._currentStateIndex = 1;
+            presentationModel.MovePointer(50, 50);
+
+            presentationModel._model._state._currentStateIndex = 0;
+            presentationModel.ReleasePointer(50, 50);
+            presentationModel._model._state._currentStateIndex = 1;
+            presentationModel.ReleasePointer(50, 50);
+
+
+            presentationModel.DrawSelectFrame(paintEventArgs);
+        }
+
+        /// <summary>
+        /// test delete key
+        /// </summary>
+        [TestMethod()]
+        public void ScaleTest()
+        {
+            var mockModel = new Mock<Model>();
+            var presentationModel = new PresentationModel(mockModel.Object);
+            var view = new PowerPointLike(presentationModel);
+            var mockGraphicsAdaptor = new Mock<IGraphics>();
+            CoordinateSet coordinateSet = new CoordinateSet(new Coordinate(1, 1), new Coordinate(100, 100));
+            presentationModel._model._shapes.AddShapeInEnd(2, coordinateSet);
+
+
+            presentationModel._buttonModel.ClickLineButton(0);
+            presentationModel.DetectButtonDraw();
+            presentationModel.DetectScale(50, 50);
+            presentationModel.DetectScale(97, 97);
+
+
+            presentationModel._model._state._currentStateIndex = 0;
+            presentationModel._stateModel.IsScale(97, 97);
+
+            presentationModel._buttonModel.ClickMouseButton(-1);
+            presentationModel.DetectButtonDraw();
+            presentationModel._buttonModel._currentButtonIndex = -1;
+            presentationModel._model._state._currentStateIndex = 1;
+
+            presentationModel.DetectScale(50, 50);
+
+            presentationModel._model._selectedOneCoordinate = coordinateSet;
+            presentationModel.DetectScale(97, 97);
+
+            Assert.AreEqual(1, presentationModel._model._state._currentStateIndex);
+        }
+
+        /// <summary>
+        /// test delete key
+        /// </summary>
+        [TestMethod()]
+        public void ScaleTest2()
+        {
+            var mockModel = new Mock<Model>();
+            var presentationModel = new PresentationModel(mockModel.Object);
+            var view = new PowerPointLike(presentationModel);
+
+            presentationModel._model._shapes.ChangeCoordinate(0, 1, 1);
+            presentationModel._model._shapes.ScaleCoordinate(0, 1, 1);
+
+            CoordinateSet coordinateSet = new CoordinateSet(new Coordinate(1, 1), new Coordinate(100, 100));
+            presentationModel._model._shapes.AddShapeInEnd(2, coordinateSet);
+            Assert.AreEqual(1, presentationModel.GetContainerLength());
+
+            presentationModel._model._shapes.ScaleCoordinate(-1, 1, 1);
+
+            presentationModel._model._state._currentStateIndex = (int)State.StateIndex.Select;
+
+            presentationModel.PressPointer(97, 97);
+
+            presentationModel._model._state._isPressed = false;
+            presentationModel._model._state._isScale = false;
+            presentationModel.MovePointer(95, 95);
+
+            presentationModel._model._state._isPressed = true;
+            presentationModel._model._state._isScale = true;
+            presentationModel.MovePointer(95, 95);
+
+            presentationModel.ReleasePointer(90, 90);
+
+            presentationModel.PressPointer(200, 200);
+            presentationModel._model._state._isPressed = false;
+            presentationModel._model._state._index = -1;
+            presentationModel.MovePointer(200, 200);
+
+            presentationModel._model._state._isPressed = true;
+            presentationModel._model._state._index = 0;
+            presentationModel.MovePointer(200, 200);
+
+            presentationModel.ReleasePointer(300, 300);
         }
     }
 }

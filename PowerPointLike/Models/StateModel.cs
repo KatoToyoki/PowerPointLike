@@ -39,7 +39,7 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void PressPointer(double coordinateX, double coordinateY, Cursor cursor)
+        public void PressPointer(double coordinateX, double coordinateY)
         {
             if (!IsDrawReady() && _model.GetCurrentStateIndex() == (int)State.StateIndex.Draw)
             {

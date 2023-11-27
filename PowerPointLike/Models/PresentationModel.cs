@@ -138,9 +138,9 @@ namespace PowerPointLike
         }
 
         // Method <c>PressPointer</c>
-        public void PressPointer(double coordinateX, double coordinateY, Cursor cursor)
+        public void PressPointer(double coordinateX, double coordinateY)
         {
-            _stateModel.PressPointer(coordinateX, coordinateY, cursor);
+            _stateModel.PressPointer(coordinateX, coordinateY);
         }
 
         // Method <c>MovePointer</c>
