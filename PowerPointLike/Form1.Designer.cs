@@ -36,9 +36,6 @@ namespace PowerPointLike
             this._canvas1 = new System.Windows.Forms.Button();
             this._canvasElementsData = new System.Windows.Forms.GroupBox();
             this._elementDataGrid = new System.Windows.Forms.DataGridView();
-            this._deleteButton = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._shapeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._shapeInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._elementsChoicesBox = new System.Windows.Forms.ComboBox();
             this._newElementButton = new System.Windows.Forms.Button();
             this._toolBar = new System.Windows.Forms.ToolStrip();
@@ -46,10 +43,28 @@ namespace PowerPointLike
             this._rectangleButton = new System.Windows.Forms.ToolStripButton();
             this._circleButton = new System.Windows.Forms.ToolStripButton();
             this._mouseButton = new System.Windows.Forms.ToolStripButton();
+            this._drawingViewContainer = new System.Windows.Forms.SplitContainer();
+            this._drawingDataContainer = new System.Windows.Forms.SplitContainer();
+            this._dataViewContainer = new System.Windows.Forms.SplitContainer();
+            this._deleteButton = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._shapeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._shapeInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._menu.SuspendLayout();
             this._canvasElementsData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._elementDataGrid)).BeginInit();
             this._toolBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._drawingViewContainer)).BeginInit();
+            this._drawingViewContainer.Panel1.SuspendLayout();
+            this._drawingViewContainer.Panel2.SuspendLayout();
+            this._drawingViewContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._drawingDataContainer)).BeginInit();
+            this._drawingDataContainer.Panel1.SuspendLayout();
+            this._drawingDataContainer.Panel2.SuspendLayout();
+            this._drawingDataContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._dataViewContainer)).BeginInit();
+            this._dataViewContainer.Panel1.SuspendLayout();
+            this._dataViewContainer.Panel2.SuspendLayout();
+            this._dataViewContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // _menu
@@ -59,7 +74,7 @@ namespace PowerPointLike
             this._menuInfo});
             this._menu.Location = new System.Drawing.Point(0, 0);
             this._menu.Name = "_menu";
-            this._menu.Size = new System.Drawing.Size(1441, 27);
+            this._menu.Size = new System.Drawing.Size(1581, 27);
             this._menu.TabIndex = 0;
             this._menu.Text = "menuStrip1";
             // 
@@ -80,29 +95,31 @@ namespace PowerPointLike
             // _canvas
             // 
             this._canvas.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this._canvas.Location = new System.Drawing.Point(140, 67);
+            this._canvas.Dock = System.Windows.Forms.DockStyle.Top;
+            this._canvas.Location = new System.Drawing.Point(0, 0);
             this._canvas.Name = "_canvas";
-            this._canvas.Size = new System.Drawing.Size(888, 640);
+            this._canvas.Size = new System.Drawing.Size(958, 615);
             this._canvas.TabIndex = 2;
             this._canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.ChangeCanvas);
             // 
             // _canvas1
             // 
+            this._canvas1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this._canvas1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this._canvas1.Location = new System.Drawing.Point(15, 67);
+            this._canvas1.Dock = System.Windows.Forms.DockStyle.Top;
+            this._canvas1.Location = new System.Drawing.Point(0, 0);
             this._canvas1.Name = "_canvas1";
-            this._canvas1.Size = new System.Drawing.Size(111, 80);
+            this._canvas1.Size = new System.Drawing.Size(133, 80);
             this._canvas1.TabIndex = 3;
             this._canvas1.UseVisualStyleBackColor = false;
             // 
             // _canvasElementsData
             // 
-            this._canvasElementsData.Controls.Add(this._elementDataGrid);
-            this._canvasElementsData.Controls.Add(this._elementsChoicesBox);
-            this._canvasElementsData.Controls.Add(this._newElementButton);
-            this._canvasElementsData.Location = new System.Drawing.Point(1045, 67);
+            this._canvasElementsData.Controls.Add(this._dataViewContainer);
+            this._canvasElementsData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._canvasElementsData.Location = new System.Drawing.Point(0, 0);
             this._canvasElementsData.Name = "_canvasElementsData";
-            this._canvasElementsData.Size = new System.Drawing.Size(374, 662);
+            this._canvasElementsData.Size = new System.Drawing.Size(470, 698);
             this._canvasElementsData.TabIndex = 5;
             this._canvasElementsData.TabStop = false;
             this._canvasElementsData.Text = "資料顯示";
@@ -115,37 +132,14 @@ namespace PowerPointLike
             this._deleteButton,
             this._shapeName,
             this._shapeInfo});
-            this._elementDataGrid.Location = new System.Drawing.Point(13, 86);
+            this._elementDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._elementDataGrid.Location = new System.Drawing.Point(0, 0);
             this._elementDataGrid.Name = "_elementDataGrid";
             this._elementDataGrid.RowHeadersWidth = 51;
             this._elementDataGrid.RowTemplate.Height = 27;
-            this._elementDataGrid.Size = new System.Drawing.Size(350, 546);
+            this._elementDataGrid.Size = new System.Drawing.Size(464, 615);
             this._elementDataGrid.TabIndex = 2;
             this._elementDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DeleteElement);
-            // 
-            // _deleteButton
-            // 
-            this._deleteButton.HeaderText = "刪除";
-            this._deleteButton.MinimumWidth = 6;
-            this._deleteButton.Name = "_deleteButton";
-            this._deleteButton.ReadOnly = true;
-            this._deleteButton.Width = 55;
-            // 
-            // _shapeName
-            // 
-            this._shapeName.HeaderText = "形狀";
-            this._shapeName.MinimumWidth = 6;
-            this._shapeName.Name = "_shapeName";
-            this._shapeName.ReadOnly = true;
-            this._shapeName.Width = 55;
-            // 
-            // _shapeInfo
-            // 
-            this._shapeInfo.HeaderText = "資訊";
-            this._shapeInfo.MinimumWidth = 6;
-            this._shapeInfo.Name = "_shapeInfo";
-            this._shapeInfo.ReadOnly = true;
-            this._shapeInfo.Width = 125;
             // 
             // _elementsChoicesBox
             // 
@@ -154,14 +148,14 @@ namespace PowerPointLike
             "矩形",
             "線",
             "圓"});
-            this._elementsChoicesBox.Location = new System.Drawing.Point(135, 44);
+            this._elementsChoicesBox.Location = new System.Drawing.Point(123, 18);
             this._elementsChoicesBox.Name = "_elementsChoicesBox";
             this._elementsChoicesBox.Size = new System.Drawing.Size(228, 23);
             this._elementsChoicesBox.TabIndex = 1;
             // 
             // _newElementButton
             // 
-            this._newElementButton.Location = new System.Drawing.Point(13, 29);
+            this._newElementButton.Location = new System.Drawing.Point(3, 3);
             this._newElementButton.Name = "_newElementButton";
             this._newElementButton.Size = new System.Drawing.Size(114, 51);
             this._newElementButton.TabIndex = 0;
@@ -179,7 +173,7 @@ namespace PowerPointLike
             this._mouseButton});
             this._toolBar.Location = new System.Drawing.Point(0, 27);
             this._toolBar.Name = "_toolBar";
-            this._toolBar.Size = new System.Drawing.Size(1441, 27);
+            this._toolBar.Size = new System.Drawing.Size(1581, 27);
             this._toolBar.TabIndex = 6;
             this._toolBar.Text = "toolStrip1";
             // 
@@ -227,17 +221,102 @@ namespace PowerPointLike
             this._mouseButton.ToolTipText = "Mouse";
             this._mouseButton.Click += new System.EventHandler(this.ClickMouseButton);
             // 
+            // _drawingViewContainer
+            // 
+            this._drawingViewContainer.BackColor = System.Drawing.Color.Silver;
+            this._drawingViewContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._drawingViewContainer.Location = new System.Drawing.Point(0, 0);
+            this._drawingViewContainer.Name = "_drawingViewContainer";
+            // 
+            // _drawingViewContainer.Panel1
+            // 
+            this._drawingViewContainer.Panel1.BackColor = System.Drawing.Color.PowderBlue;
+            this._drawingViewContainer.Panel1.Controls.Add(this._canvas1);
+            // 
+            // _drawingViewContainer.Panel2
+            // 
+            this._drawingViewContainer.Panel2.BackColor = System.Drawing.Color.PaleTurquoise;
+            this._drawingViewContainer.Panel2.Controls.Add(this._canvas);
+            this._drawingViewContainer.Size = new System.Drawing.Size(1101, 698);
+            this._drawingViewContainer.SplitterDistance = 133;
+            this._drawingViewContainer.SplitterWidth = 10;
+            this._drawingViewContainer.TabIndex = 7;
+            this._drawingViewContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.MoveSplitDrawingViewContainer);
+            // 
+            // _drawingDataContainer
+            // 
+            this._drawingDataContainer.BackColor = System.Drawing.Color.Silver;
+            this._drawingDataContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._drawingDataContainer.Location = new System.Drawing.Point(0, 54);
+            this._drawingDataContainer.Name = "_drawingDataContainer";
+            // 
+            // _drawingDataContainer.Panel1
+            // 
+            this._drawingDataContainer.Panel1.BackColor = System.Drawing.Color.LightCyan;
+            this._drawingDataContainer.Panel1.Controls.Add(this._drawingViewContainer);
+            // 
+            // _drawingDataContainer.Panel2
+            // 
+            this._drawingDataContainer.Panel2.BackColor = System.Drawing.Color.PowderBlue;
+            this._drawingDataContainer.Panel2.Controls.Add(this._canvasElementsData);
+            this._drawingDataContainer.Size = new System.Drawing.Size(1581, 698);
+            this._drawingDataContainer.SplitterDistance = 1101;
+            this._drawingDataContainer.SplitterWidth = 10;
+            this._drawingDataContainer.TabIndex = 8;
+            this._drawingDataContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.MoveSplitDrawingDataContainer);
+            // 
+            // _dataViewContainer
+            // 
+            this._dataViewContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._dataViewContainer.Location = new System.Drawing.Point(3, 21);
+            this._dataViewContainer.Name = "_dataViewContainer";
+            this._dataViewContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // _dataViewContainer.Panel1
+            // 
+            this._dataViewContainer.Panel1.Controls.Add(this._newElementButton);
+            this._dataViewContainer.Panel1.Controls.Add(this._elementsChoicesBox);
+            // 
+            // _dataViewContainer.Panel2
+            // 
+            this._dataViewContainer.Panel2.Controls.Add(this._elementDataGrid);
+            this._dataViewContainer.Size = new System.Drawing.Size(464, 674);
+            this._dataViewContainer.SplitterDistance = 55;
+            this._dataViewContainer.TabIndex = 3;
+            // 
+            // _deleteButton
+            // 
+            this._deleteButton.HeaderText = "刪除";
+            this._deleteButton.MinimumWidth = 6;
+            this._deleteButton.Name = "_deleteButton";
+            this._deleteButton.ReadOnly = true;
+            this._deleteButton.Width = 65;
+            // 
+            // _shapeName
+            // 
+            this._shapeName.HeaderText = "形狀";
+            this._shapeName.MinimumWidth = 6;
+            this._shapeName.Name = "_shapeName";
+            this._shapeName.ReadOnly = true;
+            this._shapeName.Width = 65;
+            // 
+            // _shapeInfo
+            // 
+            this._shapeInfo.HeaderText = "資訊";
+            this._shapeInfo.MinimumWidth = 6;
+            this._shapeInfo.Name = "_shapeInfo";
+            this._shapeInfo.ReadOnly = true;
+            this._shapeInfo.Width = 125;
+            // 
             // PowerPointLike
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1441, 711);
+            this.ClientSize = new System.Drawing.Size(1581, 752);
+            this.Controls.Add(this._drawingDataContainer);
             this.Controls.Add(this._toolBar);
-            this.Controls.Add(this._canvasElementsData);
-            this.Controls.Add(this._canvas1);
             this.Controls.Add(this._menu);
-            this.Controls.Add(this._canvas);
             this.MainMenuStrip = this._menu;
             this.Name = "PowerPointLike";
             this.Text = "PowerPointLike";
@@ -247,6 +326,18 @@ namespace PowerPointLike
             ((System.ComponentModel.ISupportInitialize)(this._elementDataGrid)).EndInit();
             this._toolBar.ResumeLayout(false);
             this._toolBar.PerformLayout();
+            this._drawingViewContainer.Panel1.ResumeLayout(false);
+            this._drawingViewContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._drawingViewContainer)).EndInit();
+            this._drawingViewContainer.ResumeLayout(false);
+            this._drawingDataContainer.Panel1.ResumeLayout(false);
+            this._drawingDataContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._drawingDataContainer)).EndInit();
+            this._drawingDataContainer.ResumeLayout(false);
+            this._dataViewContainer.Panel1.ResumeLayout(false);
+            this._dataViewContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._dataViewContainer)).EndInit();
+            this._dataViewContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -263,14 +354,17 @@ namespace PowerPointLike
         private System.Windows.Forms.ComboBox _elementsChoicesBox;
         private System.Windows.Forms.Button _newElementButton;
         private System.Windows.Forms.DataGridView _elementDataGrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _deleteButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _shapeName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _shapeInfo;
         private System.Windows.Forms.ToolStrip _toolBar;
         private System.Windows.Forms.ToolStripButton _lineButton;
         private System.Windows.Forms.ToolStripButton _rectangleButton;
         private System.Windows.Forms.ToolStripButton _circleButton;
         private System.Windows.Forms.ToolStripButton _mouseButton;
+        private System.Windows.Forms.SplitContainer _drawingViewContainer;
+        private System.Windows.Forms.SplitContainer _drawingDataContainer;
+        private System.Windows.Forms.SplitContainer _dataViewContainer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _deleteButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _shapeName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _shapeInfo;
     }
 }
 

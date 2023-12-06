@@ -15,6 +15,13 @@ namespace PowerPointLike
     public partial class PowerPointLike : Form
     {
         public const int START_DATA_GRID_VIEW_INDEX = 2;
+        public const int HEIGHT_SIZE = 9;
+        public const int WIDTH_SIZE = 16;
+        public const float BASE_FOR_WINDOWS = 96f;
+        public const double X_Y_FACTOR = 1.2;
+        public const double WIDTH_FACTOR = 1.35;
+        public const double HEIGHT_FACTOR = 1.45;
+
         public PresentationModel _presentationModel
         {
             get; set;
@@ -32,11 +39,12 @@ namespace PowerPointLike
             _canvas.MouseUp += HandleCanvasReleased;
             _canvas.MouseMove += HandleCanvasMoved;
             _canvas.Paint += HandleCanvasPaint;
-            Controls.Add(_canvas);
 
             this.KeyPreview = true;
             this.KeyDown += ClickKey;
 
+            _canvas1.Height = AdjustHeight(_canvas1.Width);
+            _canvas.Height = AdjustHeight(_canvas.Width);
             _presentationModel.GetModelEvent()._modelChanged += HandleModelChanged;
         }
 
@@ -254,74 +262,6 @@ namespace PowerPointLike
         public void ChangeCanvas(object sender, PaintEventArgs e)
         {
             _presentationModel.DrawSelectFrame(e);
-        }
-
-        // thumbnail ================================================================
-        /// <summary>
-        /// Method <c>GetscaleImage</c>
-        /// to get change the button's image to the panel's thumbnail
-        /// why Dr.Smell doesn't recognize the word "thunbmail" ???
-        /// </summary>
-        /// <returns></returns>
-        public Bitmap GetScaleImage()
-        {
-            System.Drawing.Rectangle captureRegion = new System.Drawing.Rectangle(_canvas.Location.X, _canvas.Location.Y, _canvas.Width, _canvas.Height);
-            Bitmap scaleImage = new Bitmap(_canvas1.Width, _canvas1.Height);
-
-            using (Graphics g = Graphics.FromImage(scaleImage))
-            {
-                Bitmap capturedImage = CaptureRegion(_canvas, captureRegion);
-                capturedImage = ResizeImage(capturedImage, _canvas1.Size);
-                g.DrawImage(capturedImage, Point.Empty);
-            }
-
-            return scaleImage;
-        }
-
-        /// <summary>
-        /// Method <c>CaptureRegion</c>
-        /// get the origin capture region of panel
-        /// </summary>
-        /// <param name="control">the panel</param>
-        /// <param name="region">the rectangle that represent panel</param>
-        /// <returns></returns>
-        public Bitmap CaptureRegion(Control control, System.Drawing.Rectangle region)
-        {
-            Bitmap capturedImage = new Bitmap(region.Width, region.Height);
-            using (Graphics g = Graphics.FromImage(capturedImage))
-            {
-                g.CopyFromScreen(
-                    control.PointToScreen(new System.Drawing.Point(region.Left, region.Top)),
-                    Point.Empty,
-                    region.Size,
-                    CopyPixelOperation.SourceCopy);
-            }
-            return capturedImage;
-        }
-
-        /// <summary>
-        /// Method <c>ResizeImage</c>
-        /// to fit the width and height of panel and button, the captured img need to scale to the proper size
-        /// </summary>
-        /// <param name="originalImage">the origin capture img</param>
-        /// <param name="newSize">the size of button</param>
-        /// <returns></returns>
-        public Bitmap ResizeImage(Bitmap originalImage, Size newSize)
-        {
-            float percentWidth = ((float)newSize.Width / (float)originalImage.Width);
-            float percentHeight = ((float)newSize.Height / (float)originalImage.Height);
-            float percent = Math.Min(percentWidth, percentHeight);
-            int finalWidth = (int)(originalImage.Width * percent);
-            int finalHeight = (int)(originalImage.Height * percent);
-
-            Bitmap resizedImage = new Bitmap(finalWidth, finalHeight);
-            using (Graphics g = Graphics.FromImage(resizedImage))
-            {
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.DrawImage(originalImage, 0, 0, finalWidth, finalHeight);
-            }
-
-            return resizedImage;
         }
     }
 }
