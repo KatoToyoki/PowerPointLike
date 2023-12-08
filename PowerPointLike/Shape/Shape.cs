@@ -19,6 +19,11 @@ namespace PowerPointLike
             get; set;
         }
 
+        public int _id
+        {
+            get; set;
+        }
+
         /// <summary>
         /// Method <c>GetOneElementData</c>
         /// get one whole element, including the name and the coordinate

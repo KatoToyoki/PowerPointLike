@@ -150,6 +150,9 @@ namespace PowerPointLike
         /// <param name="e"></param>
         private void ClickUndo(object sender, EventArgs e)
         {
+            _presentationModel._model.Undo();
+            _presentationModel.ResetSelectIndex();
+            UpdateDataToTable();
 
         }
 
@@ -160,8 +163,18 @@ namespace PowerPointLike
         /// <param name="e"></param>
         private void ClickRedo(object sender, EventArgs e)
         {
+            _presentationModel._model.Redo();
+            _presentationModel.ResetSelectIndex();
+            UpdateDataToTable();
 
         }
+
+        // void RefreshUI()    // 更新redo與undo是否為enabled
+        // {
+        //     redo.Enabled = model.IsRedoEnabled;
+        //     undo.Enabled = model.IsUndoEnabled;
+        //     Invalidate();
+        // }
 
     }
 }

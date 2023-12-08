@@ -8,12 +8,21 @@ namespace PowerPointLike
 {
     public class DrawingCommand : ICommand
     {
+        Shape _shape;
+        Model _model;
+
+        public DrawingCommand(Model model, Shape shape)
+        {
+            _shape = shape;
+            _model = model;
+        }
+
         /// <summary>
         /// Method <c>Execute</c>
         /// </summary>
         public void Execute()
         {
-
+            _model._shapes.AddShape(_shape);
         }
 
         /// <summary>
@@ -21,7 +30,7 @@ namespace PowerPointLike
         /// </summary>
         public void ExecuteCancel()
         {
-
+            _model._shapes.PopShape();
         }
     }
 }

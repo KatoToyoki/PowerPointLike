@@ -10,8 +10,6 @@ namespace PowerPointLike
 {
     public class PointState : State
     {
-        private Shapes _shapes;
-
         public int _currentItem
         {
             get; set;

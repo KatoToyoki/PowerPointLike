@@ -8,7 +8,6 @@ namespace PowerPointLike
 {
     public partial class Factory
     {
-        public const double FACTOR = 1;
         public int _maxWidth
         {
             get; set;
@@ -16,6 +15,13 @@ namespace PowerPointLike
         public int _maxHeight
         {
             get; set;
+        }
+
+        private List<Shape> _shapeContainer;
+
+        public Factory(List<Shape> shapeContainer)
+        {
+            _shapeContainer = shapeContainer;
         }
 
         /// <summary>
@@ -82,6 +88,7 @@ namespace PowerPointLike
         public Shape CreateRectangle()
         {
             Shape rectangle = new Rectangle(InitializeSet());
+            rectangle._id = _shapeContainer.Count;
             return rectangle;
         }
 
@@ -93,6 +100,7 @@ namespace PowerPointLike
         public Shape CreateLine()
         {
             Shape line = new Line(InitializeSet());
+            line._id = _shapeContainer.Count;
             return line;
         }
 
@@ -104,6 +112,7 @@ namespace PowerPointLike
         public Shape CreateCircle()
         {
             Shape circle = new Circle(InitializeSet());
+            circle._id = _shapeContainer.Count;
             return circle;
         }
 
@@ -115,6 +124,7 @@ namespace PowerPointLike
         public Shape DrawLine(CoordinateSet coordinateSet)
         {
             Shape line = new Line(coordinateSet);
+            line._id = _shapeContainer.Count;
             return line;
         }
 
@@ -126,6 +136,7 @@ namespace PowerPointLike
         public Shape DrawRectangle(CoordinateSet coordinateSet)
         {
             Shape rectangle = new Rectangle(coordinateSet);
+            rectangle._id = _shapeContainer.Count;
             return rectangle;
         }
 
@@ -137,6 +148,7 @@ namespace PowerPointLike
         public Shape DrawCircle(CoordinateSet coordinateSet)
         {
             Shape circle = new Circle(coordinateSet);
+            circle._id = _shapeContainer.Count;
             return circle;
         }
 
@@ -147,8 +159,8 @@ namespace PowerPointLike
         /// <param name="height"></param>
         public void SetCanvasSize(int width, int height)
         {
-            _maxWidth = (int)(width * FACTOR);
-            _maxHeight = (int)(height * FACTOR);
+            _maxWidth = width;
+            _maxHeight = height;
         }
     }
 }

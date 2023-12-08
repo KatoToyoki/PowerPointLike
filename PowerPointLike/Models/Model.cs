@@ -46,10 +46,16 @@ namespace PowerPointLike
             get; set;
         }
 
+        public CommandManager _commandManager
+        {
+            get; set;
+        }
+
         public Model()
         {
             _shapes = new Shapes();
             _state = new PointState(_shapes);
+            _commandManager = new CommandManager();
         }
 
         /// <summary>
@@ -218,7 +224,7 @@ namespace PowerPointLike
         /// <param name="index"></param>
         public void ClickToolButton(int index)
         {
-            _state = _state.CreateState(index, _shapes);
+            _state = _state.CreateState(index, _shapes, this);
         }
 
         /// <summary>
@@ -331,6 +337,22 @@ namespace PowerPointLike
             SetCanvasSize(width, height);
             _shapes.AdjustPositions(_canvasWidth, _canvasHeight);
             _shapes.SetCanvasSize(width, height);
+        }
+
+        /// <summary>
+        /// Method <c>Undo</c>
+        /// </summary>
+        public void Undo()
+        {
+            _commandManager.Undo();
+        }
+
+        /// <summary>
+        /// Method <c>Redo</c>
+        /// </summary>
+        public void Redo()
+        {
+            _commandManager.Redo();
         }
     }
 }

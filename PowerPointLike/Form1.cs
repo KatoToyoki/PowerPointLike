@@ -237,9 +237,6 @@ namespace PowerPointLike
             RefreshToolButtonClick();
             ClickMouseButton(sender, e);
             _presentationModel.ResetStateSelect();
-
-            // _presentationModel.DetectScale(1000, 1000);
-            // _canvas.Cursor = _presentationModel._cursor;
         }
 
         /// <summary>
@@ -251,6 +248,7 @@ namespace PowerPointLike
         {
             IGraphics graphicsAdaptor = new GraphicsAdaptor(e.Graphics);
             _presentationModel.Draw(graphicsAdaptor);
+            _presentationModel._model._state.DrawTempShape(graphicsAdaptor);
             _canvas1.Image = GetScaleImage();
         }
 

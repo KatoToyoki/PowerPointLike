@@ -12,6 +12,7 @@ namespace PowerPointLike
         const string LINE = "線";
         const string CIRCLE = "圓";
         private List<Shape> _shapeContainer = new List<Shape>();
+
         public Factory _factory
         {
             get; set;
@@ -19,7 +20,7 @@ namespace PowerPointLike
 
         public Shapes()
         {
-            _factory = new Factory();
+            _factory = new Factory(_shapeContainer);
         }
         public int _maxWidth
         {
@@ -30,6 +31,7 @@ namespace PowerPointLike
             get; set;
         }
 
+        // create shape =================================================================
         /// <summary>
         /// Method <c>AddShape</c>
         /// to create new element depends on the chosen element
@@ -49,7 +51,76 @@ namespace PowerPointLike
             {
                 _shapeContainer.Add(_factory.CreateCircle());
             }
+        }
 
+        /// <summary>
+        ///  Method <c>DrawShape</c>
+        ///  to create a drawn shpae
+        /// </summary>
+        /// <param name="shapeIndex">to know which shape to draw</param>
+        /// <param name="coordinateSet">to set the coordinate</param>
+        public void DrawShape(int shapeIndex, CoordinateSet coordinateSet)
+        {
+            switch (shapeIndex)
+            {
+                case (int)PresentationModel.ShapeIndex.Line:
+                    _shapeContainer.Add(_factory.DrawLine(coordinateSet));
+                    break;
+                case (int)PresentationModel.ShapeIndex.Rectangle:
+                    _shapeContainer.Add(_factory.DrawRectangle(coordinateSet));
+                    break;
+                case (int)PresentationModel.ShapeIndex.Circle:
+                    _shapeContainer.Add(_factory.DrawCircle(coordinateSet));
+                    break;
+            }
+        }
+
+        /// <summary>
+        ///  Method <c>CreateTempShape</c>
+        ///  create a shape but not added in the container
+        /// </summary>
+        /// <param name="shapeIndex"></param>
+        /// <param name="coordinateSet"></param>
+        /// <returns></returns>
+        public Shape CreateTempShape(int shapeIndex, CoordinateSet coordinateSet)
+        {
+            switch (shapeIndex)
+            {
+                case (int)PresentationModel.ShapeIndex.Line:
+                    return _factory.DrawLine(coordinateSet);
+                case (int)PresentationModel.ShapeIndex.Rectangle:
+                    return _factory.DrawRectangle(coordinateSet);
+                case (int)PresentationModel.ShapeIndex.Circle:
+                    return _factory.DrawCircle(coordinateSet);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Method <c>AddShapeInEnd</c>
+        /// </summary>
+        /// <param name="shape"></param>
+        public void AddShapeInEnd(int shapeIndex, CoordinateSet newShapeCoordinateSet)
+        {
+            _shapeContainer.Add(CreateTempShape(shapeIndex, newShapeCoordinateSet));
+        }
+
+        /// <summary>
+        /// Method <c>AddShape</c>
+        /// </summary>
+        /// <param name="shape"></param>
+        public void AddShape(Shape shape)
+        {
+            _shapeContainer.Add(shape);
+        }
+
+        // ====================================================================================
+        /// <summary>
+        /// Method <c>PopShape</c>
+        /// </summary>
+        public void PopShape()
+        {
+            _shapeContainer.RemoveAt(GetContainerLength() - 1);
         }
 
         /// <summary>
@@ -120,49 +191,6 @@ namespace PowerPointLike
         }
 
         /// <summary>
-        ///  Method <c>DrawShape</c>
-        ///  to create a drawn shpae
-        /// </summary>
-        /// <param name="shapeIndex">to know which shape to draw</param>
-        /// <param name="coordinateSet">to set the coordinate</param>
-        public void DrawShape(int shapeIndex, CoordinateSet coordinateSet)
-        {
-            switch (shapeIndex)
-            {
-                case (int)PresentationModel.ShapeIndex.Line:
-                    _shapeContainer.Add(_factory.DrawLine(coordinateSet));
-                    break;
-                case (int)PresentationModel.ShapeIndex.Rectangle:
-                    _shapeContainer.Add(_factory.DrawRectangle(coordinateSet));
-                    break;
-                case (int)PresentationModel.ShapeIndex.Circle:
-                    _shapeContainer.Add(_factory.DrawCircle(coordinateSet));
-                    break;
-            }
-        }
-
-        /// <summary>
-        ///  Method <c>CreateTempShape</c>
-        ///  create a shape but not added in the container
-        /// </summary>
-        /// <param name="shapeIndex"></param>
-        /// <param name="coordinateSet"></param>
-        /// <returns></returns>
-        public Shape CreateTempShape(int shapeIndex, CoordinateSet coordinateSet)
-        {
-            switch (shapeIndex)
-            {
-                case (int)PresentationModel.ShapeIndex.Line:
-                    return _factory.DrawLine(coordinateSet);
-                case (int)PresentationModel.ShapeIndex.Rectangle:
-                    return _factory.DrawRectangle(coordinateSet);
-                case (int)PresentationModel.ShapeIndex.Circle:
-                    return _factory.DrawCircle(coordinateSet);
-            }
-            return null;
-        }
-
-        /// <summary>
         /// Method <c>GetShape</c>
         /// to get one certain shape 
         /// </summary>
@@ -212,15 +240,6 @@ namespace PowerPointLike
                 }
             }
             return null;
-        }
-
-        /// <summary>
-        /// Method <c>AddShapeInEnd</c>
-        /// </summary>
-        /// <param name="shape"></param>
-        public void AddShapeInEnd(int shapeIndex, CoordinateSet newShapeCoordinateSet)
-        {
-            _shapeContainer.Add(CreateTempShape(shapeIndex, newShapeCoordinateSet));
         }
 
         /// <summary>

@@ -10,14 +10,13 @@ namespace PowerPointLike
 {
     public class DrawingState : State
     {
-        Shapes _shapes;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DrawingState"/> class.
         /// </summary>
-        public DrawingState(Shapes shapes)
+        public DrawingState(Shapes shapes, Model model)
         {
             _shapes = shapes;
+            _model = model;
         }
 
         /// <summary>
@@ -31,7 +30,7 @@ namespace PowerPointLike
         {
             ChangeCurrentIndex(shapeIndex);
             PressFirst(coordinateX, coordinateY, shapeIndex);
-            _newShape = _shapes.CreateTempShape(shapeIndex, _newShapeCoordinateSet);
+            _tempShape = _shapes.CreateTempShape(shapeIndex, _newShapeCoordinateSet);
             selectedOne = _selectedOneCoordinate;
         }
 
@@ -44,11 +43,9 @@ namespace PowerPointLike
         /// <param name="shapeIndex">shapeIndex</param>
         public override void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne)
         {
-            _shapes.DeleteEndShape(_newLength);
-            _oldLength = _shapes.GetContainerLength();
             PressMiddle(coordinateX, coordinateY);
-            _shapes.AddShapeInEnd(shapeIndex, _newShapeCoordinateSet);
-            _newLength = _shapes.GetContainerLength();
+            _tempShape = _shapes.CreateTempShape(shapeIndex, _newShapeCoordinateSet);
+            Console.WriteLine(_tempShape._id);
             selectedOne = _selectedOneCoordinate;
         }
 
@@ -65,11 +62,10 @@ namespace PowerPointLike
 
             if (_isPressed)
             {
-                _shapes.DeleteEndShape(_newLength);
                 CoordinateSet confirmOne = new CoordinateSet();
                 confirmOne._point1 = _firstPoint;
                 confirmOne._point2 = (new Coordinate((int)coordinateX, (int)coordinateY));
-                _shapes.DrawShape(shapeIndex, confirmOne);
+                _model._commandManager.Execute(new DrawingCommand(_model, _tempShape));
                 _oldLength = -1;
                 _newLength = -1;
             }

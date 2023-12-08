@@ -24,7 +24,7 @@ namespace PowerPointLike
         protected Coordinate _startPoint;
         protected Coordinate _firstPoint;
         protected CoordinateSet _newShapeCoordinateSet = new CoordinateSet();
-        protected Shape _newShape;
+        // protected Shape _newShape;
         public bool _isPressed
         {
             get; set;
@@ -48,6 +48,19 @@ namespace PowerPointLike
         {
             get; set;
         }
+
+        public Shape _originalShape
+        {
+            get; set;
+        }
+
+        public Shape _tempShape
+        {
+            get; set;
+        }
+
+        protected Shapes _shapes;
+        protected Model _model;
 
         protected int _oldLength = -1;
         protected int _newLength = -1;
@@ -108,13 +121,13 @@ namespace PowerPointLike
         /// <param name="index">button index</param>
         /// <param name="shapes">the container, will be need with draw event</param>
         /// <returns></returns>
-        public State CreateState(int index, Shapes shapes)
+        public State CreateState(int index, Shapes shapes, Model model)
         {
             ChangeCurrentIndex(index);
 
             if (_currentStateIndex == (int)StateIndex.Draw)
             {
-                return new DrawingState(shapes);
+                return new DrawingState(shapes, model);
             }
             else if (_currentStateIndex == (int)StateIndex.Select)
             {
@@ -162,6 +175,7 @@ namespace PowerPointLike
             _firstPoint = new Coordinate((int)coordinateX, (int)coordinateY);
             _startPoint = _firstPoint;
             _newShapeCoordinateSet._point1 = _firstPoint;
+            _newShapeCoordinateSet._point2 = _firstPoint;
             _isPressed = true;
         }
 
@@ -224,5 +238,19 @@ namespace PowerPointLike
             }
             return false;
         }
+
+        /// <summary>
+        /// Method <c>DrawTempShape</c>
+        /// </summary>
+        /// <param name="graphics"></param>
+        public void DrawTempShape(IGraphics graphics)
+        {
+            if (_tempShape == null)
+            {
+                return;
+            }
+            _tempShape.Draw(graphics);
+        }
+
     }
 }
