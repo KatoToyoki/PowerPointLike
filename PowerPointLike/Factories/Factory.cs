@@ -8,8 +8,15 @@ namespace PowerPointLike
 {
     public partial class Factory
     {
-        public const int MAX_WIDTH = 600;
-        public const int MAX_HEIGHT = 500;
+        public const double FACTOR = 1;
+        public int _maxWidth
+        {
+            get; set;
+        }
+        public int _maxHeight
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Method <c>RandomCoordinate</c>
@@ -20,8 +27,8 @@ namespace PowerPointLike
         public Coordinate CreateRandomCoordinate(Random random)
         {
             Coordinate coordinate = new Coordinate();
-            coordinate._x = random.Next(MAX_WIDTH);
-            coordinate._y = random.Next(MAX_HEIGHT);
+            coordinate._x = random.Next(_maxWidth);
+            coordinate._y = random.Next(_maxHeight);
             return coordinate;
         }
 
@@ -131,6 +138,17 @@ namespace PowerPointLike
         {
             Shape circle = new Circle(coordinateSet);
             return circle;
+        }
+
+        /// <summary>
+        /// Method <c>SetCanvasSize</c>
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public void SetCanvasSize(int width, int height)
+        {
+            _maxWidth = (int)(width * FACTOR);
+            _maxHeight = (int)(height * FACTOR);
         }
     }
 }

@@ -115,5 +115,15 @@ namespace PowerPointLike
 
             return tableData;
         }
+
+        /// <summary>
+        /// Method <c>ChangeCanvasSize</c>
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public void ChangeCanvasSize(int width, int height)
+        {
+            _model.ChangeCanvasSize(width, height);
+        }
     }
 }

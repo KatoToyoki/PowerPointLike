@@ -36,6 +36,16 @@ namespace PowerPointLike
             get; set;
         }
 
+        public int _canvasWidth
+        {
+            get; set;
+        }
+
+        public int _canvasHeight
+        {
+            get; set;
+        }
+
         public Model()
         {
             _shapes = new Shapes();
@@ -283,6 +293,44 @@ namespace PowerPointLike
         public bool IsScale(double coordinateX, double coordinateY)
         {
             return _selectedOneCoordinate.IsScale(coordinateX, coordinateY);
+        }
+
+        /// <summary>
+        /// Method <c>SetAllCanvasSize</c>
+        /// init for all
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public void SetAllCanvasSize(int width, int height)
+        {
+            _canvasWidth = width;
+            _canvasHeight = height;
+            _shapes.SetCanvasSize(_canvasWidth, _canvasHeight);
+            _shapes._factory.SetCanvasSize(_canvasWidth, _canvasHeight);
+        }
+
+        /// <summary>
+        /// Method <c>SetCanvasSize</c>
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public void SetCanvasSize(int width, int height)
+        {
+            _canvasWidth = width;
+            _canvasHeight = height;
+            _shapes._factory.SetCanvasSize(width, height);
+        }
+
+        /// <summary>
+        /// Method <c>ChangeCanvasSize</c>
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public void ChangeCanvasSize(int width, int height)
+        {
+            SetCanvasSize(width, height);
+            _shapes.AdjustPositions(_canvasWidth, _canvasHeight);
+            _shapes.SetCanvasSize(width, height);
         }
     }
 }

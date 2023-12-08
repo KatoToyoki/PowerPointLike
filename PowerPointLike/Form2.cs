@@ -113,6 +113,8 @@ namespace PowerPointLike
             _canvas1.Height = AdjustHeight(_canvas1.Width);
             _canvas.Height = AdjustHeight(_canvas.Width);
             _canvas1.Image = GetScaleImage();
+            _presentationModel.ChangeCanvasSize(_canvas.Width, _canvas.Height);
+            UpdateDataToTable();
         }
 
         /// <summary>
@@ -126,6 +128,8 @@ namespace PowerPointLike
             _canvas1.Height = AdjustHeight(_canvas1.Width);
             _canvas.Height = AdjustHeight(_canvas.Width);
             _canvasElementsData.Height = AdjustHeight(_canvasElementsData.Width);
+            _presentationModel.ChangeCanvasSize(_canvas.Width, _canvas.Height);
+            UpdateDataToTable();
         }
 
         /// <summary>

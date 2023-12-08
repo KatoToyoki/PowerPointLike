@@ -19,8 +19,15 @@ namespace PowerPointLike
 
         public Shapes()
         {
-
             _factory = new Factory();
+        }
+        public int _maxWidth
+        {
+            get; set;
+        }
+        public int _maxHeight
+        {
+            get; set;
         }
 
         /// <summary>
@@ -285,6 +292,42 @@ namespace PowerPointLike
                 }
             }
             return false;
+        }
+
+        /// <summary>
+        /// Method <c>AdjustPositions</c>
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public void AdjustPositions(int width, int height)
+        {
+            double factorX = ((double)width / _maxWidth);
+            double factorY = ((double)height / _maxHeight);
+
+            foreach (var shape in _shapeContainer)
+            {
+                CoordinateSet currentItem = shape._coordinateSet;
+                int newX1 = (int)(currentItem._point1._x * factorX);
+                int newY1 = (int)(currentItem._point1._y * factorY);
+                int newX2 = (int)(currentItem._point2._x * factorX);
+                int newY2 = (int)(currentItem._point2._y * factorY);
+
+                shape._coordinateSet = new CoordinateSet(new Coordinate(newX1, newY1), new Coordinate(newX2, newY2));
+            }
+
+            SetCanvasSize(width, height);
+            _factory.SetCanvasSize(width, height);
+        }
+
+        /// <summary>
+        /// Method <c>SetCanvasSize</c>
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public void SetCanvasSize(int width, int height)
+        {
+            _maxWidth = width;
+            _maxHeight = height;
         }
     }
 }

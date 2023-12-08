@@ -124,6 +124,12 @@ namespace PowerPointLike
             return _dataModel.GetAllContainerData();
         }
 
+        // Method <c>ChangeCanvasSize</c>
+        public void ChangeCanvasSize(int width, int height)
+        {
+            _dataModel.ChangeCanvasSize(width, height);
+        }
+
         // state ==============================================================
         // Method <c>ResetStateSelect</c>
         public void ResetStateSelect()
