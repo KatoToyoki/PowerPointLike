@@ -143,5 +143,25 @@ namespace PowerPointLike
             return width * HEIGHT_SIZE / WIDTH_SIZE;
         }
 
+        /// <summary>
+        /// Method <c>ClickUndo</c>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickUndo(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Method <c>ClickRedo</c>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickRedo(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

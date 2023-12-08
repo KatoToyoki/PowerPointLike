@@ -50,7 +50,6 @@ namespace PowerPointLike
             _shapes.AddShapeInEnd(shapeIndex, _newShapeCoordinateSet);
             _newLength = _shapes.GetContainerLength();
             selectedOne = _selectedOneCoordinate;
-
         }
 
         /// <summary>

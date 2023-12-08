@@ -57,6 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CommandManager.cs" />
+    <Compile Include="Commands\DataGridViewCommand.cs" />
+    <Compile Include="Commands\DrawingCommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\PointCommand.cs" />
     <Compile Include="Factories\Factory.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -114,6 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mouse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

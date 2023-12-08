@@ -191,6 +191,31 @@
           <AnalysisFileManager>
             <AnalysisFiles>
               <AnalysisFile>
+                <RelativePath>Commands\CommandManager.cs</RelativePath>
+                <ProjectName>PowerPointLike</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Commands\DataGridViewCommand.cs</RelativePath>
+                <ProjectName>PowerPointLike</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Commands\DrawingCommand.cs</RelativePath>
+                <ProjectName>PowerPointLike</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Commands\ICommand.cs</RelativePath>
+                <ProjectName>PowerPointLike</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Commands\PointCommand.cs</RelativePath>
+                <ProjectName>PowerPointLike</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>Factories\Factory.cs</RelativePath>
                 <ProjectName>PowerPointLike</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
@@ -327,7 +352,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>3557</ProductionLoc>
+          <ProductionLoc>3778</ProductionLoc>
           <TestLoc>639</TestLoc>
         </CodeReview>
       </Data>
