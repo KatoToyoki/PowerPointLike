@@ -89,15 +89,13 @@ namespace PowerPointLike
         /// <param name="shape"></param>
         public void ExchangeShape(Shape oldOne, Shape newOne)
         {
-            int index = 0;
             for (int i = 0; i < _shapeContainer.Count; i++)
             {
-                if (_shapeContainer[i]._coordinateSet.GetIfIsSame(oldOne._coordinateSet))
+                if (_shapeContainer[i]._coordinateSet.IsCoordinateSetSame(oldOne))
                 {
-                    index = i;
+                    _shapeContainer[i] = newOne.GetClone();
                 }
             }
-            _shapeContainer[index] = newOne.GetClone();
         }
 
         /// <summary>

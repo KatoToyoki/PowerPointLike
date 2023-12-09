@@ -140,7 +140,8 @@ namespace PowerPointLike
 
             ReleaseCoordinate();
             ResetThreePoint();
-            selectedOne = _tempShape._coordinateSet;
+            selectedOne = _tempShape._coordinateSet.GetClone();
+            _model._selectedShape = _tempShape.GetClone();
         }
 
         /// <summary>
@@ -148,16 +149,13 @@ namespace PowerPointLike
         /// </summary>
         public void ReleaseCoordinate()
         {
-            if (_isScale)
+            if (_originalShape._coordinateSet.IsCoordinateSetSame(_tempShape))
             {
-                _tempShape = _shapes.GetShape(_index).GetClone();
-                _model._commandManager.Execute(new PointCommand(_originalShape.GetClone(), _tempShape.GetClone(), _model));
+                return;
             }
-            else
-            {
-                _tempShape = _shapes.GetShape(_index).GetClone();
-                _model._commandManager.Execute(new PointCommand(_originalShape.GetClone(), _tempShape.GetClone(), _model));
-            }
+
+            _tempShape = _shapes.GetShape(_index).GetClone();
+            _model._commandManager.Execute(new PointCommand(_originalShape.GetClone(), _tempShape.GetClone(), _model));
         }
 
         /// <summary>

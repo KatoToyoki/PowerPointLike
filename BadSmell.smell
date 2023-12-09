@@ -185,9 +185,28 @@
     <div class="data">
       <Data id="ReviewPalData">
         <CodeReview xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-          <Reviews />
+          <Reviews>
+            <Smell>
+              <Id>1</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>96 目前物件 PowerPointLike.Shapes，使用物件的方法或屬性次數：0次，Envy到對象物件 PowerPointLike.Shape，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：PowerPointLike.Shape.GetClone() 以及 PowerPointLike.Shape._coordinateSet</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>PowerPointLike</Project>
+              <File>E:\window_p\PowerPointLike\PowerPointLike\Shapes\ShapesB.cs</File>
+              <Line>96</Line>
+              <StartLine>95</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>96</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>目前物件 PowerPointLike.Shapes，使用物件的方法或屬性次數：0次，Envy到對象物件 PowerPointLike.Shape，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：PowerPointLike.Shape.GetClone() 以及 PowerPointLike.Shape._coordinateSet</Comment>
+              <Auto>false</Auto>
+            </Smell>
+          </Reviews>
           <HashCodeIgnoreList />
-          <HashCodeRequestIgnoreList />
+          <HashCodeRequestIgnoreList>
+            <string>96 目前物件 PowerPointLike.Shapes，使用物件的方法或屬性次數：0次，Envy到對象物件 PowerPointLike.Shape，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：PowerPointLike.Shape.GetClone() 以及 PowerPointLike.Shape._coordinateSet</string>
+          </HashCodeRequestIgnoreList>
           <AnalysisFileManager>
             <AnalysisFiles>
               <AnalysisFile>
@@ -362,8 +381,8 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>4201</ProductionLoc>
-          <TestLoc>767</TestLoc>
+          <ProductionLoc>4220</ProductionLoc>
+          <TestLoc>777</TestLoc>
         </CodeReview>
       </Data>
     </div>

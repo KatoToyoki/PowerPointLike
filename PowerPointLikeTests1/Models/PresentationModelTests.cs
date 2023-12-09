@@ -301,6 +301,14 @@ namespace PowerPointLike.Tests
             presentationModel._model._state._isScale = true;
             presentationModel.MovePointer(95, 95);
 
+            CoordinateSet coordinateSetaa = new CoordinateSet(new Coordinate(1, 1), new Coordinate(100, 100));
+            presentationModel._model._shapes.AddShapeInEnd(0, coordinateSetaa);
+            presentationModel._model._selectedShape = presentationModel._model._shapes.GetShape(presentationModel._model._shapes.GetContainerLength()-1);
+            presentationModel.DetectScale(97, 97);
+
+            presentationModel._model._shapes.AddShapeInEnd(0, coordinateSetaa);
+            Shape newShape = presentationModel._model._selectedShape;
+
             presentationModel.ReleasePointer(90, 90);
 
             presentationModel.PressPointer(200, 200);
@@ -313,6 +321,8 @@ namespace PowerPointLike.Tests
             presentationModel.MovePointer(200, 200);
 
             presentationModel.ReleasePointer(300, 300);
+
+            presentationModel._model._shapes.ExchangeShape(presentationModel._model._selectedShape, newShape);
         }
 
         /// <summary>

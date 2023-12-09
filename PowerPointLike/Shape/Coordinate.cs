@@ -402,12 +402,22 @@ namespace PowerPointLike
         }
 
         /// <summary>
-        /// Method <c>GetClone</c>
+        /// Method <c>GetClone</c> 
         /// </summary>
         /// <returns></returns>
         public CoordinateSet GetClone()
         {
             return new CoordinateSet(this._point1.GetClone(), this._point2.GetClone());
+        }
+
+        /// <summary>
+        /// Method <c>IsCoordinateSetSame</c> 
+        /// </summary>
+        /// <param name="otherShape"></param>
+        /// <returns></returns>
+        public bool IsCoordinateSetSame(Shape otherShape)
+        {
+            return this.GetIfIsSame(otherShape._coordinateSet);
         }
     }
 }

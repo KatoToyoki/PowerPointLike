@@ -51,6 +51,11 @@ namespace PowerPointLike
             get; set;
         }
 
+        public Shape _selectedShape
+        {
+            get; set;
+        }
+
         public Model()
         {
             _shapes = new Shapes();
@@ -300,7 +305,11 @@ namespace PowerPointLike
         /// <returns></returns>
         public bool IsScale(double coordinateX, double coordinateY)
         {
-            return _selectedOneCoordinate.IsScale(coordinateX, coordinateY);
+            if (_selectedShape == null)
+            {
+                return false;
+            }
+            return _selectedShape._coordinateSet.IsScale(coordinateX, coordinateY);
         }
     }
 }

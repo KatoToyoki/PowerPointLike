@@ -75,6 +75,7 @@ namespace PowerPointLike
         }
 
         // data =====================================================================
+
         /// <summary>
         /// Method <c>AddElement</c>
         /// when the button is clicked, add new item in the container
@@ -140,6 +141,7 @@ namespace PowerPointLike
         }
 
         // button ===================================================================
+
         /// <summary>
         /// Method <c>ClickLineButton</c>
         /// change the status of all buttons
@@ -210,6 +212,7 @@ namespace PowerPointLike
         }
 
         // state ====================================================================
+
         /// <summary>
         /// Method <c>HandleCanvasPressed</c>
         /// this function is to deal with the situation of the starting of the drawing
@@ -220,8 +223,9 @@ namespace PowerPointLike
         {
             _canvas.Invalidate();
 
-            _presentationModel.DetectScale(e.X, e.Y);
             _presentationModel.PressPointer(e.X, e.Y);
+            _presentationModel.DetectScale(e.X, e.Y);
+            _canvas.Cursor = _presentationModel._cursor;
         }
 
         /// <summary>
