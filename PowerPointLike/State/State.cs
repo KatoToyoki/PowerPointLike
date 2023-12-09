@@ -34,6 +34,8 @@ namespace PowerPointLike
             get; set;
         }
 
+        // public int count = 0;
+
         public CoordinateSet _selectedOneCoordinate
         {
             get; set;
@@ -65,6 +67,7 @@ namespace PowerPointLike
         protected int _oldLength = -1;
         protected int _newLength = -1;
         public const int INVALID = -1;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="State"/> class.
@@ -131,7 +134,7 @@ namespace PowerPointLike
             }
             else if (_currentStateIndex == (int)StateIndex.Select)
             {
-                return new PointState(shapes);
+                return new PointState(shapes, model);
             }
             return null;
         }

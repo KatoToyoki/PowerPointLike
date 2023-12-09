@@ -277,7 +277,7 @@ namespace PowerPointLike.Tests
             point.Offset(10, 10);
             */
 
-            model._state = new PointState(model._shapes);
+            model._state = new PointState(model._shapes,model);
 
             model.PressPointer(55, 55, 0);
 

@@ -154,6 +154,7 @@ namespace PowerPointLike
             _presentationModel.ResetSelectIndex();
             UpdateDataToTable();
             _canvas.Invalidate();
+            RefreshRedoUndoUI();
         }
 
         /// <summary>
@@ -167,14 +168,15 @@ namespace PowerPointLike
             _presentationModel.ResetSelectIndex();
             UpdateDataToTable();
             _canvas.Invalidate();
+            RefreshRedoUndoUI();
         }
 
-        // void RefreshUI()    // 更新redo與undo是否為enabled
-        // {
-        //     redo.Enabled = model.IsRedoEnabled;
-        //     undo.Enabled = model.IsUndoEnabled;
-        //     Invalidate();
-        // }
+        private void RefreshRedoUndoUI()
+        {
+            _redoButton.Enabled = _presentationModel._model._commandManager.IsRedoEnabled;
+            _undoButton.Enabled = _presentationModel._model._commandManager.IsUndoEnabled;
+            Invalidate();
+        }
 
     }
 }

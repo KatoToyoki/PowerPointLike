@@ -36,9 +36,11 @@ namespace PowerPointLike
         /// </summary>
         public void Execute()
         {
+            // Console.WriteLine("do datagridview " + _shape.GetOneElementCoordinate());
+            Console.WriteLine("do datagirdview " + _shape._id);
             if (_command == (int)Command.Add)
             {
-                _model._shapes.AddShape(_shape, _deleteIndex - 1);
+                _model._shapes.AddShape(_shape.Clone(), _deleteIndex - 1);
             }
             else if (_command == (int)Command.Delete)
             {
@@ -51,13 +53,15 @@ namespace PowerPointLike
         /// </summary>
         public void ExecuteCancel()
         {
+            // Console.WriteLine("undo datagridview " + _shape.GetOneElementCoordinate());
+            Console.WriteLine("undo datagirdview " + _shape._id);
             if (_command == (int)Command.Add)
             {
                 _model._shapes.DeleteCertainElement(_dataIndex, _deleteIndex - 1);
             }
             else if (_command == (int)Command.Delete)
             {
-                _model._shapes.AddShape(_shape, _deleteIndex);
+                _model._shapes.AddShape(_shape.Clone(), _deleteIndex);
             }
         }
     }

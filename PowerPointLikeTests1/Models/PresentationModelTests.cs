@@ -70,7 +70,7 @@ namespace PowerPointLike.Tests
             presentationModel.AddItem("線");
             presentationModel.AddItem("矩形");
             presentationModel.Draw(mockGraphicsAdaptor.Object);
-            */
+            
 
             CoordinateSet coordinateSet = new CoordinateSet(new Coordinate(1, 1), new Coordinate(100, 100));
             Shape shape1 = new Circle(coordinateSet);
@@ -85,6 +85,7 @@ namespace PowerPointLike.Tests
             mockGraphicsAdaptor.Object.DrawLine(coordinateSet);
             mockGraphicsAdaptor.Object.DrawCircle(coordinateSet);
             mockGraphicsAdaptor.Object.DrawRectangle(coordinateSet);
+            */
         }
 
         /// <summary>

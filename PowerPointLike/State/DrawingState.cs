@@ -58,14 +58,16 @@ namespace PowerPointLike
         /// <param name="shapeIndex">shapeIndex</param>
         public override void HandleCanvasReleased(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne)
         {
-            selectedOne = _selectedOneCoordinate;
+            // selectedOne = _selectedOneCoordinate;
+            selectedOne = default;
 
             if (_isPressed)
             {
                 CoordinateSet confirmOne = new CoordinateSet();
                 confirmOne._point1 = _firstPoint;
                 confirmOne._point2 = (new Coordinate((int)coordinateX, (int)coordinateY));
-                _model._commandManager.Execute(new DrawingCommand(_model, _tempShape));
+                Console.WriteLine("== draw press " + _tempShape._id + " " + _tempShape.Clone()._id);
+                _model._commandManager.Execute(new DrawingCommand(_model, _tempShape.Clone()));
                 _oldLength = -1;
                 _newLength = -1;
             }

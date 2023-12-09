@@ -54,7 +54,7 @@ namespace PowerPointLike
         public Model()
         {
             _shapes = new Shapes();
-            _state = new PointState(_shapes);
+            _state = new PointState(_shapes, this);
             _commandManager = new CommandManager();
         }
 
@@ -79,7 +79,7 @@ namespace PowerPointLike
                 return;
             }
             Shape newShape = _shapes.CreateTempShape(shapeName);
-            _commandManager.Execute(new DataGridViewCommand(newShape, dataIndex, deleteIndex, this, (int)DataGridViewCommand.Command.Add));
+            _commandManager.Execute(new DataGridViewCommand(newShape.Clone(), dataIndex, deleteIndex, this, (int)DataGridViewCommand.Command.Add));
             NotifyModelChanged();
 
             // print test

@@ -134,6 +134,11 @@ namespace PowerPointLike
         {
             return new Coordinate(_x + offsetX, _y + offsetY);
         }
+
+        public Coordinate Clone()
+        {
+            return new Coordinate(this._x, this._y);
+        }
     }
 
     public struct CoordinateSet
@@ -390,6 +395,11 @@ namespace PowerPointLike
                 return true;
             }
             return false;
+        }
+
+        public CoordinateSet Clone()
+        {
+            return new CoordinateSet(this._point1.Clone(), this._point2.Clone());
         }
     }
 }

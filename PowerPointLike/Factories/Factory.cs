@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PowerPointLike
 {
@@ -87,8 +88,9 @@ namespace PowerPointLike
         /// <returns>rectangle element</returns>
         public Shape CreateRectangle()
         {
-            Shape rectangle = new Rectangle(InitializeSet());
-            rectangle._id = _shapeContainer.Count;
+            Shape rectangle = new Rectangle(InitializeSet(), this);
+            // rectangle._id = _shapeContainer.Count;
+            rectangle._id = GetLastOneID() + 1;
             return rectangle;
         }
 
@@ -99,8 +101,9 @@ namespace PowerPointLike
         /// <returns>line element</returns>
         public Shape CreateLine()
         {
-            Shape line = new Line(InitializeSet());
-            line._id = _shapeContainer.Count;
+            Shape line = new Line(InitializeSet(), this);
+            // line._id = _shapeContainer.Count; 
+            line._id = GetLastOneID() + 1;
             return line;
         }
 
@@ -111,8 +114,9 @@ namespace PowerPointLike
         /// <returns>circle element</returns>
         public Shape CreateCircle()
         {
-            Shape circle = new Circle(InitializeSet());
-            circle._id = _shapeContainer.Count;
+            Shape circle = new Circle(InitializeSet(), this);
+            // circle._id = _shapeContainer.Count;
+            circle._id = GetLastOneID() + 1;
             return circle;
         }
 
@@ -123,8 +127,9 @@ namespace PowerPointLike
         /// <returns>line element</returns>
         public Shape DrawLine(CoordinateSet coordinateSet)
         {
-            Shape line = new Line(coordinateSet);
-            line._id = _shapeContainer.Count;
+            Shape line = new Line(coordinateSet, this);
+            // line._id = _shapeContainer.Count; 
+            line._id = GetLastOneID() + 1;
             return line;
         }
 
@@ -135,8 +140,9 @@ namespace PowerPointLike
         /// <returns>rectangle element</returns>
         public Shape DrawRectangle(CoordinateSet coordinateSet)
         {
-            Shape rectangle = new Rectangle(coordinateSet);
-            rectangle._id = _shapeContainer.Count;
+            Shape rectangle = new Rectangle(coordinateSet, this);
+            // rectangle._id = _shapeContainer.Count;
+            rectangle._id = GetLastOneID() + 1;
             return rectangle;
         }
 
@@ -147,8 +153,9 @@ namespace PowerPointLike
         /// <returns>circle element</returns>
         public Shape DrawCircle(CoordinateSet coordinateSet)
         {
-            Shape circle = new Circle(coordinateSet);
-            circle._id = _shapeContainer.Count;
+            Shape circle = new Circle(coordinateSet, this);
+            // circle._id = _shapeContainer.Count;
+            circle._id = GetLastOneID() + 1;
             return circle;
         }
 
@@ -161,6 +168,25 @@ namespace PowerPointLike
         {
             _maxWidth = width;
             _maxHeight = height;
+        }
+
+        public int GetLastOneID()
+        {
+            int maxValue = ButtonModel.INVALID;
+            if (_shapeContainer.Count == 0)
+            {
+                return 0;
+            }
+            for (int i = 0; i < _shapeContainer.Count; i++)
+            {
+                if (_shapeContainer[i]._id > maxValue)
+                {
+                    maxValue = _shapeContainer[i]._id;
+                }
+            }
+
+            return maxValue;
+            // return _shapeContainer[_shapeContainer.Count - 1]._id;
         }
     }
 }

@@ -14,10 +14,11 @@ namespace PowerPointLike
         /// <summary>
         /// Initializes a new instance of the <see cref="Line"/> class.
         /// </summary>
-        public Line(CoordinateSet coordinateSet)
+        public Line(CoordinateSet coordinateSet, Factory factory)
         {
             _shapeName = LINE;
             _coordinateSet = coordinateSet;
+             _factory = factory;
         }
 
         /// <summary>
@@ -27,6 +28,16 @@ namespace PowerPointLike
         public override void Draw(IGraphics graphics)
         {
             graphics.DrawLine(_coordinateSet);
+        }
+
+        public override Shape Clone()
+        {
+            // Line newOne = new Line(_coordinateSet.Clone());
+            // return newOne;
+            // return null;
+            Shape newOne = _factory.CreateLine();
+            newOne._coordinateSet = this._coordinateSet.Clone();
+            return newOne;
         }
     }
 }

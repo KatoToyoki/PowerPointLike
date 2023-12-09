@@ -13,10 +13,12 @@ namespace PowerPointLike
         /// <summary>
         /// Initializes a new instance of the <see cref="Rectangle"/> class.
         /// </summary>
-        public Rectangle(CoordinateSet coordinateSet)
+        public Rectangle(CoordinateSet coordinateSet, Factory factory)
         {
             _shapeName = RECTANGLE;
             _coordinateSet = coordinateSet;
+            // _shapes = shapes;
+            _factory = factory;
         }
 
         /// <summary>
@@ -26,6 +28,15 @@ namespace PowerPointLike
         public override void Draw(IGraphics graphics)
         {
             graphics.DrawRectangle(_coordinateSet);
+        }
+
+        public override Shape Clone()
+        {
+            // CoordinateSet newCoordinate=_coordinateSet
+            // return new Rectangle(_coordinateSet.Clone());
+            Shape newOne = _factory.CreateRectangle();
+            newOne._coordinateSet = this._coordinateSet.Clone();
+            return newOne;
         }
     }
 }

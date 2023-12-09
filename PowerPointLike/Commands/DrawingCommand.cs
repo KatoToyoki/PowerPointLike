@@ -9,12 +9,18 @@ namespace PowerPointLike
     public class DrawingCommand : ICommand
     {
         Shape _shape;
+        Shape _test1;
         Model _model;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DrawingCommand"/> class.
+        /// </summary>
         public DrawingCommand(Model model, Shape shape)
         {
-            _shape = shape;
+            _shape = shape.Clone();
             _model = model;
+            _test1 = _shape.Clone();
+            Console.WriteLine("new draw " + shape._id + " " + _shape._id);
         }
 
         /// <summary>
@@ -22,7 +28,9 @@ namespace PowerPointLike
         /// </summary>
         public void Execute()
         {
-            _model._shapes.AddShape(_shape);
+            // Console.WriteLine("do draw " + _shape.GetOneElementCoordinate() + " --" + _test1.GetOneElementCoordinate());
+            Console.WriteLine("do draw " + _shape._id);
+            _model._shapes.AddShape(_shape.Clone());
         }
 
         /// <summary>
@@ -30,6 +38,8 @@ namespace PowerPointLike
         /// </summary>
         public void ExecuteCancel()
         {
+            Console.WriteLine("undo draw " + _shape._id);
+            // Console.WriteLine("undo draw " + _shape.GetOneElementCoordinate() + " --" + _test1.GetOneElementCoordinate());
             _model._shapes.PopShape();
         }
     }

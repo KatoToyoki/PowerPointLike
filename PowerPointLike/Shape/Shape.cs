@@ -9,6 +9,14 @@ namespace PowerPointLike
 {
     public abstract class Shape
     {
+        // public Shapes _shapes
+        // {
+        //     get; set;
+        // }
+        public Factory _factory
+        {
+            get; set;
+        }
         public string _shapeName
         {
             get; set;
@@ -68,5 +76,7 @@ namespace PowerPointLike
         {
             _coordinateSet = set;
         }
+
+        public abstract Shape Clone();
     }
 }

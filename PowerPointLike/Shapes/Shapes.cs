@@ -154,7 +154,7 @@ namespace PowerPointLike
         {
             for (int i = 0; i < _shapeContainer.Count; i++)
             {
-                Console.WriteLine(_shapeContainer[i].GetOneElementData());
+                Console.WriteLine(_shapeContainer[i].GetOneElementData() + " " + _shapeContainer[i]._id);
             }
         }
 
@@ -187,6 +187,10 @@ namespace PowerPointLike
         /// <param name="index">the wanted index</param>
         public void DeleteCertainElement(int dataIndex, int deleteIndex)
         {
+            if (_shapeContainer.Count == 0)
+            {
+                return;
+            }
             if (dataIndex == (int)DataModel.DATA_DELETE_INDEX)
             {
                 _shapeContainer.RemoveAt(deleteIndex);
@@ -273,12 +277,9 @@ namespace PowerPointLike
         /// to check if it's in the process of drawing, and delete the temp shape in the container
         /// </summary>
         /// <param name="currentLength"></param>
-        public void DeleteEndShape(int currentLength)
+        public void DeleteShapeByIndex(int index)
         {
-            if (currentLength == GetContainerLength())
-            {
-                _shapeContainer.RemoveAt(GetContainerLength() - 1);
-            }
+            _shapeContainer.RemoveAt(index);
         }
 
         /// <summary>
@@ -373,6 +374,26 @@ namespace PowerPointLike
         {
             _maxWidth = width;
             _maxHeight = height;
+        }
+
+        /// <summary>
+        /// Method <c>ExchangeShape</c>
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="shape"></param>
+        public void ExchangeShape(int index, Shape shape)
+        {
+            int indexForItem;
+            Console.WriteLine("are they the same or something?? " + index + " " + shape._id);
+            for (int i = 0; i < _shapeContainer.Count; i++)
+            {
+                if (_shapeContainer[i]._id == index)
+                {
+                    indexForItem = i;
+                    _shapeContainer[indexForItem] = shape.Clone();
+                }
+            }
+
         }
     }
 }

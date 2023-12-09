@@ -18,11 +18,12 @@ namespace PowerPointLike
         /// <summary>
         /// Initializes a new instance of the <see cref="DrawingState"/> class.
         /// </summary>
-        public PointState(Shapes shapes)
+        public PointState(Shapes shapes, Model model)
         {
             _shapes = shapes;
             _isScale = false;
             _isFirstMove = false;
+            _model = model;
         }
 
         /// <summary>
@@ -34,6 +35,11 @@ namespace PowerPointLike
         /// <param name="shapeIndex">shapeIndex</param>
         public override void HandleCanvasPressed(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne)
         {
+            if (_shapes.GetContainerLength() == 0)
+            {
+                selectedOne = _selectedOneCoordinate;
+                return;
+            }
             _index = INVALID;
             PressFirst(coordinateX, coordinateY, shapeIndex);
             PickShape(coordinateX, coordinateY);
@@ -54,8 +60,18 @@ namespace PowerPointLike
         /// <param name="shapeIndex">shapeIndex</param>
         public override void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne)
         {
-            PickShape(coordinateX, coordinateY);
-            selectedOne = _selectedOneCoordinate;
+
+            if (_shapes.GetContainerLength() == 0)
+            {
+                selectedOne = _selectedOneCoordinate;
+                return;
+            }
+            if (_tempShape == null)
+            {
+                selectedOne = _selectedOneCoordinate;
+                return;
+            }
+            selectedOne = _tempShape._coordinateSet;
 
             if (ViolateMove())
             {
@@ -102,17 +118,24 @@ namespace PowerPointLike
         /// <param name="shapeIndex">shapeIndex</param>
         public override void HandleCanvasReleased(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne)
         {
+            if (_tempShape == null)
+            {
+                // selectedOne = _selectedOneCoordinate;
+                selectedOne = default;
+                return;
+            }
+
             if (_newShapeCoordinateSet._point2.GetIfIsSame(new Coordinate(0, 0)))
             {
-                PickShape(coordinateX, coordinateY);
-                selectedOne = _selectedOneCoordinate;
+                // selectedOne = _selectedOneCoordinate;
+                selectedOne = default;
                 return;
             }
 
             ReleaseCoordinate();
             ResetThreePoint();
-            PickShape(coordinateX, coordinateY);
-            selectedOne = _selectedOneCoordinate;
+            // selectedOne = _tempShape._coordinateSet;
+            selectedOne = default;
         }
 
         /// <summary>
@@ -122,11 +145,17 @@ namespace PowerPointLike
         {
             if (_isScale)
             {
-                _shapes.ScaleCoordinate(_currentItem, _newShapeCoordinateSet.GetDeltaX(), _newShapeCoordinateSet.GetDeltaY());
+                _tempShape = _shapes.GetShape(_index).Clone();
+                _shapes.DeleteElementByIndex(_index);
+                _shapes.AddShape(_tempShape, _index);
+                _model._commandManager.Execute(new PointCommand(_originalShape.Clone(), _tempShape.Clone(), _model));
             }
             else
             {
-                _shapes.ChangeCoordinate(_currentItem, _newShapeCoordinateSet.GetDeltaX(), _newShapeCoordinateSet.GetDeltaY());
+                _tempShape = _shapes.GetShape(_index).Clone();
+                _shapes.DeleteElementByIndex(_index);
+                _shapes.AddShape(_tempShape, _index);
+                _model._commandManager.Execute(new PointCommand(_originalShape.Clone(), _tempShape.Clone(), _model));
             }
         }
 
@@ -138,13 +167,21 @@ namespace PowerPointLike
         /// <param name="coordinateY"></param>
         public void PickShape(double coordinateX, double coordinateY)
         {
-
             CoordinateSet selectedCoordinate;
             if (_shapes.PickShape(coordinateX, coordinateY, out selectedCoordinate) == null)
             {
                 return;
             }
             _index = (int)_shapes.PickShape(coordinateX, coordinateY, out selectedCoordinate);
+
+            // pop original and temp copy from it. 
+            // insert temp is to reveal the data in data gird view
+            _originalShape = _shapes.GetShape(_index).Clone();
+            _tempShape = _shapes.GetShape(_index);
+            _shapes.DeleteElementByIndex(_index);
+            _shapes.AddShape(_tempShape, _index);
+
+            selectedCoordinate = _tempShape._coordinateSet;
             _selectedOneCoordinate = selectedCoordinate;
         }
 
