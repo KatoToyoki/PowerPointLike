@@ -83,15 +83,15 @@ namespace PowerPointLike
 
         // data ===============================================================
         // Method <c>AddItem</c>
-        public void AddItem(string shape)
+        public void AddItem(string shape, int dataIndex, int deleteIndex)
         {
-            _dataModel.AddItem(shape);
+            _dataModel.AddItem(shape, dataIndex, deleteIndex);
         }
 
         //  Method <c>DeleteCertainElement</c>
-        public void DeleteCertainElement(int dataIndex, int deleteIndex)
+        public void DeleteCertainElement(string shapeName, int dataIndex, int deleteIndex)
         {
-            _dataModel.DeleteCertainElement(dataIndex, deleteIndex);
+            _dataModel.DeleteCertainElement(shapeName, dataIndex, deleteIndex);
         }
 
         // Method <c>GetDeleteIndex</c>

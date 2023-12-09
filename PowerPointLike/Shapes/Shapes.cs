@@ -37,20 +37,9 @@ namespace PowerPointLike
         /// to create new element depends on the chosen element
         /// </summary>
         /// <param name="shapeName">to decide which element will be create</param>
-        public void AddShape(string shapeName)
+        public void AddShape(Shape shape, int index)
         {
-            if (shapeName == RECTANGLE)
-            {
-                _shapeContainer.Add(_factory.CreateRectangle());
-            }
-            else if (shapeName == LINE)
-            {
-                _shapeContainer.Add(_factory.CreateLine());
-            }
-            else if (shapeName == CIRCLE)
-            {
-                _shapeContainer.Add(_factory.CreateCircle());
-            }
+            _shapeContainer.Insert(index, shape);
         }
 
         /// <summary>
@@ -93,6 +82,30 @@ namespace PowerPointLike
                 case (int)PresentationModel.ShapeIndex.Circle:
                     return _factory.DrawCircle(coordinateSet);
             }
+            return null;
+        }
+
+        /// <summary>
+        ///  Method <c>CreateTempShape</c>
+        ///  create a shape but not added in the container 
+        /// </summary>
+        /// <param name="shapeName"></param>
+        /// <returns></returns>
+        public Shape CreateTempShape(string shapeName)
+        {
+            if (shapeName == RECTANGLE)
+            {
+                return _factory.CreateRectangle();
+            }
+            else if (shapeName == LINE)
+            {
+                return _factory.CreateLine();
+            }
+            else if (shapeName == CIRCLE)
+            {
+                return _factory.CreateCircle();
+            }
+
             return null;
         }
 
@@ -169,10 +182,23 @@ namespace PowerPointLike
 
         /// <summary>
         /// Method <c>DeleteCertainElement</c>
-        /// delete the certain element by index
+        /// for data grid view
         /// </summary>
         /// <param name="index">the wanted index</param>
-        public void DeleteCertainElement(int index)
+        public void DeleteCertainElement(int dataIndex, int deleteIndex)
+        {
+            if (dataIndex == (int)DataModel.DATA_DELETE_INDEX)
+            {
+                _shapeContainer.RemoveAt(deleteIndex);
+            }
+        }
+
+        /// <summary>
+        /// Method <c>DeleteElementByIndex</c>
+        ///  /// delete the certain element by index
+        /// </summary>
+        /// <param name="index"></param>
+        public void DeleteElementByIndex(int index)
         {
             _shapeContainer.RemoveAt(index);
         }

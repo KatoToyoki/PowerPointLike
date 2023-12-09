@@ -153,7 +153,7 @@ namespace PowerPointLike
             _presentationModel._model.Undo();
             _presentationModel.ResetSelectIndex();
             UpdateDataToTable();
-
+            _canvas.Invalidate();
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace PowerPointLike
             _presentationModel._model.Redo();
             _presentationModel.ResetSelectIndex();
             UpdateDataToTable();
-
+            _canvas.Invalidate();
         }
 
         // void RefreshUI()    // 更新redo與undo是否為enabled

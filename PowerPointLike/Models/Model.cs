@@ -72,13 +72,14 @@ namespace PowerPointLike
         /// to call the factory to add new element depends on the chosen element
         /// </summary>
         /// <param name="shape"></param>
-        public void AddItem(string shape)
+        public void AddItem(string shapeName, int dataIndex, int deleteIndex)
         {
-            if (shape == EMPTY_STRING)
+            if (shapeName == EMPTY_STRING)
             {
                 return;
             }
-            _shapes.AddShape(shape);
+            Shape newShape = _shapes.CreateTempShape(shapeName);
+            _commandManager.Execute(new DataGridViewCommand(newShape, dataIndex, deleteIndex, this, (int)DataGridViewCommand.Command.Add));
             NotifyModelChanged();
 
             // print test
@@ -116,9 +117,10 @@ namespace PowerPointLike
         /// Method <c>DeleteCertainElement</c>
         /// </summary>
         /// <param name="index">the wanted index</param>
-        public void DeleteCertainElement(int index)
+        public void DeleteCertainElement(string shapeName, int dataIndex, int deleteIndex)
         {
-            _shapes.DeleteCertainElement(index);
+            Shape shape = _shapes.GetShape(deleteIndex);
+            _commandManager.Execute(new DataGridViewCommand(shape, dataIndex, deleteIndex, this, (int)DataGridViewCommand.Command.Delete));
             NotifyModelChanged();
         }
 
@@ -276,7 +278,7 @@ namespace PowerPointLike
             {
                 return;
             }
-            _shapes.DeleteCertainElement((int)GetSelectIndex());
+            _shapes.DeleteElementByIndex((int)GetSelectIndex());
         }
 
         /// <summary>

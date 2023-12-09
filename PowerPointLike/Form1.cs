@@ -21,6 +21,7 @@ namespace PowerPointLike
         public const double X_Y_FACTOR = 1.2;
         public const double WIDTH_FACTOR = 1.35;
         public const double HEIGHT_FACTOR = 1.45;
+        public const string SHAPE_NAME = "_shapeName";
 
         public PresentationModel _presentationModel
         {
@@ -80,7 +81,7 @@ namespace PowerPointLike
         /// <param name="e"></param>
         public void AddNewElement(object sender, EventArgs e)
         {
-            _presentationModel.AddItem(_elementsChoicesBox.Text);
+            _presentationModel.AddItem(_elementsChoicesBox.Text, (int)DataModel.DATA_DELETE_INDEX, _elementDataGrid.RowCount);
             UpdateDataToTable();
         }
 
@@ -92,7 +93,8 @@ namespace PowerPointLike
         /// <param name="e"></param>
         public void DeleteElement(object sender, DataGridViewCellEventArgs e)
         {
-            _presentationModel.DeleteCertainElement(e.ColumnIndex, e.RowIndex);
+            string shapeName = _elementDataGrid.Rows[e.RowIndex].Cells[SHAPE_NAME].Value.ToString();
+            _presentationModel.DeleteCertainElement(shapeName, e.ColumnIndex, e.RowIndex);
             _presentationModel.ResetSelectIndex();
             UpdateDataToTable();
         }

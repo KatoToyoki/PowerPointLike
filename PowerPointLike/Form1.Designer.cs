@@ -43,14 +43,14 @@ namespace PowerPointLike
             this._shapeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._shapeInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._toolBar = new System.Windows.Forms.ToolStrip();
-            this._drawingViewContainer = new System.Windows.Forms.SplitContainer();
-            this._drawingDataContainer = new System.Windows.Forms.SplitContainer();
             this._lineButton = new System.Windows.Forms.ToolStripButton();
             this._rectangleButton = new System.Windows.Forms.ToolStripButton();
             this._circleButton = new System.Windows.Forms.ToolStripButton();
             this._mouseButton = new System.Windows.Forms.ToolStripButton();
             this._undoButton = new System.Windows.Forms.ToolStripButton();
             this._redoButton = new System.Windows.Forms.ToolStripButton();
+            this._drawingViewContainer = new System.Windows.Forms.SplitContainer();
+            this._drawingDataContainer = new System.Windows.Forms.SplitContainer();
             this._menu.SuspendLayout();
             this._canvasElementsData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dataViewContainer)).BeginInit();
@@ -224,50 +224,6 @@ namespace PowerPointLike
             this._toolBar.TabIndex = 6;
             this._toolBar.Text = "toolStrip1";
             // 
-            // _drawingViewContainer
-            // 
-            this._drawingViewContainer.BackColor = System.Drawing.Color.Silver;
-            this._drawingViewContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._drawingViewContainer.Location = new System.Drawing.Point(0, 0);
-            this._drawingViewContainer.Name = "_drawingViewContainer";
-            // 
-            // _drawingViewContainer.Panel1
-            // 
-            this._drawingViewContainer.Panel1.BackColor = System.Drawing.Color.PowderBlue;
-            this._drawingViewContainer.Panel1.Controls.Add(this._canvas1);
-            // 
-            // _drawingViewContainer.Panel2
-            // 
-            this._drawingViewContainer.Panel2.BackColor = System.Drawing.Color.PaleTurquoise;
-            this._drawingViewContainer.Panel2.Controls.Add(this._canvas);
-            this._drawingViewContainer.Size = new System.Drawing.Size(1101, 698);
-            this._drawingViewContainer.SplitterDistance = 133;
-            this._drawingViewContainer.SplitterWidth = 10;
-            this._drawingViewContainer.TabIndex = 7;
-            this._drawingViewContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.MoveSplitDrawingViewContainer);
-            // 
-            // _drawingDataContainer
-            // 
-            this._drawingDataContainer.BackColor = System.Drawing.Color.Silver;
-            this._drawingDataContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._drawingDataContainer.Location = new System.Drawing.Point(0, 54);
-            this._drawingDataContainer.Name = "_drawingDataContainer";
-            // 
-            // _drawingDataContainer.Panel1
-            // 
-            this._drawingDataContainer.Panel1.BackColor = System.Drawing.Color.LightCyan;
-            this._drawingDataContainer.Panel1.Controls.Add(this._drawingViewContainer);
-            // 
-            // _drawingDataContainer.Panel2
-            // 
-            this._drawingDataContainer.Panel2.BackColor = System.Drawing.Color.PowderBlue;
-            this._drawingDataContainer.Panel2.Controls.Add(this._canvasElementsData);
-            this._drawingDataContainer.Size = new System.Drawing.Size(1581, 698);
-            this._drawingDataContainer.SplitterDistance = 1101;
-            this._drawingDataContainer.SplitterWidth = 10;
-            this._drawingDataContainer.TabIndex = 8;
-            this._drawingDataContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.MoveSplitDrawingDataContainer);
-            // 
             // _lineButton
             // 
             this._lineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -331,6 +287,50 @@ namespace PowerPointLike
             this._redoButton.Size = new System.Drawing.Size(29, 24);
             this._redoButton.Text = "Redo";
             this._redoButton.Click += new System.EventHandler(this.ClickRedo);
+            // 
+            // _drawingViewContainer
+            // 
+            this._drawingViewContainer.BackColor = System.Drawing.Color.Silver;
+            this._drawingViewContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._drawingViewContainer.Location = new System.Drawing.Point(0, 0);
+            this._drawingViewContainer.Name = "_drawingViewContainer";
+            // 
+            // _drawingViewContainer.Panel1
+            // 
+            this._drawingViewContainer.Panel1.BackColor = System.Drawing.Color.PowderBlue;
+            this._drawingViewContainer.Panel1.Controls.Add(this._canvas1);
+            // 
+            // _drawingViewContainer.Panel2
+            // 
+            this._drawingViewContainer.Panel2.BackColor = System.Drawing.Color.PaleTurquoise;
+            this._drawingViewContainer.Panel2.Controls.Add(this._canvas);
+            this._drawingViewContainer.Size = new System.Drawing.Size(1101, 698);
+            this._drawingViewContainer.SplitterDistance = 133;
+            this._drawingViewContainer.SplitterWidth = 10;
+            this._drawingViewContainer.TabIndex = 7;
+            this._drawingViewContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.MoveSplitDrawingViewContainer);
+            // 
+            // _drawingDataContainer
+            // 
+            this._drawingDataContainer.BackColor = System.Drawing.Color.Silver;
+            this._drawingDataContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._drawingDataContainer.Location = new System.Drawing.Point(0, 54);
+            this._drawingDataContainer.Name = "_drawingDataContainer";
+            // 
+            // _drawingDataContainer.Panel1
+            // 
+            this._drawingDataContainer.Panel1.BackColor = System.Drawing.Color.LightCyan;
+            this._drawingDataContainer.Panel1.Controls.Add(this._drawingViewContainer);
+            // 
+            // _drawingDataContainer.Panel2
+            // 
+            this._drawingDataContainer.Panel2.BackColor = System.Drawing.Color.PowderBlue;
+            this._drawingDataContainer.Panel2.Controls.Add(this._canvasElementsData);
+            this._drawingDataContainer.Size = new System.Drawing.Size(1581, 698);
+            this._drawingDataContainer.SplitterDistance = 1101;
+            this._drawingDataContainer.SplitterWidth = 10;
+            this._drawingDataContainer.TabIndex = 8;
+            this._drawingDataContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.MoveSplitDrawingDataContainer);
             // 
             // PowerPointLike
             // 

@@ -29,13 +29,13 @@ namespace PowerPointLike
         /// add the assigned shape to the shape container
         /// </summary>
         /// <param name="shape">the assigned shape</param>
-        public void AddItem(string shape)
+        public void AddItem(string shape, int dataIndex, int deleteIndex)
         {
             if (shape == string.Empty)
             {
                 return;
             }
-            _model.AddItem(shape);
+            _model.AddItem(shape, dataIndex, deleteIndex);
         }
 
         /// <summary>
@@ -44,12 +44,12 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="dataIndex">to determine if this function will be executed</param>
         /// <param name="deleteIndex">the index of the shape in the container</param>
-        public void DeleteCertainElement(int dataIndex, int deleteIndex)
+        public void DeleteCertainElement(string shapeName, int dataIndex, int deleteIndex)
         {
-            if (dataIndex == (int)DataModel.DATA_DELETE_INDEX)
-            {
-                _model.DeleteCertainElement(deleteIndex);
-            }
+            // if (dataIndex == (int)DataModel.DATA_DELETE_INDEX)
+            // {
+            _model.DeleteCertainElement(shapeName, dataIndex, deleteIndex);
+            // }
         }
 
         /// <summary>

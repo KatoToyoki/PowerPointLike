@@ -189,9 +189,9 @@
             <Smell>
               <Id>1</Id>
               <SmellType>Large class(過大類別)</SmellType>
-              <HashCode>LargeClass.PowerPointLike.Model.313</HashCode>
+              <HashCode>LargeClass.PowerPointLike.Model.315</HashCode>
               <Severity>Warning</Severity>
-              <Weight>313</Weight>
+              <Weight>315</Weight>
               <Project>PowerPointLike</Project>
               <File>Model.cs</File>
               <Line>11</Line>
@@ -205,9 +205,9 @@
             <Smell>
               <Id>2</Id>
               <SmellType>Large class(過大類別)</SmellType>
-              <HashCode>LargeClass.PowerPointLike.Shapes.315</HashCode>
+              <HashCode>LargeClass.PowerPointLike.Shapes.338</HashCode>
               <Severity>Warning</Severity>
-              <Weight>315</Weight>
+              <Weight>338</Weight>
               <Project>PowerPointLike</Project>
               <File>Shapes.cs</File>
               <Line>9</Line>
@@ -385,8 +385,8 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>3878</ProductionLoc>
-          <TestLoc>640</TestLoc>
+          <ProductionLoc>3945</ProductionLoc>
+          <TestLoc>653</TestLoc>
         </CodeReview>
       </Data>
     </div>
