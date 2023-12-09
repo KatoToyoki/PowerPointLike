@@ -30,11 +30,14 @@ namespace PowerPointLike
             graphics.DrawCircle(_coordinateSet);
         }
 
-        public override Shape Clone()
+        /// <summary>
+        /// Method <c>GetClone</c>
+        /// </summary>
+        /// <returns></returns>
+        public override Shape GetClone()
         {
-            // return new Circle(_coordinateSet.Clone());
             Shape newOne = _factory.CreateCircle();
-            newOne._coordinateSet = this._coordinateSet.Clone();
+            newOne._coordinateSet = this._coordinateSet.GetClone();
             return newOne;
         }
     }

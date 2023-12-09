@@ -154,7 +154,7 @@ namespace PowerPointLike
             _presentationModel.ResetSelectIndex();
             UpdateDataToTable();
             _canvas.Invalidate();
-            RefreshRedoUndoUI();
+            RefreshRedoUndo();
         }
 
         /// <summary>
@@ -168,10 +168,13 @@ namespace PowerPointLike
             _presentationModel.ResetSelectIndex();
             UpdateDataToTable();
             _canvas.Invalidate();
-            RefreshRedoUndoUI();
+            RefreshRedoUndo();
         }
 
-        private void RefreshRedoUndoUI()
+        /// <summary>
+        /// Method <c>RefreshRedoUndo</c>
+        /// </summary>
+        private void RefreshRedoUndo()
         {
             _redoButton.Enabled = _presentationModel._model._commandManager.IsRedoEnabled;
             _undoButton.Enabled = _presentationModel._model._commandManager.IsUndoEnabled;

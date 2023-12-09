@@ -63,11 +63,9 @@ namespace PowerPointLike
 
         protected Shapes _shapes;
         protected Model _model;
-
         protected int _oldLength = -1;
         protected int _newLength = -1;
         public const int INVALID = -1;
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="State"/> class.

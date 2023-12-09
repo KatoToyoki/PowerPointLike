@@ -49,7 +49,7 @@ namespace PowerPointLike
             _canvas.Height = AdjustHeight(_canvas.Width);
             _presentationModel.GetModelEvent()._modelChanged += HandleModelChanged;
 
-            RefreshRedoUndoUI();
+            RefreshRedoUndo();
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace PowerPointLike
         {
             _presentationModel.AddItem(_elementsChoicesBox.Text, (int)DataModel.DATA_DELETE_INDEX, _elementDataGrid.RowCount);
             UpdateDataToTable();
-            RefreshRedoUndoUI();
+            RefreshRedoUndo();
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace PowerPointLike
             _presentationModel.DeleteCertainElement(shapeName, e.ColumnIndex, e.RowIndex);
             _presentationModel.ResetSelectIndex();
             UpdateDataToTable();
-            RefreshRedoUndoUI();
+            RefreshRedoUndo();
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace PowerPointLike
             _rectangleButton.Checked = _presentationModel.GetButtonChecked((int)PresentationModel.ShapeIndex.Rectangle);
             _circleButton.Checked = _presentationModel.GetButtonChecked((int)PresentationModel.ShapeIndex.Circle);
             _mouseButton.Checked = _presentationModel.GetButtonChecked((int)PresentationModel.ShapeIndex.Mouse);
-            RefreshRedoUndoUI();
+            RefreshRedoUndo();
         }
 
         // state ====================================================================
@@ -244,7 +244,7 @@ namespace PowerPointLike
             RefreshToolButtonClick();
             ClickMouseButton(sender, e);
             _presentationModel.ResetStateSelect();
-            RefreshRedoUndoUI();
+            RefreshRedoUndo();
         }
 
         /// <summary>

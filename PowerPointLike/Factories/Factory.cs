@@ -90,7 +90,7 @@ namespace PowerPointLike
         {
             Shape rectangle = new Rectangle(InitializeSet(), this);
             // rectangle._id = _shapeContainer.Count;
-            rectangle._id = GetLastOneID() + 1;
+            rectangle._id = GetMaxValue() + 1;
             return rectangle;
         }
 
@@ -103,7 +103,7 @@ namespace PowerPointLike
         {
             Shape line = new Line(InitializeSet(), this);
             // line._id = _shapeContainer.Count; 
-            line._id = GetLastOneID() + 1;
+            line._id = GetMaxValue() + 1;
             return line;
         }
 
@@ -116,7 +116,7 @@ namespace PowerPointLike
         {
             Shape circle = new Circle(InitializeSet(), this);
             // circle._id = _shapeContainer.Count;
-            circle._id = GetLastOneID() + 1;
+            circle._id = GetMaxValue() + 1;
             return circle;
         }
 
@@ -129,7 +129,7 @@ namespace PowerPointLike
         {
             Shape line = new Line(coordinateSet, this);
             // line._id = _shapeContainer.Count; 
-            line._id = GetLastOneID() + 1;
+            line._id = GetMaxValue() + 1;
             return line;
         }
 
@@ -142,7 +142,7 @@ namespace PowerPointLike
         {
             Shape rectangle = new Rectangle(coordinateSet, this);
             // rectangle._id = _shapeContainer.Count;
-            rectangle._id = GetLastOneID() + 1;
+            rectangle._id = GetMaxValue() + 1;
             return rectangle;
         }
 
@@ -155,7 +155,7 @@ namespace PowerPointLike
         {
             Shape circle = new Circle(coordinateSet, this);
             // circle._id = _shapeContainer.Count;
-            circle._id = GetLastOneID() + 1;
+            circle._id = GetMaxValue() + 1;
             return circle;
         }
 
@@ -170,7 +170,11 @@ namespace PowerPointLike
             _maxHeight = height;
         }
 
-        public int GetLastOneID()
+        /// <summary>
+        /// Method <c>GetMaxValue</c>
+        /// </summary>
+        /// <returns></returns>
+        public int GetMaxValue()
         {
             int maxValue = ButtonModel.INVALID;
             if (_shapeContainer.Count == 0)
@@ -186,7 +190,6 @@ namespace PowerPointLike
             }
 
             return maxValue;
-            // return _shapeContainer[_shapeContainer.Count - 1]._id;
         }
     }
 }

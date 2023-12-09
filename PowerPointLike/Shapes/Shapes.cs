@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PowerPointLike
 {
-    public class Shapes
+    public partial class Shapes
     {
         const string RECTANGLE = "矩形";
         const string LINE = "線";
@@ -152,9 +152,10 @@ namespace PowerPointLike
         /// </summary>
         public void PrintContainer()
         {
+            const string FORMAT = "{0}, id = {1}";
             for (int i = 0; i < _shapeContainer.Count; i++)
             {
-                Console.WriteLine(_shapeContainer[i].GetOneElementData() + " " + _shapeContainer[i]._id);
+                Console.WriteLine(string.Format(FORMAT, _shapeContainer[i].GetOneElementData(), _shapeContainer[i]._id));
             }
         }
 
@@ -300,100 +301,6 @@ namespace PowerPointLike
                 return;
             }
             _shapeContainer[index].SetCoordinate(_shapeContainer[index]._coordinateSet.Offset(coordinateX, coordinateY));
-        }
-
-        /// <summary>
-        /// Method <c>ScaleCoordinate</c>
-        /// to set new Coordinate
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="coordinateX"></param>
-        /// <param name="coordinateY"></param>
-        public void ScaleCoordinate(int index, double coordinateX, double coordinateY)
-        {
-            if (_shapeContainer.Count == 0)
-            {
-                return;
-            }
-            if (index == State.INVALID)
-            {
-                return;
-            }
-            _shapeContainer[index].SetCoordinate(_shapeContainer[index]._coordinateSet.ScaleOffset((int)coordinateX, (int)coordinateY));
-        }
-
-        /// <summary>
-        /// Method <c>ExistInContainer</c>
-        /// to check if the item is exist
-        /// </summary>
-        /// <param name="coordinateSet"></param>
-        /// <returns></returns>
-        public bool ExistInContainer(CoordinateSet coordinateSet)
-        {
-            foreach (Shape shape in _shapeContainer)
-            {
-                if (shape._coordinateSet.GetIfIsSame(coordinateSet))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Method <c>AdjustPositions</c>
-        /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        public void AdjustPositions(int width, int height)
-        {
-            double factorX = ((double)width / _maxWidth);
-            double factorY = ((double)height / _maxHeight);
-
-            foreach (var shape in _shapeContainer)
-            {
-                CoordinateSet currentItem = shape._coordinateSet;
-                int newX1 = (int)(currentItem._point1._x * factorX);
-                int newY1 = (int)(currentItem._point1._y * factorY);
-                int newX2 = (int)(currentItem._point2._x * factorX);
-                int newY2 = (int)(currentItem._point2._y * factorY);
-
-                shape._coordinateSet = new CoordinateSet(new Coordinate(newX1, newY1), new Coordinate(newX2, newY2));
-            }
-
-            SetCanvasSize(width, height);
-            _factory.SetCanvasSize(width, height);
-        }
-
-        /// <summary>
-        /// Method <c>SetCanvasSize</c>
-        /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        public void SetCanvasSize(int width, int height)
-        {
-            _maxWidth = width;
-            _maxHeight = height;
-        }
-
-        /// <summary>
-        /// Method <c>ExchangeShape</c>
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="shape"></param>
-        public void ExchangeShape(int index, Shape shape)
-        {
-            int indexForItem;
-            Console.WriteLine("are they the same or something?? " + index + " " + shape._id);
-            for (int i = 0; i < _shapeContainer.Count; i++)
-            {
-                if (_shapeContainer[i]._id == index)
-                {
-                    indexForItem = i;
-                    _shapeContainer[indexForItem] = shape.Clone();
-                }
-            }
-
         }
     }
 }

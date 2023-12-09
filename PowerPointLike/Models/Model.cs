@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace PowerPointLike
 {
-    public class Model
+    public partial class Model
     {
         public delegate void ModelChangedEventHandler();
         public event ModelChangedEventHandler _modelChanged;
@@ -79,7 +79,7 @@ namespace PowerPointLike
                 return;
             }
             Shape newShape = _shapes.CreateTempShape(shapeName);
-            _commandManager.Execute(new DataGridViewCommand(newShape.Clone(), dataIndex, deleteIndex, this, (int)DataGridViewCommand.Command.Add));
+            _commandManager.Execute(new DataGridViewCommand(newShape.GetClone(), dataIndex, deleteIndex, this, (int)DataGridViewCommand.Command.Add));
             NotifyModelChanged();
 
             // print test
@@ -301,60 +301,6 @@ namespace PowerPointLike
         public bool IsScale(double coordinateX, double coordinateY)
         {
             return _selectedOneCoordinate.IsScale(coordinateX, coordinateY);
-        }
-
-        /// <summary>
-        /// Method <c>SetAllCanvasSize</c>
-        /// init for all
-        /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        public void SetAllCanvasSize(int width, int height)
-        {
-            _canvasWidth = width;
-            _canvasHeight = height;
-            _shapes.SetCanvasSize(_canvasWidth, _canvasHeight);
-            _shapes._factory.SetCanvasSize(_canvasWidth, _canvasHeight);
-        }
-
-        /// <summary>
-        /// Method <c>SetCanvasSize</c>
-        /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        public void SetCanvasSize(int width, int height)
-        {
-            _canvasWidth = width;
-            _canvasHeight = height;
-            _shapes._factory.SetCanvasSize(width, height);
-        }
-
-        /// <summary>
-        /// Method <c>ChangeCanvasSize</c>
-        /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        public void ChangeCanvasSize(int width, int height)
-        {
-            SetCanvasSize(width, height);
-            _shapes.AdjustPositions(_canvasWidth, _canvasHeight);
-            _shapes.SetCanvasSize(width, height);
-        }
-
-        /// <summary>
-        /// Method <c>Undo</c>
-        /// </summary>
-        public void Undo()
-        {
-            _commandManager.Undo();
-        }
-
-        /// <summary>
-        /// Method <c>Redo</c>
-        /// </summary>
-        public void Redo()
-        {
-            _commandManager.Redo();
         }
     }
 }

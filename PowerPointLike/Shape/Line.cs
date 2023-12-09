@@ -18,7 +18,7 @@ namespace PowerPointLike
         {
             _shapeName = LINE;
             _coordinateSet = coordinateSet;
-             _factory = factory;
+            _factory = factory;
         }
 
         /// <summary>
@@ -30,13 +30,14 @@ namespace PowerPointLike
             graphics.DrawLine(_coordinateSet);
         }
 
-        public override Shape Clone()
+        /// <summary>
+        /// Method <c>GetClone</c>
+        /// </summary>
+        /// <returns></returns>
+        public override Shape GetClone()
         {
-            // Line newOne = new Line(_coordinateSet.Clone());
-            // return newOne;
-            // return null;
             Shape newOne = _factory.CreateLine();
-            newOne._coordinateSet = this._coordinateSet.Clone();
+            newOne._coordinateSet = this._coordinateSet.GetClone();
             return newOne;
         }
     }

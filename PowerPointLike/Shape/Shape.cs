@@ -77,6 +77,10 @@ namespace PowerPointLike
             _coordinateSet = set;
         }
 
-        public abstract Shape Clone();
+        /// <summary>
+        /// Method <c>GetClone</c>
+        /// </summary>
+        /// <returns></returns>
+        public abstract Shape GetClone();
     }
 }

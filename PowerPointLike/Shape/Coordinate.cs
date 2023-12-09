@@ -135,7 +135,11 @@ namespace PowerPointLike
             return new Coordinate(_x + offsetX, _y + offsetY);
         }
 
-        public Coordinate Clone()
+        /// <summary>
+        /// Method <c>GetClone</c>
+        /// </summary>
+        /// <returns></returns>
+        public Coordinate GetClone()
         {
             return new Coordinate(this._x, this._y);
         }
@@ -397,9 +401,13 @@ namespace PowerPointLike
             return false;
         }
 
-        public CoordinateSet Clone()
+        /// <summary>
+        /// Method <c>GetClone</c>
+        /// </summary>
+        /// <returns></returns>
+        public CoordinateSet GetClone()
         {
-            return new CoordinateSet(this._point1.Clone(), this._point2.Clone());
+            return new CoordinateSet(this._point1.GetClone(), this._point2.GetClone());
         }
     }
 }

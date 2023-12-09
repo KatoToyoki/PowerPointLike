@@ -60,19 +60,27 @@ namespace PowerPointLike
         /// <param name="shapeIndex">shapeIndex</param>
         public override void HandleCanvasMoved(double coordinateX, double coordinateY, int shapeIndex, out CoordinateSet selectedOne)
         {
-
+            selectedOne = _selectedOneCoordinate;
             if (_shapes.GetContainerLength() == 0)
             {
-                selectedOne = _selectedOneCoordinate;
                 return;
             }
             if (_tempShape == null)
             {
-                selectedOne = _selectedOneCoordinate;
                 return;
             }
             selectedOne = _tempShape._coordinateSet;
 
+            ScaleOrPointMove(coordinateX, coordinateY);
+        }
+
+        /// <summary>
+        /// Method <c>ScaleOrPointMove</c>
+        /// </summary>
+        /// <param name="coordinateX"></param>
+        /// <param name="coordinateY"></param>
+        public void ScaleOrPointMove(double coordinateX, double coordinateY)
+        {
             if (ViolateMove())
             {
                 return;
@@ -120,22 +128,19 @@ namespace PowerPointLike
         {
             if (_tempShape == null)
             {
-                // selectedOne = _selectedOneCoordinate;
-                selectedOne = default;
+                selectedOne = new CoordinateSet(new Coordinate(0, 0), new Coordinate(0, 0));
                 return;
             }
 
             if (_newShapeCoordinateSet._point2.GetIfIsSame(new Coordinate(0, 0)))
             {
-                // selectedOne = _selectedOneCoordinate;
-                selectedOne = default;
+                selectedOne = _tempShape._coordinateSet;
                 return;
             }
 
             ReleaseCoordinate();
             ResetThreePoint();
-            // selectedOne = _tempShape._coordinateSet;
-            selectedOne = default;
+            selectedOne = _tempShape._coordinateSet;
         }
 
         /// <summary>
@@ -145,17 +150,13 @@ namespace PowerPointLike
         {
             if (_isScale)
             {
-                _tempShape = _shapes.GetShape(_index).Clone();
-                _shapes.DeleteElementByIndex(_index);
-                _shapes.AddShape(_tempShape, _index);
-                _model._commandManager.Execute(new PointCommand(_originalShape.Clone(), _tempShape.Clone(), _model));
+                _tempShape = _shapes.GetShape(_index).GetClone();
+                _model._commandManager.Execute(new PointCommand(_originalShape.GetClone(), _tempShape.GetClone(), _model));
             }
             else
             {
-                _tempShape = _shapes.GetShape(_index).Clone();
-                _shapes.DeleteElementByIndex(_index);
-                _shapes.AddShape(_tempShape, _index);
-                _model._commandManager.Execute(new PointCommand(_originalShape.Clone(), _tempShape.Clone(), _model));
+                _tempShape = _shapes.GetShape(_index).GetClone();
+                _model._commandManager.Execute(new PointCommand(_originalShape.GetClone(), _tempShape.GetClone(), _model));
             }
         }
 
@@ -173,16 +174,10 @@ namespace PowerPointLike
                 return;
             }
             _index = (int)_shapes.PickShape(coordinateX, coordinateY, out selectedCoordinate);
+            _originalShape = _shapes.CloneAndReplace(coordinateX, coordinateY);
+            _tempShape = _shapes.CloneAndReplace(coordinateX, coordinateY);
 
-            // pop original and temp copy from it. 
-            // insert temp is to reveal the data in data gird view
-            _originalShape = _shapes.GetShape(_index).Clone();
-            _tempShape = _shapes.GetShape(_index);
-            _shapes.DeleteElementByIndex(_index);
-            _shapes.AddShape(_tempShape, _index);
-
-            selectedCoordinate = _tempShape._coordinateSet;
-            _selectedOneCoordinate = selectedCoordinate;
+            _selectedOneCoordinate = _tempShape._coordinateSet;
         }
 
         /// <summary>

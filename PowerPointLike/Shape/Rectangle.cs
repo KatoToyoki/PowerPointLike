@@ -30,12 +30,14 @@ namespace PowerPointLike
             graphics.DrawRectangle(_coordinateSet);
         }
 
-        public override Shape Clone()
+        /// <summary>
+        /// Method <c>GetClone</c>
+        /// </summary>
+        /// <returns></returns>
+        public override Shape GetClone()
         {
-            // CoordinateSet newCoordinate=_coordinateSet
-            // return new Rectangle(_coordinateSet.Clone());
             Shape newOne = _factory.CreateRectangle();
-            newOne._coordinateSet = this._coordinateSet.Clone();
+            newOne._coordinateSet = this._coordinateSet.GetClone();
             return newOne;
         }
     }
