@@ -20,14 +20,13 @@ namespace PowerPointLike.Tests
             Model model = new Model();
 
             string shape1 = string.Empty;
-            /*
-            model.AddItem(shape1);
+
+            model.AddItem(shape1, 0, 1);
             Assert.AreEqual(0, model.GetContainerLength());
 
             string shape2 = "矩形";
-            model.AddItem(shape2);
+            model.AddItem(shape2, 0, 1);
             Assert.AreEqual(1, model.GetContainerLength());
-            */
         }
 
         /// <summary>
@@ -37,16 +36,13 @@ namespace PowerPointLike.Tests
         public void DeleteCertainElementTest()
         {
             Model model = new Model();
-
-            /*
             string shape2 = "矩形";
-            
-            model.AddItem(shape2);
+
+            model.AddItem(shape2, 0, 1);
             Assert.AreEqual(1, model.GetContainerLength());
 
-            model.DeleteCertainElement(0);
+            model.DeleteCertainElement(shape2, 0, 0);
             Assert.AreEqual(0, model.GetContainerLength());
-            */
         }
 
         /// <summary>
@@ -62,10 +58,10 @@ namespace PowerPointLike.Tests
 
             Coordinate coordinate2 = new Coordinate(1, -1);
             Assert.IsFalse(model.CheckInputValid(coordinate2._x, coordinate2._y));
-            
+
             Coordinate coordinate3 = new Coordinate(-1, 1);
             Assert.IsFalse(model.CheckInputValid(coordinate3._x, coordinate3._y));
-            
+
             Coordinate coordinate4 = new Coordinate(-1, -1);
             Assert.IsFalse(model.CheckInputValid(coordinate4._x, coordinate4._y));
         }
@@ -98,7 +94,6 @@ namespace PowerPointLike.Tests
             model.ClickToolButton(0);
             model.PressPointer(coordinate1._x, coordinate1._y, shapeIndex);
             Assert.AreEqual(null, model.GetSelectIndex());
-
         }
 
         /// <summary>
@@ -114,8 +109,8 @@ namespace PowerPointLike.Tests
             Assert.IsTrue(model.CheckInputValid(coordinate1._x, coordinate1._y));
 
             model.ClickToolButton(0);
-            Assert.IsFalse (model._state._isPressed);
-            
+            Assert.IsFalse(model._state._isPressed);
+
             model.PressPointer(coordinate1._x, coordinate1._y, shapeIndex);
             Assert.IsTrue(model._state._isPressed);
 
@@ -201,13 +196,13 @@ namespace PowerPointLike.Tests
         public void DeleteSelectOneTest()
         {
             Model model = new Model();
-            /*
+
             string shape1 = "圓";
-            model.AddItem(shape1);
+            model.AddItem(shape1, 0, 1);
             Assert.AreEqual(1, model.GetContainerLength());
 
             string shape2 = "線";
-            model.AddItem(shape2);
+            model.AddItem(shape2, 0, 2);
             Assert.AreEqual(2, model.GetContainerLength());
 
             CoordinateSet coordinateSet = new CoordinateSet(new Coordinate(1, 2), new Coordinate(100, 200));
@@ -229,7 +224,6 @@ namespace PowerPointLike.Tests
 
             model._state._index = 0;
             model.DeleteSelectOne();
-            */
         }
 
         /// <summary>
@@ -240,13 +234,13 @@ namespace PowerPointLike.Tests
         {
             Model model = new Model();
             model._state._currentStateIndex = 1;
-            /*
+
             string shape1 = "圓";
-            model.AddItem(shape1);
+            model.AddItem(shape1, 0, 1);
             Assert.AreEqual(1, model.GetContainerLength());
 
             string shape2 = "線";
-            model.AddItem(shape2);
+            model.AddItem(shape2, 0, 2);
             Assert.AreEqual(2, model.GetContainerLength());
 
             Coordinate point1 = new Coordinate(100, 100);
@@ -256,7 +250,6 @@ namespace PowerPointLike.Tests
             point2.GetIfIsSame(point1);
             point2.GetIfIsSame(point3);
             CoordinateSet point = new CoordinateSet(point1, point2);
-            
 
             model._shapes.AddShapeInEnd(0, point);
             model.PrintTest();
@@ -275,9 +268,8 @@ namespace PowerPointLike.Tests
             point.GetDeltaX();
             point.GetDeltaY();
             point.Offset(10, 10);
-            */
 
-            model._state = new PointState(model._shapes,model);
+            model._state = new PointState(model._shapes, model);
 
             model.PressPointer(55, 55, 0);
 
@@ -290,11 +282,10 @@ namespace PowerPointLike.Tests
             model.MovePointer(110, 110, 0);
             model.MovePointer(120, 120, 0);
             model.MovePointer(130, 130, 0);
-            
+
             Coordinate test1 = new Coordinate(56, 56);
             Coordinate test2 = new Coordinate(58, 58);
 
-            
             CoordinateSet temp = model._state.GetNewShapeCoordinate();
             temp._point2 = test2;
 
@@ -305,12 +296,11 @@ namespace PowerPointLike.Tests
             model.ReleasePointer(120, 120, 0);
 
             model._state.SetNewShapeCoordinate(temp);
-            
+
             model.ReleasePointer(120, 120, 0);
 
-            /*
-            model._state.CreateState(999, model._shapes);
-            model._state.CreateState(-1, model._shapes);
+            model._state.CreateState(999, model._shapes, model);
+            model._state.CreateState(-1, model._shapes, model);
             Assert.AreEqual(1, model.GetCurrentStateIndex());
             model._state.ResetThreePoint();
 
@@ -320,7 +310,6 @@ namespace PowerPointLike.Tests
             model._shapes.CreateTempShape(1, temp);
             model._shapes.CreateTempShape(2, temp);
             model._shapes.CreateTempShape(999, temp);
-            */
         }
     }
 }

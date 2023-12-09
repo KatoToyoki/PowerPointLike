@@ -148,7 +148,7 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClickUndo(object sender, EventArgs e)
+        public void ClickUndo(object sender, EventArgs e)
         {
             _presentationModel._model.Undo();
             _presentationModel.ResetSelectIndex();
@@ -162,7 +162,7 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClickRedo(object sender, EventArgs e)
+        public void ClickRedo(object sender, EventArgs e)
         {
             _presentationModel._model.Redo();
             _presentationModel.ResetSelectIndex();

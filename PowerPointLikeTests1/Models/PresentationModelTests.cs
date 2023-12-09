@@ -21,15 +21,13 @@ namespace PowerPointLike.Tests
         [TestMethod()]
         public void AddItemTest()
         {
-            /*
             PowerPointLike view = new PowerPointLike(new PresentationModel(new Model()));
-            view._presentationModel.AddItem(string.Empty);
+            view._presentationModel.AddItem(string.Empty, 0, 1);
             Assert.AreEqual(0, view._presentationModel.GetContainerLength());
-            view._presentationModel.AddItem("圓");
-            view._presentationModel.AddItem("線");
-            view._presentationModel.AddItem("矩形");
+            view._presentationModel.AddItem("圓", 0, 1);
+            view._presentationModel.AddItem("線", 0, 2);
+            view._presentationModel.AddItem("矩形", 0, 3);
             Assert.AreEqual(3, view._presentationModel.GetContainerLength());
-            */
         }
 
         /// <summary>
@@ -38,22 +36,20 @@ namespace PowerPointLike.Tests
         [TestMethod()]
         public void DeleteCertainElementTest()
         {
-            /*
             PowerPointLike view = new PowerPointLike(new PresentationModel(new Model()));
-            view._presentationModel.AddItem(string.Empty);
+            view._presentationModel.AddItem(string.Empty, 0, 1);
             Assert.AreEqual(0, view._presentationModel.GetContainerLength());
-            view._presentationModel.AddItem("圓");
-            view._presentationModel.AddItem("線");
-            view._presentationModel.AddItem("矩形");
+            view._presentationModel.AddItem("圓", 0, 1);
+            view._presentationModel.AddItem("線", 0, 2);
+            view._presentationModel.AddItem("矩形", 0, 3);
             Assert.AreEqual(3, view._presentationModel.GetContainerLength());
 
-            view._presentationModel.DeleteCertainElement(1, 0);
+            view._presentationModel.DeleteCertainElement("圓", 1, 1);
             Assert.AreEqual(3, view._presentationModel.GetContainerLength());
-            view._presentationModel.DeleteCertainElement(0, 0);
+            view._presentationModel.DeleteCertainElement("圓", 0, 1);
             Assert.AreEqual(2, view._presentationModel.GetContainerLength());
 
             view._presentationModel.ResetStateSelect();
-            */
         }
 
         /// <summary>
@@ -65,27 +61,25 @@ namespace PowerPointLike.Tests
             var mockModel = new Mock<Model>();
             var presentationModel = new PresentationModel(mockModel.Object);
             var mockGraphicsAdaptor = new Mock<IGraphics>();
-            /*
-            presentationModel.AddItem("圓");
-            presentationModel.AddItem("線");
-            presentationModel.AddItem("矩形");
+
+            presentationModel.AddItem("圓", 0, 1);
+            presentationModel.AddItem("線", 0, 2);
+            presentationModel.AddItem("矩形", 0, 3);
             presentationModel.Draw(mockGraphicsAdaptor.Object);
-            
 
             CoordinateSet coordinateSet = new CoordinateSet(new Coordinate(1, 1), new Coordinate(100, 100));
-            Shape shape1 = new Circle(coordinateSet);
+            Shape shape1 = new Circle(coordinateSet, presentationModel._model._shapes._factory);
             shape1.Draw(mockGraphicsAdaptor.Object);
 
-            Shape shape2 = new Line(coordinateSet);
+            Shape shape2 = new Line(coordinateSet, presentationModel._model._shapes._factory);
             shape2.Draw(mockGraphicsAdaptor.Object);
 
-            Shape shape3 = new Rectangle(coordinateSet);
+            Shape shape3 = new Rectangle(coordinateSet, presentationModel._model._shapes._factory);
             shape3.Draw(mockGraphicsAdaptor.Object);
 
             mockGraphicsAdaptor.Object.DrawLine(coordinateSet);
             mockGraphicsAdaptor.Object.DrawCircle(coordinateSet);
             mockGraphicsAdaptor.Object.DrawRectangle(coordinateSet);
-            */
         }
 
         /// <summary>
@@ -148,7 +142,6 @@ namespace PowerPointLike.Tests
             Assert.IsTrue(presentationModel.IsDraw());
 
             Assert.AreEqual(0, presentationModel.GetCurrentStateIndex());
-
         }
 
         /// <summary>
@@ -240,7 +233,6 @@ namespace PowerPointLike.Tests
             presentationModel._model._state._currentStateIndex = 1;
             presentationModel.ReleasePointer(50, 50);
 
-
             presentationModel.DrawSelectFrame(paintEventArgs);
         }
 
@@ -257,12 +249,10 @@ namespace PowerPointLike.Tests
             CoordinateSet coordinateSet = new CoordinateSet(new Coordinate(1, 1), new Coordinate(100, 100));
             presentationModel._model._shapes.AddShapeInEnd(2, coordinateSet);
 
-
             presentationModel._buttonModel.ClickLineButton(0);
             presentationModel.DetectButtonDraw();
             presentationModel.DetectScale(50, 50);
             presentationModel.DetectScale(97, 97);
-
 
             presentationModel._model._state._currentStateIndex = 0;
             presentationModel._stateModel.IsScale(97, 97);
@@ -323,6 +313,140 @@ namespace PowerPointLike.Tests
             presentationModel.MovePointer(200, 200);
 
             presentationModel.ReleasePointer(300, 300);
+        }
+
+        /// <summary>
+        /// test if drawing command works successfully
+        /// </summary>
+        [TestMethod()]
+        public void DrawingCommandTest()
+        {
+            var mockModel = new Mock<Model>();
+            var presentationModel = new PresentationModel(mockModel.Object);
+            var view = new PowerPointLike(presentationModel);
+            var mockGraphicsAdaptor = new Mock<IGraphics>();
+            var mockSender = new Mock<object>();
+            var mockMouseEventArgs = new MouseEventArgs(MouseButtons.Left, 0, 5, 5, 50);
+            var mockMouseEventArgs2 = new MouseEventArgs(MouseButtons.Left, 0, 50, 50, 100);
+            var mockMouseEventArgs3 = new MouseEventArgs(MouseButtons.Left, 0, 100, 100, 150);
+
+            presentationModel.AddItem("圓", 0, 1);
+            presentationModel.AddItem("線", 0, 2);
+            presentationModel.AddItem("矩形", 0, 3);
+            presentationModel.Draw(mockGraphicsAdaptor.Object);
+
+            CoordinateSet coordinateSet = new CoordinateSet(new Coordinate(1, 1), new Coordinate(100, 100));
+            Shape shape1 = new Circle(coordinateSet, presentationModel._model._shapes._factory);
+            shape1.Draw(mockGraphicsAdaptor.Object);
+
+            Shape shape2 = new Line(coordinateSet, presentationModel._model._shapes._factory);
+            shape2.Draw(mockGraphicsAdaptor.Object);
+
+            Shape shape3 = new Rectangle(coordinateSet, presentationModel._model._shapes._factory);
+            shape3.Draw(mockGraphicsAdaptor.Object);
+
+            mockGraphicsAdaptor.Object.DrawLine(coordinateSet);
+            mockGraphicsAdaptor.Object.DrawCircle(coordinateSet);
+            mockGraphicsAdaptor.Object.DrawRectangle(coordinateSet);
+
+            var mockEventArgs = new EventArgs();
+
+            view._presentationModel._buttonModel._currentButtonIndex = 0;
+            view._presentationModel._model._state._currentStateIndex = 0;
+            view.HandleCanvasPressed(mockSender, mockMouseEventArgs);
+            view.HandleCanvasMoved(mockSender, mockMouseEventArgs2);
+            view.HandleCanvasReleased(mockSender, mockMouseEventArgs3);
+
+            view._presentationModel._model._commandManager.Execute(new DrawingCommand(view._presentationModel._model, shape1));
+            view._presentationModel._model._commandManager.Execute(new DrawingCommand(view._presentationModel._model, shape2));
+
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
+        }
+
+
+        /// <summary>
+        /// test if data grid view comamand works successfully
+        /// </summary>
+        [TestMethod()]
+        public void DataGridViewCommandTest()
+        {
+            var mockModel = new Mock<Model>();
+            var presentationModel = new PresentationModel(mockModel.Object);
+            var view = new PowerPointLike(presentationModel);
+            var mockGraphicsAdaptor = new Mock<IGraphics>();
+            var mockSender = new Mock<object>();
+            var mockEventArgs = new EventArgs();
+            var mockDataGridViewCellEventArgs = new DataGridViewCellEventArgs(columnIndex: 0, rowIndex: 1);
+
+            view.SetTextOnChoiceBox("圓");
+            view.AddNewElement(mockSender, mockEventArgs);
+            view.AddNewElement(mockSender, mockEventArgs);
+            view.AddNewElement(mockSender, mockEventArgs);
+            view.AddNewElement(mockSender, mockEventArgs);
+            view.AddNewElement(mockSender, mockEventArgs);
+
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
+
+            view.DeleteElement(mockSender, mockDataGridViewCellEventArgs);
+            view.DeleteElement(mockSender, mockDataGridViewCellEventArgs);
+
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
+        }
+
+        /// <summary>
+        /// test if point command works successfully
+        /// </summary>
+        [TestMethod()]
+        public void PointCommandTest()
+        {
+            var mockModel = new Mock<Model>();
+            var presentationModel = new PresentationModel(mockModel.Object);
+            var view = new PowerPointLike(presentationModel);
+            var mockSender = new Mock<object>();
+            var mockEventArgs = new EventArgs();
+            var mockDataGridViewCellEventArgs = new DataGridViewCellEventArgs(columnIndex: 0, rowIndex: 1);
+            var mockMouseEventArgs = new MouseEventArgs(MouseButtons.Left, 0, 5, 5, 50);
+
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
+
+            var mockGraphicsAdaptor = new Mock<IGraphics>();
+            view._presentationModel._model._state.DrawTempShape(mockGraphicsAdaptor.Object);
+
+            view.HandleCanvasPressed(mockSender, mockMouseEventArgs);
+            view.HandleCanvasMoved(mockSender, mockMouseEventArgs);
+            view.HandleCanvasReleased(mockSender, mockMouseEventArgs);
+
+            presentationModel.AddItem("圓", 0, 1);
+            presentationModel.AddItem("線", 0, 2);
+            presentationModel.AddItem("矩形", 0, 3);
+
+            CoordinateSet coordinateSet = new CoordinateSet(new Coordinate(1, 1), new Coordinate(100, 100));
+            Shape shape1 = new Circle(coordinateSet, presentationModel._model._shapes._factory);
+            shape1.Draw(mockGraphicsAdaptor.Object);
+
+            Shape shape2 = new Line(coordinateSet, presentationModel._model._shapes._factory);
+            shape2.Draw(mockGraphicsAdaptor.Object);
+
+            Shape shape3 = new Rectangle(coordinateSet, presentationModel._model._shapes._factory);
+            shape3.Draw(mockGraphicsAdaptor.Object);
+
+            view._presentationModel._model._commandManager.Execute(new PointCommand(shape1, shape2, view._presentationModel._model));
+            view._presentationModel._model._commandManager.Execute(new PointCommand(shape2, shape3, view._presentationModel._model));
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
+
+            view._presentationModel._model._shapes.AdjustPositions(500, 500);
+            view._presentationModel._model._shapes.GetIndex(-1, -1);
+
+            view._presentationModel._model._state._tempShape = shape3;
+            view._presentationModel._model._state.DrawTempShape(mockGraphicsAdaptor.Object);
         }
     }
 }

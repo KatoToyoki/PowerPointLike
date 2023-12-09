@@ -89,6 +89,15 @@ namespace PowerPointLike
         }
 
         /// <summary>
+        /// Method <c>SetTextOnChoiceBox</c>
+        /// </summary>
+        /// <param name="text"></param>
+        public void SetTextOnChoiceBox(string text)
+        {
+            _elementsChoicesBox.Text = text;
+        }
+
+        /// <summary>
         /// Method <c>DeleteElement</c>
         /// if the button is clicked, delete the element
         /// </summary>
