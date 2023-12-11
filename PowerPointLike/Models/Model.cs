@@ -36,12 +36,21 @@ namespace PowerPointLike
             get; set;
         }
 
-        public int _canvasWidth
+        public int _oldCanvasWidth
         {
             get; set;
         }
 
-        public int _canvasHeight
+        public int _oldCanvasHeight
+        {
+            get; set;
+        }
+        public int _newCanvasWidth
+        {
+            get; set;
+        }
+
+        public int _newCanvasHeight
         {
             get; set;
         }

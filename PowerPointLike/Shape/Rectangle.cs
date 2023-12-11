@@ -17,7 +17,6 @@ namespace PowerPointLike
         {
             _shapeName = RECTANGLE;
             _coordinateSet = coordinateSet;
-            // _shapes = shapes;
             _factory = factory;
         }
 

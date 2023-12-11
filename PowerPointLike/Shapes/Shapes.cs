@@ -22,16 +22,25 @@ namespace PowerPointLike
         {
             _factory = new Factory(_shapeContainer);
         }
-        public int _maxWidth
+        public int _oldCanvasWidth
         {
             get; set;
         }
-        public int _maxHeight
+        public int _oldCanvasHeight
+        {
+            get; set;
+        }
+        public int _newCanvasWidth
+        {
+            get; set;
+        }
+        public int _newCanvasHeight
         {
             get; set;
         }
 
         // create shape =================================================================
+
         /// <summary>
         /// Method <c>AddShape</c>
         /// to create new element depends on the chosen element
@@ -128,6 +137,7 @@ namespace PowerPointLike
         }
 
         // ====================================================================================
+
         /// <summary>
         /// Method <c>PopShape</c>
         /// </summary>
@@ -271,16 +281,6 @@ namespace PowerPointLike
                 }
             }
             return null;
-        }
-
-        /// <summary>
-        /// Method <c>DeleteEndShape</c>
-        /// to check if it's in the process of drawing, and delete the temp shape in the container
-        /// </summary>
-        /// <param name="currentLength"></param>
-        public void DeleteShapeByIndex(int index)
-        {
-            _shapeContainer.RemoveAt(index);
         }
 
         /// <summary>

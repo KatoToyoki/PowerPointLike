@@ -9,10 +9,6 @@ namespace PowerPointLike
 {
     public abstract class Shape
     {
-        // public Shapes _shapes
-        // {
-        //     get; set;
-        // }
         public Factory _factory
         {
             get; set;
@@ -82,5 +78,21 @@ namespace PowerPointLike
         /// </summary>
         /// <returns></returns>
         public abstract Shape GetClone();
+
+        /// <summary>
+        /// Method <c>AdjustPosition</c>
+        /// </summary>
+        /// <param name="factorX"></param>
+        /// <param name="factorY"></param>
+        public void AdjustPosition(double factorX, double factorY)
+        {
+            CoordinateSet currentItem = this._coordinateSet;
+            int newX1 = (int)(currentItem._point1._x * factorX);
+            int newY1 = (int)(currentItem._point1._y * factorY);
+            int newX2 = (int)(currentItem._point2._x * factorX);
+            int newY2 = (int)(currentItem._point2._y * factorY);
+
+            this._coordinateSet = new CoordinateSet(new Coordinate(newX1, newY1), new Coordinate(newX2, newY2));
+        }
     }
 }

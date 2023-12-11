@@ -36,7 +36,7 @@ namespace PowerPointLike
         {
             _presentationModel = presentationModel;
             InitializeComponent();
-            _presentationModel._model.SetAllCanvasSize(_canvas.Width, _canvas.Height);
+            _presentationModel._model.InitialCanvasSize(_canvas.Width, _canvas.Height);
             _canvas.MouseDown += HandleCanvasPressed;
             _canvas.MouseUp += HandleCanvasReleased;
             _canvas.MouseMove += HandleCanvasMoved;

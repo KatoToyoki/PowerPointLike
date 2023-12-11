@@ -15,16 +15,13 @@ namespace PowerPointLike
             Draw,
             Select
         }
-
         public int _currentStateIndex
         {
             get; set;
         }
-
         protected Coordinate _startPoint;
         protected Coordinate _firstPoint;
         protected CoordinateSet _newShapeCoordinateSet = new CoordinateSet();
-        // protected Shape _newShape;
         public bool _isPressed
         {
             get; set;
@@ -33,8 +30,6 @@ namespace PowerPointLike
         {
             get; set;
         }
-
-        // public int count = 0;
 
         public CoordinateSet _selectedOneCoordinate
         {
@@ -252,6 +247,5 @@ namespace PowerPointLike
             }
             _tempShape.Draw(graphics);
         }
-
     }
 }

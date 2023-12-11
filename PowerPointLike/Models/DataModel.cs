@@ -46,10 +46,7 @@ namespace PowerPointLike
         /// <param name="deleteIndex">the index of the shape in the container</param>
         public void DeleteCertainElement(string shapeName, int dataIndex, int deleteIndex)
         {
-            // if (dataIndex == (int)DataModel.DATA_DELETE_INDEX)
-            // {
             _model.DeleteCertainElement(shapeName, dataIndex, deleteIndex);
-            // }
         }
 
         /// <summary>

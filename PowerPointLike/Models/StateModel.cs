@@ -24,6 +24,7 @@ namespace PowerPointLike
         }
 
         // state ========================================
+
         /// <summary>
         /// Method <c>ResetStateSelect</c>
         /// reset the state to select
@@ -45,7 +46,6 @@ namespace PowerPointLike
             {
                 return;
             }
-            // check if is around right bottom
             _model.PressPointer(coordinateX, coordinateY, _buttonModel._currentButtonIndex);
         }
 
@@ -80,6 +80,7 @@ namespace PowerPointLike
         }
 
         // draw =========================================
+
         /// <summary>
         /// Method <c>Draw</c>
         /// let model draw
@@ -127,6 +128,7 @@ namespace PowerPointLike
         }
 
         // select =======================================
+
         /// <summary>
         /// Method <c>GetSelectedOneCoordinate</c>
         /// </summary>
@@ -157,7 +159,12 @@ namespace PowerPointLike
             }
         }
 
-        // Method <c>IsScale</c>
+        /// <summary>
+        /// Method <c>IsScale</c>
+        /// </summary>
+        /// <param name="coordinateX"></param>
+        /// <param name="coordinateY"></param>
+        /// <returns></returns>
         public bool IsScale(double coordinateX, double coordinateY)
         {
             if (_model._state._currentStateIndex == (int)State.StateIndex.Draw)

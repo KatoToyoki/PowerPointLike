@@ -9,11 +9,11 @@ namespace PowerPointLike
 {
     public partial class Factory
     {
-        public int _maxWidth
+        public int _canvasWidth
         {
             get; set;
         }
-        public int _maxHeight
+        public int _canvasHeight
         {
             get; set;
         }
@@ -34,8 +34,8 @@ namespace PowerPointLike
         public Coordinate CreateRandomCoordinate(Random random)
         {
             Coordinate coordinate = new Coordinate();
-            coordinate._x = random.Next(_maxWidth);
-            coordinate._y = random.Next(_maxHeight);
+            coordinate._x = random.Next(_canvasWidth);
+            coordinate._y = random.Next(_canvasHeight);
             return coordinate;
         }
 
@@ -89,7 +89,6 @@ namespace PowerPointLike
         public Shape CreateRectangle()
         {
             Shape rectangle = new Rectangle(InitializeSet(), this);
-            // rectangle._id = _shapeContainer.Count;
             rectangle._id = GetMaxValue() + 1;
             return rectangle;
         }
@@ -102,7 +101,6 @@ namespace PowerPointLike
         public Shape CreateLine()
         {
             Shape line = new Line(InitializeSet(), this);
-            // line._id = _shapeContainer.Count; 
             line._id = GetMaxValue() + 1;
             return line;
         }
@@ -115,7 +113,6 @@ namespace PowerPointLike
         public Shape CreateCircle()
         {
             Shape circle = new Circle(InitializeSet(), this);
-            // circle._id = _shapeContainer.Count;
             circle._id = GetMaxValue() + 1;
             return circle;
         }
@@ -128,7 +125,6 @@ namespace PowerPointLike
         public Shape DrawLine(CoordinateSet coordinateSet)
         {
             Shape line = new Line(coordinateSet, this);
-            // line._id = _shapeContainer.Count; 
             line._id = GetMaxValue() + 1;
             return line;
         }
@@ -141,7 +137,6 @@ namespace PowerPointLike
         public Shape DrawRectangle(CoordinateSet coordinateSet)
         {
             Shape rectangle = new Rectangle(coordinateSet, this);
-            // rectangle._id = _shapeContainer.Count;
             rectangle._id = GetMaxValue() + 1;
             return rectangle;
         }
@@ -154,7 +149,6 @@ namespace PowerPointLike
         public Shape DrawCircle(CoordinateSet coordinateSet)
         {
             Shape circle = new Circle(coordinateSet, this);
-            // circle._id = _shapeContainer.Count;
             circle._id = GetMaxValue() + 1;
             return circle;
         }
@@ -166,8 +160,8 @@ namespace PowerPointLike
         /// <param name="height"></param>
         public void SetCanvasSize(int width, int height)
         {
-            _maxWidth = width;
-            _maxHeight = height;
+            _canvasWidth = width;
+            _canvasHeight = height;
         }
 
         /// <summary>

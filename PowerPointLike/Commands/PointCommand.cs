@@ -8,8 +8,14 @@ namespace PowerPointLike
 {
     public class PointCommand : ICommand
     {
-        Shape _oldPositionShape;
-        Shape _newPositionShape;
+        public Shape _oldPositionShape
+        {
+            get; set;
+        }
+        public Shape _newPositionShape
+        {
+            get; set;
+        }
         Model _model;
 
         /// <summary>
@@ -38,6 +44,15 @@ namespace PowerPointLike
         {
             _model._shapes.ExchangeShape(_newPositionShape.GetClone(), _oldPositionShape.GetClone());
             _model.PrintTest();
+        }
+
+        /// <summary>
+        /// Method <c>AdjustPositions</c>
+        /// </summary>
+        public void AdjustPositions()
+        {
+            _oldPositionShape.AdjustPosition(_model.GetFactorX(), _model.GetFactorY());
+            _newPositionShape.AdjustPosition(_model.GetFactorX(), _model.GetFactorY());
         }
     }
 }

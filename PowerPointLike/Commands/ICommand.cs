@@ -17,5 +17,10 @@ namespace PowerPointLike
         /// Method <c>ExecuteCancel</c>
         /// </summary>
         void ExecuteCancel();
+
+        /// <summary>
+        /// Method <c>AdjustPositions</c>
+        /// </summary>
+        void AdjustPositions();
     }
 }

@@ -60,5 +60,13 @@ namespace PowerPointLike
                 _model._shapes.AddShape(_shape.GetClone(), _deleteIndex);
             }
         }
+
+        /// <summary>
+        /// Method <c>AdjustPositions</c>
+        /// </summary>
+        public void AdjustPositions()
+        {
+            _shape.AdjustPosition(_model.GetFactorX(), _model.GetFactorY());
+        }
     }
 }

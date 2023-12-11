@@ -374,8 +374,12 @@ namespace PowerPointLike.Tests
             view.ClickUndo(mockSender, mockEventArgs);
             view.ClickRedo(mockSender, mockEventArgs);
             view.ClickRedo(mockSender, mockEventArgs);
-        }
 
+            var mockSplitterEventArgs = new SplitterEventArgs(100, 100, 500, 500);
+            view.MoveSplitDrawingDataContainer(mockSender, mockSplitterEventArgs);
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
+        }
 
         /// <summary>
         /// test if data grid view comamand works successfully
@@ -407,6 +411,57 @@ namespace PowerPointLike.Tests
 
             view.ClickUndo(mockSender, mockEventArgs);
             view.ClickRedo(mockSender, mockEventArgs);
+
+            var mockSplitterEventArgs = new SplitterEventArgs(100, 100, 500, 500);
+            view.MoveSplitDrawingDataContainer(mockSender, mockSplitterEventArgs);
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
+        }
+
+        /// <summary>
+        /// test if point command works successfully
+        /// </summary>
+        [TestMethod()]
+        public void ExceptionTest() {
+            var mockModel = new Mock<Model>();
+            var presentationModel = new PresentationModel(mockModel.Object);
+            var view = new PowerPointLike(presentationModel);
+            var mockSender = new Mock<object>();
+            var mockEventArgs = new EventArgs();
+            var mockDataGridViewCellEventArgs = new DataGridViewCellEventArgs(columnIndex: 0, rowIndex: 1);
+            var mockMouseEventArgs = new MouseEventArgs(MouseButtons.Left, 0, 5, 5, 50);
+
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
+
+            var mockGraphicsAdaptor = new Mock<IGraphics>();
+            view._presentationModel._model._state.DrawTempShape(mockGraphicsAdaptor.Object);
+
+            view.HandleCanvasPressed(mockSender, mockMouseEventArgs);
+            view.HandleCanvasMoved(mockSender, mockMouseEventArgs);
+            view.HandleCanvasReleased(mockSender, mockMouseEventArgs);
+
+            presentationModel._model._shapes.DeleteCertainElement(0, 0);
+            presentationModel._model._shapes.CreateTempShape("???");
+
+            view.SetTextOnChoiceBox("圓");
+            view.AddNewElement(mockSender, mockEventArgs);
+            view.AddNewElement(mockSender, mockEventArgs);
+            view.AddNewElement(mockSender, mockEventArgs);
+            view.AddNewElement(mockSender, mockEventArgs);
+            view.AddNewElement(mockSender, mockEventArgs);
+
+            var mockSplitterEventArgs = new SplitterEventArgs(100, 100, 500, 500);
+            view.MoveSplitDrawingDataContainer(mockSender, mockSplitterEventArgs);
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickUndo(mockSender, mockEventArgs);
+            view._presentationModel._model._commandManager.AdjustPositions();
+            view.ClickRedo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
         }
 
         /// <summary>
@@ -422,6 +477,7 @@ namespace PowerPointLike.Tests
             var mockEventArgs = new EventArgs();
             var mockDataGridViewCellEventArgs = new DataGridViewCellEventArgs(columnIndex: 0, rowIndex: 1);
             var mockMouseEventArgs = new MouseEventArgs(MouseButtons.Left, 0, 5, 5, 50);
+            var mockSplitterEventArgs = new SplitterEventArgs(100,100,500,500);
 
             view.ClickUndo(mockSender, mockEventArgs);
             view.ClickRedo(mockSender, mockEventArgs);
@@ -450,13 +506,21 @@ namespace PowerPointLike.Tests
             view._presentationModel._model._commandManager.Execute(new PointCommand(shape1, shape2, view._presentationModel._model));
             view._presentationModel._model._commandManager.Execute(new PointCommand(shape2, shape3, view._presentationModel._model));
             view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
             view.ClickRedo(mockSender, mockEventArgs);
 
-            view._presentationModel._model._shapes.AdjustPositions(500, 500);
+            view._presentationModel._model._shapes.AdjustPositions();
             view._presentationModel._model._shapes.GetIndex(-1, -1);
 
             view._presentationModel._model._state._tempShape = shape3;
             view._presentationModel._model._state.DrawTempShape(mockGraphicsAdaptor.Object);
+
+            view.MoveSplitDrawingDataContainer(mockSender, mockSplitterEventArgs);
+            view.ClickUndo(mockSender, mockEventArgs);
+            view.ClickRedo(mockSender, mockEventArgs);
+
+            view._presentationModel._model.GetFactorY();
         }
     }
 }

@@ -37,5 +37,13 @@ namespace PowerPointLike
             _model._shapes.PopShape();
             _model.PrintTest();
         }
+
+        /// <summary>
+        /// Method <c>AdjustPositions</c>
+        /// </summary>
+        public void AdjustPositions()
+        {
+            _shape.AdjustPosition(_model.GetFactorX(), _model.GetFactorY());
+        }
     }
 }

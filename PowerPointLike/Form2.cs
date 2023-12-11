@@ -12,6 +12,7 @@ namespace PowerPointLike
     public partial class PowerPointLike : Form
     {
         // thumbnail ================================================================
+
         /// <summary>
         /// Method <c>GetscaleImage</c>
         /// to get change the button's image to the panel's thumbnail
@@ -108,7 +109,7 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MoveSplitDrawingViewContainer(object sender, SplitterEventArgs e)
+        public void MoveSplitDrawingViewContainer(object sender, SplitterEventArgs e)
         {
             _canvas1.Height = AdjustHeight(_canvas1.Width);
             _canvas.Height = AdjustHeight(_canvas.Width);
@@ -123,7 +124,7 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MoveSplitDrawingDataContainer(object sender, SplitterEventArgs e)
+        public void MoveSplitDrawingDataContainer(object sender, SplitterEventArgs e)
         {
             _canvas1.Height = AdjustHeight(_canvas1.Width);
             _canvas.Height = AdjustHeight(_canvas.Width);
@@ -180,6 +181,5 @@ namespace PowerPointLike
             _undoButton.Enabled = _presentationModel._model._commandManager.IsUndoEnabled;
             Invalidate();
         }
-
     }
 }

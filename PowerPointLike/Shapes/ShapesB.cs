@@ -51,24 +51,15 @@ namespace PowerPointLike
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        public void AdjustPositions(int width, int height)
+        public void AdjustPositions()
         {
-            double factorX = ((double)width / _maxWidth);
-            double factorY = ((double)height / _maxHeight);
+            double factorX = ((double)_newCanvasWidth / _oldCanvasWidth);
+            double factorY = ((double)_newCanvasHeight / _oldCanvasHeight);
 
             foreach (var shape in _shapeContainer)
             {
-                CoordinateSet currentItem = shape._coordinateSet;
-                int newX1 = (int)(currentItem._point1._x * factorX);
-                int newY1 = (int)(currentItem._point1._y * factorY);
-                int newX2 = (int)(currentItem._point2._x * factorX);
-                int newY2 = (int)(currentItem._point2._y * factorY);
-
-                shape._coordinateSet = new CoordinateSet(new Coordinate(newX1, newY1), new Coordinate(newX2, newY2));
+                shape.AdjustPosition(factorX, factorY);
             }
-
-            SetCanvasSize(width, height);
-            _factory.SetCanvasSize(width, height);
         }
 
         /// <summary>
@@ -78,8 +69,10 @@ namespace PowerPointLike
         /// <param name="height"></param>
         public void SetCanvasSize(int width, int height)
         {
-            _maxWidth = width;
-            _maxHeight = height;
+            _oldCanvasWidth = _newCanvasWidth;
+            _oldCanvasHeight = _newCanvasHeight;
+            _newCanvasWidth = width;
+            _newCanvasHeight = height;
         }
 
         /// <summary>
@@ -89,12 +82,18 @@ namespace PowerPointLike
         /// <param name="shape"></param>
         public void ExchangeShape(Shape oldOne, Shape newOne)
         {
+            List<int> index = new List<int>();
             for (int i = 0; i < _shapeContainer.Count; i++)
             {
                 if (_shapeContainer[i]._coordinateSet.IsCoordinateSetSame(oldOne))
                 {
-                    _shapeContainer[i] = newOne.GetClone();
+                    index.Add(i);
                 }
+            }
+
+            for (int i = 0; i < index.Count; i++)
+            {
+                _shapeContainer[index[i]] = newOne.GetClone();
             }
         }
 

@@ -8,8 +8,23 @@ namespace PowerPointLike
 {
     public class CommandManager
     {
-        Stack<ICommand> _undo = new Stack<ICommand>();
-        Stack<ICommand> _redo = new Stack<ICommand>();
+        public Stack<ICommand> _undo
+        {
+            get; set;
+        }
+        public Stack<ICommand> _redo
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandManager"/> class.
+        /// </summary>
+        public CommandManager()
+        {
+            _undo = new Stack<ICommand>();
+            _redo = new Stack<ICommand>();
+        }
 
         /// <summary>
         /// Method <c>Execute</c>
@@ -68,6 +83,22 @@ namespace PowerPointLike
             get
             {
                 return _undo.Count != 0;
+            }
+        }
+
+        /// <summary>
+        /// Method <c>AdjustPositions</c>
+        /// </summary>
+        public void AdjustPositions()
+        {
+            for (int i = 0; i < _redo.Count; i++)
+            {
+                _redo.ElementAt(i).AdjustPositions();
+            }
+
+            for (int i = 0; i < _undo.Count; i++)
+            {
+                _undo.ElementAt(i).AdjustPositions();
             }
         }
     }

@@ -100,7 +100,7 @@ namespace PowerPointLike
             this._canvas.Dock = System.Windows.Forms.DockStyle.Top;
             this._canvas.Location = new System.Drawing.Point(0, 0);
             this._canvas.Name = "_canvas";
-            this._canvas.Size = new System.Drawing.Size(958, 530);
+            this._canvas.Size = new System.Drawing.Size(958, 539);
             this._canvas.TabIndex = 2;
             this._canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.ChangeCanvas);
             // 
