@@ -236,6 +236,11 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>Form3.cs</RelativePath>
+                <ProjectName>PowerPointLike</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>Models\ButtonModel.cs</RelativePath>
                 <ProjectName>PowerPointLike</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>

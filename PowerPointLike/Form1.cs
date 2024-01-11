@@ -84,7 +84,7 @@ namespace PowerPointLike
         /// <param name="e"></param>
         public void AddNewElement(object sender, EventArgs e)
         {
-            _presentationModel.AddItem(_elementsChoicesBox.Text, (int)DataModel.DATA_DELETE_INDEX, _elementDataGrid.RowCount);
+            ShowDialogBox();
             UpdateDataToTable();
             RefreshRedoUndo();
         }
@@ -282,6 +282,15 @@ namespace PowerPointLike
         public void ChangeCanvas(object sender, PaintEventArgs e)
         {
             _presentationModel.DrawSelectFrame(e);
+        }
+
+        /// <summary>
+        /// show modal
+        /// </summary>
+        private void ShowDialogBox()
+        {
+            ModalDialog testDialog = new ModalDialog(_presentationModel._model, _elementsChoicesBox.Text, (int)DataModel.DATA_DELETE_INDEX, _elementDataGrid.RowCount);
+            testDialog.ShowDialog();
         }
     }
 }

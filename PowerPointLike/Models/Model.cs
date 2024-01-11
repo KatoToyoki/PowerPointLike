@@ -101,6 +101,25 @@ namespace PowerPointLike
         }
 
         /// <summary>
+        /// Method <c>AssignItem</c>
+        /// to call the factory to add new element depends on the chosen element
+        /// </summary>
+        /// <param name="shape"></param>
+        public void AssignItem(string shapeName, int dataIndex, int deleteIndex, CoordinateSet set)
+        {
+            if (shapeName == EMPTY_STRING)
+            {
+                return;
+            }
+            Shape newShape = _shapes.CreateShape(shapeName, set);
+            _commandManager.Execute(new DataGridViewCommand(newShape.GetClone(), dataIndex, deleteIndex, this, (int)DataGridViewCommand.Command.Add));
+            NotifyModelChanged();
+
+            // print test
+            PrintTest();
+        }
+
+        /// <summary>
         /// Method <c>GetOneElement</c>
         /// get the delete button, name, and its coordinate in one time
         /// the informatiob is constructed by a string array

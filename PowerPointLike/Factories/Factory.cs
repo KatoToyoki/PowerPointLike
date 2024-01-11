@@ -118,6 +118,42 @@ namespace PowerPointLike
         }
 
         /// <summary>
+        /// Method <c>AssignRectangle</c>
+        /// to create a new rectangle element
+        /// </summary>
+        /// <returns>rectangle element</returns>
+        public Shape AssignRectangle(CoordinateSet set)
+        {
+            Shape rectangle = new Rectangle(set, this);
+            rectangle._id = GetMaxValue() + 1;
+            return rectangle;
+        }
+
+        /// <summary>
+        /// Method <c>AssignRectangle</c>
+        /// to create a new line element
+        /// </summary>
+        /// <returns>line element</returns>
+        public Shape AssignLine(CoordinateSet set)
+        {
+            Shape line = new Line(set, this);
+            line._id = GetMaxValue() + 1;
+            return line;
+        }
+
+        /// <summary>
+        /// Method <c>AssignCircle</c>
+        /// to create a new circle element
+        /// </summary>
+        /// <returns>circle element</returns>
+        public Shape AssignCircle(CoordinateSet set)
+        {
+            Shape circle = new Circle(set, this);
+            circle._id = GetMaxValue() + 1;
+            return circle;
+        }
+
+        /// <summary>
         /// Method <c>DrawLine</c>
         /// to create a drawn line element
         /// </summary>

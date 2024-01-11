@@ -119,6 +119,30 @@ namespace PowerPointLike
         }
 
         /// <summary>
+        /// create shape by assigned coordinate
+        /// </summary>
+        /// <param name="shapeName"></param>
+        /// <param name="set"></param>
+        /// <returns></returns>
+        public Shape CreateShape(string shapeName, CoordinateSet set)
+        {
+            if (shapeName == RECTANGLE)
+            {
+                return _factory.AssignRectangle(set);
+            }
+            else if (shapeName == LINE)
+            {
+                return _factory.AssignLine(set);
+            }
+            else if (shapeName == CIRCLE)
+            {
+                return _factory.AssignCircle(set);
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Method <c>AddShapeInEnd</c>
         /// </summary>
         /// <param name="shape"></param>
