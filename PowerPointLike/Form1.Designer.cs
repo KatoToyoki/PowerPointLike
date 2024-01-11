@@ -43,14 +43,18 @@ namespace PowerPointLike
             this._shapeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._shapeInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._toolBar = new System.Windows.Forms.ToolStrip();
+            this._drawingViewContainer = new System.Windows.Forms.SplitContainer();
+            this._drawingDataContainer = new System.Windows.Forms.SplitContainer();
             this._lineButton = new System.Windows.Forms.ToolStripButton();
             this._rectangleButton = new System.Windows.Forms.ToolStripButton();
             this._circleButton = new System.Windows.Forms.ToolStripButton();
             this._mouseButton = new System.Windows.Forms.ToolStripButton();
             this._undoButton = new System.Windows.Forms.ToolStripButton();
             this._redoButton = new System.Windows.Forms.ToolStripButton();
-            this._drawingViewContainer = new System.Windows.Forms.SplitContainer();
-            this._drawingDataContainer = new System.Windows.Forms.SplitContainer();
+            this._newPageButton = new System.Windows.Forms.ToolStripButton();
+            this._deletePageButton = new System.Windows.Forms.ToolStripButton();
+            this._saveButton = new System.Windows.Forms.ToolStripButton();
+            this._loadButton = new System.Windows.Forms.ToolStripButton();
             this._menu.SuspendLayout();
             this._canvasElementsData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dataViewContainer)).BeginInit();
@@ -217,12 +221,60 @@ namespace PowerPointLike
             this._circleButton,
             this._mouseButton,
             this._undoButton,
-            this._redoButton});
+            this._redoButton,
+            this._newPageButton,
+            this._deletePageButton,
+            this._saveButton,
+            this._loadButton});
             this._toolBar.Location = new System.Drawing.Point(0, 27);
             this._toolBar.Name = "_toolBar";
             this._toolBar.Size = new System.Drawing.Size(1581, 27);
             this._toolBar.TabIndex = 6;
             this._toolBar.Text = "toolStrip1";
+            // 
+            // _drawingViewContainer
+            // 
+            this._drawingViewContainer.BackColor = System.Drawing.Color.Silver;
+            this._drawingViewContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._drawingViewContainer.Location = new System.Drawing.Point(0, 0);
+            this._drawingViewContainer.Name = "_drawingViewContainer";
+            // 
+            // _drawingViewContainer.Panel1
+            // 
+            this._drawingViewContainer.Panel1.BackColor = System.Drawing.Color.PowderBlue;
+            this._drawingViewContainer.Panel1.Controls.Add(this._canvas1);
+            // 
+            // _drawingViewContainer.Panel2
+            // 
+            this._drawingViewContainer.Panel2.BackColor = System.Drawing.Color.PaleTurquoise;
+            this._drawingViewContainer.Panel2.Controls.Add(this._canvas);
+            this._drawingViewContainer.Size = new System.Drawing.Size(1101, 698);
+            this._drawingViewContainer.SplitterDistance = 133;
+            this._drawingViewContainer.SplitterWidth = 10;
+            this._drawingViewContainer.TabIndex = 7;
+            this._drawingViewContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.MoveSplitDrawingViewContainer);
+            // 
+            // _drawingDataContainer
+            // 
+            this._drawingDataContainer.BackColor = System.Drawing.Color.Silver;
+            this._drawingDataContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._drawingDataContainer.Location = new System.Drawing.Point(0, 54);
+            this._drawingDataContainer.Name = "_drawingDataContainer";
+            // 
+            // _drawingDataContainer.Panel1
+            // 
+            this._drawingDataContainer.Panel1.BackColor = System.Drawing.Color.LightCyan;
+            this._drawingDataContainer.Panel1.Controls.Add(this._drawingViewContainer);
+            // 
+            // _drawingDataContainer.Panel2
+            // 
+            this._drawingDataContainer.Panel2.BackColor = System.Drawing.Color.PowderBlue;
+            this._drawingDataContainer.Panel2.Controls.Add(this._canvasElementsData);
+            this._drawingDataContainer.Size = new System.Drawing.Size(1581, 698);
+            this._drawingDataContainer.SplitterDistance = 1101;
+            this._drawingDataContainer.SplitterWidth = 10;
+            this._drawingDataContainer.TabIndex = 8;
+            this._drawingDataContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.MoveSplitDrawingDataContainer);
             // 
             // _lineButton
             // 
@@ -288,49 +340,41 @@ namespace PowerPointLike
             this._redoButton.Text = "Redo";
             this._redoButton.Click += new System.EventHandler(this.ClickRedo);
             // 
-            // _drawingViewContainer
+            // _newPageButton
             // 
-            this._drawingViewContainer.BackColor = System.Drawing.Color.Silver;
-            this._drawingViewContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._drawingViewContainer.Location = new System.Drawing.Point(0, 0);
-            this._drawingViewContainer.Name = "_drawingViewContainer";
+            this._newPageButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._newPageButton.Image = global::PowerPointLike.Properties.Resources.new_page;
+            this._newPageButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._newPageButton.Name = "_newPageButton";
+            this._newPageButton.Size = new System.Drawing.Size(29, 24);
+            this._newPageButton.Text = "new page";
             // 
-            // _drawingViewContainer.Panel1
+            // _deletePageButton
             // 
-            this._drawingViewContainer.Panel1.BackColor = System.Drawing.Color.PowderBlue;
-            this._drawingViewContainer.Panel1.Controls.Add(this._canvas1);
+            this._deletePageButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._deletePageButton.Image = global::PowerPointLike.Properties.Resources.delete_page;
+            this._deletePageButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._deletePageButton.Name = "_deletePageButton";
+            this._deletePageButton.Size = new System.Drawing.Size(29, 24);
+            this._deletePageButton.Text = "delete page";
             // 
-            // _drawingViewContainer.Panel2
+            // _saveButton
             // 
-            this._drawingViewContainer.Panel2.BackColor = System.Drawing.Color.PaleTurquoise;
-            this._drawingViewContainer.Panel2.Controls.Add(this._canvas);
-            this._drawingViewContainer.Size = new System.Drawing.Size(1101, 698);
-            this._drawingViewContainer.SplitterDistance = 133;
-            this._drawingViewContainer.SplitterWidth = 10;
-            this._drawingViewContainer.TabIndex = 7;
-            this._drawingViewContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.MoveSplitDrawingViewContainer);
+            this._saveButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._saveButton.Image = global::PowerPointLike.Properties.Resources.save;
+            this._saveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._saveButton.Name = "_saveButton";
+            this._saveButton.Size = new System.Drawing.Size(29, 24);
+            this._saveButton.Text = "save";
             // 
-            // _drawingDataContainer
+            // _loadButton
             // 
-            this._drawingDataContainer.BackColor = System.Drawing.Color.Silver;
-            this._drawingDataContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._drawingDataContainer.Location = new System.Drawing.Point(0, 54);
-            this._drawingDataContainer.Name = "_drawingDataContainer";
-            // 
-            // _drawingDataContainer.Panel1
-            // 
-            this._drawingDataContainer.Panel1.BackColor = System.Drawing.Color.LightCyan;
-            this._drawingDataContainer.Panel1.Controls.Add(this._drawingViewContainer);
-            // 
-            // _drawingDataContainer.Panel2
-            // 
-            this._drawingDataContainer.Panel2.BackColor = System.Drawing.Color.PowderBlue;
-            this._drawingDataContainer.Panel2.Controls.Add(this._canvasElementsData);
-            this._drawingDataContainer.Size = new System.Drawing.Size(1581, 698);
-            this._drawingDataContainer.SplitterDistance = 1101;
-            this._drawingDataContainer.SplitterWidth = 10;
-            this._drawingDataContainer.TabIndex = 8;
-            this._drawingDataContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.MoveSplitDrawingDataContainer);
+            this._loadButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._loadButton.Image = global::PowerPointLike.Properties.Resources.load;
+            this._loadButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._loadButton.Name = "_loadButton";
+            this._loadButton.Size = new System.Drawing.Size(29, 24);
+            this._loadButton.Text = "load";
             // 
             // PowerPointLike
             // 
@@ -391,6 +435,10 @@ namespace PowerPointLike
         private System.Windows.Forms.DataGridViewTextBoxColumn _shapeInfo;
         private System.Windows.Forms.ToolStripButton _undoButton;
         private System.Windows.Forms.ToolStripButton _redoButton;
+        private System.Windows.Forms.ToolStripButton _newPageButton;
+        private System.Windows.Forms.ToolStripButton _deletePageButton;
+        private System.Windows.Forms.ToolStripButton _saveButton;
+        private System.Windows.Forms.ToolStripButton _loadButton;
     }
 }
 
